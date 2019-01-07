@@ -1,0 +1,435 @@
+{% extends "tab_base.html" %}
+
+{% block title %} General Elements {% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+<link href="/static/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<link href="/static/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+<link href="/static/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+<link href="/static/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+<link href="/static/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+<!-- Ion.RangeSlider -->
+<link href="/static/vendors/normalize-css/normalize.css" rel="stylesheet">
+<link href="/static/vendors/ion.rangeSlider/css/ion.rangeSlider.css" rel="stylesheet">
+<link href="/static/vendors/ion.rangeSlider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+<link href="/static/vendors/icheck-1.x/skins/square/blue.css" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block ajaxCode %}
+<script type="text/javascript">
+    // 페이지가 로드 되었을 떄 자동으로 chatListFunction() 함수 실행
+  //   $(document).ready(function () {
+   //      //getInfiniteChat();
+   //      //getDatasetList();
+    //     $(document).on("click", "#save_btn", function () {
+    //        alert("저장되었습니다.")
+   //      });
+   //  });
+
+    //////////////////////// dataSet 셀렉터 선택에 따라 하단부 table 불러오기
+    function getTable() {
+        var dataSet = $('#dataSet').val();   // DataSet 셀렉터로부터 선택된 값을 가져온다
+        console.log(dataSet);
+
+        $.ajax({
+            type : "POST",
+            url : "table/",
+            dataType : "json",
+            data : {
+                'csrfmiddlewaretoken': '{{csrf_token }}',
+                // 'dataSet':JSON.stringify(dataSet),
+                'dataSet':dataSet,
+            },
+            success: function(responseData) {
+                //alert(success);
+                if (responseData == null) {
+                    alert("Error : responseData is null");
+                    return;
+                }    // 받아올 값이 없거나 오류가 발생하면 바로 함수 종료
+
+                console.log(responseData.tuples);
+                // 해당 데이터셋과 일치하는 테이블이 없는 경우 바로 함수 종료
+                if (responseData.tuples == null) {
+                    alert("Error : no such table");
+                    document.getElementById("table_name").innerHTML = "No Table";    // table 이름 설정
+                    document.getElementById("datatable-buttons").innerHTML = null;   // table 컨텐츠 설정
+                    return;
+                }
+
+                var content = "<thead>" +
+                                "<tr>";
+
+                for (var i = 0; i < responseData.column.length; i++) {
+                    var selectId = "select_" + i;
+                    var inputId = "inputPort_" + i;
+                    var outputId = "outputPort_" + i;
+                    content +=      "<th>" +
+                                      "<select class='form-control btn btn-default dropdown-toggle' id=" + selectId + ">" + 
+                                          "<option value=" + inputId + ">" + inputId + "</option>" + 
+                                          "<option value=" + outputId + ">" + outputId + "</option>" +
+                                          "<option value='ignore'>ignore</option>" +
+                                      "</select>" + 
+                                    "</th>";
+                }
+
+                content += "</tr>" + "<tr>";
+
+                for (var i = 0; i < responseData.column.length; i++) {
+                                  
+                    content += "<th>" + responseData.column[i] + "</th>";
+                }
+
+                content += "</tr>" +  
+                              "</thead>" +
+                              "<tbody>";
+
+                for (var i = 0; i < responseData.tuples.length; i++) {
+                    content += "<tr>";
+
+                    for (var j = 0; j < responseData.column.length; j++) {
+                        content += "<td>" + responseData.tuples[i][j] + "</td>";
+                    }
+
+                    content += "</tr>";
+                }
+
+                content += "</tbody>";
+
+                //console.log(innerHTML(elements))
+                document.getElementById("table_name").innerHTML = dataSet;          // table 이름 설정
+                document.getElementById("datatable-buttons").innerHTML = content;  // table 컨텐츠 설정
+            },
+            error: function() {
+                //alert(error);
+                //autoclosingAlert("#danerMessage", 2000);
+            }
+        });
+    }
+
+
+    function getDatasetList() {
+          $.ajax({
+            type : "POST",
+            url : "dataset_list/",
+            dataType : "json",
+            data : {
+                'csrfmiddlewaretoken': '{{csrf_token }}',
+                'data1':'hello'
+            },
+            success: function(responseData) {
+                //alert(111);
+               if (responseData == null) {
+                   alert("Error : responseData is null")
+                   return;
+               }    // 받아올 값이 없거나 오류가 발생하면 바로 함수 종료
+                console.log(responseData);
+                alert(responseData.column[0]);
+            },
+            error: function() {
+                alert(222);
+                //autoclosingAlert("#danerMessage", 2000);
+            }
+        });
+    }
+
+    function autoclosingAlert(selector, delay) {
+        var alert = $(selector).alert();
+        alert.show();
+        window.setTimeout(function() {alert.hide()}, delay);
+    }
+
+    function submitFunction() {
+        var chatName = $('#chatName').val();
+        var chatContent = $('#chatContent').val();
+
+        $.ajax({
+            type: "POST",
+            url : "./ChatSubmitServlet",
+            data: {
+                chatName: encodeURIComponent(chatName),
+                chatContent: encodeURIComponent(chatContent)
+            },
+            success: function(result) {
+                if (result == 1) {
+                    autoclosingAlert('#successMessage', 2000);
+                } else if (result == 0) {
+                    autoclosingAlert('#dangerMessage', 2000);
+                } else {
+                    autoclosingAlert('#warningMessage', 2000);
+                }
+            }
+        });
+
+        $('#chatContent').val('');
+    }
+</script>
+{% endblock ajaxCode%}
+
+{% block name %}
+<h2><i class="fa fa-bars"></i> Data <small></small></h2>
+{% endblock name %}
+
+{% block tab %}
+<div class="alert alert-success" id="successMessage" style="display: none;">
+  <strong>메시지 전송에 성공하였습니다.</strong>
+</div>
+<div class="alert alert-danger" id="dangerMzssage" style="display: none;">
+  <strong>메시지 전송에 실패하였습니다.</strong>
+</div>
+<div class="alert alert-warning" id="warningMassage" style="display: none;">
+  <strong>데이터베이스 오류가 발생 하였습니다.</strong>
+</div>
+
+
+<div class="" role="tabpanel" data-example-id="togglable-tabs">
+  <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+    <li role="presentation" class="active"><a href="/modeling/data" aria-expanded="true">Data</a>
+    </li>
+    <li role="presentation" class=""><a href="/modeling/model" aria-expanded="false">Model</a>
+    </li>
+    <li role="presentation" class=""><a href="/modeling/hyperparameter" aria-expanded="false">Hyperparameter</a>
+    </li>
+    <li role="presentation" class=""><a href="/modeling/training" aria-expanded="false">Training</a>
+    </li>
+    <li role="presentation" class=""><a href="/modeling/result" aria-expanded="false">Result</a>
+    </li>
+    <li role="presentation" class=""><a href="/modeling/inference" aria-expanded="false">Inference</a>
+    </li>
+    <!--<li role="presentation" class=""><a href="#tab_content3" aria-expanded="false">Result</a>-->
+    <!--</li>-->
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+    </div>
+    <div class="row">
+      <div class="clearfix"></div>
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Setting datasets <small>Set your Datasets</small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Settings 1</a>
+                  </li>
+                  <li><a href="#">Settings 2</a>
+                  </li>
+                </ul>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <br />
+            <form class="form-horizontal form-label-left">
+              <div class="form-group">
+                <label class="control-label col-md-3">Dataset</label>
+                <div class="col-md-3">
+                  <select class="form-control" id="dataSet" onchange="getTable();">
+                    <option>Dataset 선택(필수)</option>
+                    <!-- <option value="iris">iris</option>
+                    <option value="mnist">mnist</option>
+                    <option value="toilets">toilets</option>
+                    <option value="imdb">imdb</option>
+                    <option value="reuters">reuters</option>
+                    <option value="titanic">titanic</option>
+                    <option value="mytable">mytable(custom)</option> -->
+                        {% for dataset_name in datasetList %}
+                            <option value="{{ dataset_name }}">{{ dataset_name }} (custom)</option>
+                        {% endfor %}
+                  </select>
+                </div>
+                <label class="control-label col-md-3">Load Dataset in Memory</label>
+                <div class="col-md-3">
+                  <select class="form-control">
+                    <option>Full dataset</option>
+                    <option>One Batch at a time</option>
+                  </select>
+                </div>
+                <br><br><br>
+                <label class="control-label col-md-3">Train/Validation/Test Split</label>
+                <div class="col-md-3">
+                  <select class="form-control" id="TVT_select">
+                    <option>Custom</option>
+                    <option value="60_20_20">60%-20%-20%</option>
+                    <option value="70_15_15">70%-15%-15%</option>
+                    <option value="80_10_10">80%-10%-10%</option>
+                    <option value="90_5_5">90%-5%-5%</option>
+                    <option value="95_5_0">95%-5%-0%</option>
+                    <option value="k_fold_cross_validation">K-Fold Cross Validation</option>
+                  </select>
+                </div>
+                <label class="control-label col-md-3">Total Records : 150</label>
+                <div class="checkbox col-md-3" style="font-size:15px">
+                  <input type="checkbox" class="flat" checked="checked"> Shuffle Data
+                </div>
+              </div>
+              <div class="ln_solid"></div>
+              <div class="form-group">
+                <div class="x_content" id="TVT_split">
+                  <div class="col-md-3"></div>
+                  <div class="col-md-2"><input type="text" value="60" class="dial" id="train_ratio" data-fgColor="#26B99A"></div>
+                  <div class="col-md-2"><input type="text" value="20" class="dial" id="validation_ratio" data-fgColor='#e01ab5'></div>
+                  <div class="col-md-2"><input type="text" value="20" class="dial" id="test_ratio" data-fgColor="#3159a6"></div>
+                  <!-- <div class="col-md-2">
+                    <p>Training</p>
+                    <input id="training_bar" class="knob" data-width="100" data-height="120" data-min="0" data-displayPrevious=false data-fgColor="#26B99A" value="60">
+                  </div>
+                  <div class="col-md-2">
+                    <p>Validation</p>
+                    <input id="validation_bar" class="knob" data-width="100" data-height="120" data-min="0" data-displayPrevious=true data-fgColor="#e01ab5" value="20">
+                  </div>
+                  <div class="col-md-3">
+                    <p>Test</p>
+                    <input id="test_bar" class="knob" data-width="100" data-height="120" data-min="0" data-displayPrevious=true data-fgColor="#3159a6" value="20">
+                  </div> -->
+              </div>
+              </div>
+              <div class="ln_solid"></div>
+              <div class="">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                  <!-- <button type="button" class="btn btn-danger" onclick="getDatasetList();">Cancel</button> -->
+                  <button type="reset" class="btn btn-primary">Reset</button>
+                  <button type="button" class="btn btn-success" id="save_btn">Save</button>
+                  <div class="col-md-3"></div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div class="x_panel">
+            <div class="x_title">
+              <h2 id="table_name"> <small>Sample table of datasets</small></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table id="datatable-buttons" class="table table-striped table-bordered">
+                <!--<thead>-->
+                <!--<tr>-->
+                <!--{% for col in column %}-->
+                <!--<th>{{ col }}</th>-->
+                <!--{% endfor %}-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--{% for tuple in csvTable %}-->
+                <!--<tr>-->
+                <!--{% for temp in tuple %}-->
+                <!--<td>{{ temp }}</td>-->
+                <!--{% endfor %}-->
+                <!--</tr>-->
+                <!--{% endfor %}-->
+                <!--</tbody>-->
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+{{ block.super }}
+
+<script src="/static/vendors/datatables.net/js/jquery.dataTables.min.js?ver=1"></script>
+<script src="/static/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js?ver=1"></script>
+<script src="/static/vendors/datatables.net-buttons/js/dataTables.buttons.min.js?ver=1"></script>
+<script src="/static/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js?ver=1"></script>
+<script src="/static/vendors/datatables.net-buttons/js/buttons.flash.min.js?ver=1"></script>
+<script src="/static/vendors/datatables.net-buttons/js/buttons.html5.min.js?ver=1"></script>
+<script src="/static/vendors/datatables.net-buttons/js/buttons.print.min.js?ver=1"></script>
+<script src="/static/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js?ver=1"></script>
+<script src="/static/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js?ver=1"></script>
+<script src="/static/vendors/datatables.net-responsive/js/dataTables.responsive.min.js?ver=1"></script>
+<script src="/static/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js?ver=1"></script>
+<script src="/static/vendors/datatables.net-scroller/js/dataTables.scroller.min.js?ver=1"></script>
+<script src="/static/vendors/jszip/dist/jszip.min.js?ver=1"></script>
+<script src="/static/vendors/pdfmake/build/pdfmake.min.js?ver=1"></script>
+<script src="/static/vendors/pdfmake/build/vfs_fonts.js?ver=1"></script>
+
+<!-- jQuery Knob -->
+<!-- <script src="/static/vendors/jquery-knob/dist/jquery.knob.min.js?ver=1"></script> -->
+<script src="/static/vendors/icheck-1.x/icheck.js"></script>
+<script src="/static/vendors/jquery/dist/jquery.min.js?ver=1"></script>
+<script src="/static/vendors/jQuery-Knob-master/dist/jquery.knob.min.js?ver=1"></script>
+
+<script>
+  $('.dial').knob(
+    {
+      "min" : 0,
+      "max" : 100,
+      "height" : 120,
+      "width" : 120,
+    }
+  );
+
+  $(document).ready(function () {
+
+    // selector로 부터 Train set, validation set, test set을 설정하여 pie bar에 출력하는 함수
+    $(document).on("change", "#TVT_select", function () {
+      var select = $("#TVT_select").val();
+
+      //if (select.value == "custom") {
+        //
+      //}else if (select.value == "k_fold_cross_validation") {
+        //
+      //} else {
+      //}
+      var strArr = select.split('_');
+      var train_ratio = strArr[0];
+      var validation_ratio = strArr[1];
+      var test_ratio = strArr[2];
+
+      $('#train_ratio').val(train_ratio).trigger('change');
+      $('#validation_ratio').val(validation_ratio).trigger('change');
+      $('#test_ratio').val(test_ratio).trigger('change');
+    });
+
+    // [save] 버튼을 클릭했을 때 이벤트 발생
+    $(document).on("click", "#save_btn", function() {
+      alert("저장되었습니다.");
+    });
+
+    // check 박스 디자인
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  });
+</script>
+{% endblock javascripts %}

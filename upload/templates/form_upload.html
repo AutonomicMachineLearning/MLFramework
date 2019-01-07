@@ -1,0 +1,197 @@
+{% extends "base_site.html" %}
+
+{% block title %} Data 입력 {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <!-- Dropzone.js -->
+  <link href="/static/vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3>Datasets </h3>
+        </div>
+
+        <div class="title_right">
+          <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search for...">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Dropzone multiple file uploader</h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+              <form id="FILE_FORM" action="upload/upload_file/" method="post" class="dropzone" enctype="multipart/form-data">
+                  {% csrf_token %}
+              </form>
+               <br>
+              <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div>
+                    {{ form }}
+                </div>
+                <br>
+                <div>
+                  <input type="submit" value="Upload" />
+
+                </div>
+                <!-- <a class="ui-shadow ui-btn ui-corner-all" href="javascript:uploadFile();">전송</a> -->
+
+
+              </form>
+              <br />
+              <br />
+              <br />
+              <br />
+              <div class="ln_solid"></div>
+              <div class="">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                  <button type="button" class="btn btn-danger" onclick="getDatasetList();">Cancel</button>
+                  <button type="reset" class="btn btn-primary" onclick="submitFunction();">Reset</button>
+                  <button type="submit" class="btn btn-success">Upload</button>
+                  <div class="col-md-3"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        <blockquote>
+                  <ul>
+                    <li>아래의 영역에 이미지 파일을 드롭다운하시거나 클릭하셔서 파일을 업로드 해 주세요.
+                    </li><li>최대 300Kb의 이미지 파일을 압축할 수 있습니다.
+                    </li><li>압축이 가능한 파일은 gif, jpeg/jpg, png 등이 압축이 가능합니다.
+                  </li></ul>
+                </blockquote>      
+                          <form action="upload_file/" class="dropzone" drop-zone="" id="file-dropzone">
+                            {% csrf_token %}
+                            <div class="dz-message text-center alert alert-danger">
+                                <h3><strong>배너파일을 이곳에 드롭다운 하시거나 여기를 클릭해 주세요.</strong></h3>
+                            </div>
+                         
+                          </form>
+                           
+                          <!-- <div class="upload-progress text-center alert alert-warning">
+                        <h3><i class="fa fa-refresh fa-spin"></i><strong> 파일을 압축중 입니다.</strong></h3>
+                          </div>
+                           
+                          <div class="resize-image text-center alert alert-success">
+                        <h3>
+                            기존 <span id="origin-size"></span>Kbyte 에서 <span id="resize-size"></span>KByte로 압축되었습니다.
+                        </h3>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-lg btn-primary" filename="" onclick="downImage()" id="image-down">이미지 다운로드</button>
+                        </div> -->
+                          </div>
+                     
+                     
+                    <div id="banner-preview" class="dropzone-previews hide"></div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">                                       <h3>이미지 파일 미리보기</h3>
+        <div class="image-preview">
+            <img src="" id="preview-img">
+        </div> {% endcomment %}
+</div>
+ 
+ 
+</div><!-- /. row -->
+
+
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super }}
+  <!-- Dropzone.js -->
+  <script src="/static/vendors/dropzone/dist/min/dropzone.min.js"></script>
+  <script>
+$.getScript('http://cdnjs.cloudflare.com/ajax/libs/dropzone/3.8.4/dropzone.min.js',function(){
+  // instantiate the uploader
+  $('#file-dropzone').dropzone({
+    type : "POST",
+    url: "upload/upload_file/", // 드롭다운 시 업로드 되는 URL
+    maxFilesize: 300, // 드롭다운 시 파일 크기
+    paramName: "userfile", // input file="user_file"
+    maxThumbnailFilesize: 1, // 섬네일 사이즈 인데 안보여 줄거니까 1정도
+    previewsContainer: ".dropzone-previews", // 섬네일 보여주는 Container class
+    init: function() {
+      this.on('success', function(file, json) {
+          // 파일이 서버에 업로드가 완료 되었 을때
+          var res = JSON.parse(json);
+ 
+          if(res.msg=='OK'){
+            alert("!");
+              //만약에 response message 가 OK 라면
+              $("#origin-size").empty().append(res.origin_size);
+              $("#resize-size").empty().append(res.size);
+              $(".upload-progress").hide();
+              $(".resize-image").show();
+              $(".image-preview").show();
+              $("#preview-img").attr("src",res.path);
+              $("#image-down").attr("filename",res.path);
+          } else {
+              // 만약에 OK 가 아니라면???
+              $("#file-dropzone").show();
+              $(".upload-progress").hide();
+              alert(res.msg);
+          }
+          console.log(json);
+      });
+       
+      this.on('addedfile', function(file) {
+          $("#file-dropzone").hide();
+          $(".upload-progress").show();
+      });
+       
+      this.on('drop', function(file) {
+          // 파일이 드롭되면Upload Progress 나와줘야 된다.
+          $("#file-dropzone").hide();
+          $(".upload-progress").show();
+      });
+    }
+  });
+});
+
+
+  </script>
+{% endblock javascripts %}

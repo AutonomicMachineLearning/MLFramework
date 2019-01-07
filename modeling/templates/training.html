@@ -1,0 +1,571 @@
+{% extends "tab_base.html" %}
+
+{% block title %} General Elements {% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+{% endblock stylesheets %}
+
+{% block name %}
+<h2><i class="fa fa-bars"></i> Training <small></small></h2>
+{% endblock %}
+
+{% block tab %}
+<div class="" role="tabpanel" data-example-id="togglable-tabs">
+  <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+    <li role="presentation" class=""><a href="/modeling/data" aria-expanded="false">Data</a>
+    </li>
+    <li role="presentation" class=""><a href="/modeling/model" aria-expanded="false">Model</a>
+    </li>
+    <li role="presentation" class=""><a href="/modeling/hyperparameter" aria-expanded="false">Hyperparameter</a>
+    </li>
+    <li role="presentation" class="active"><a href="/modeling/training" aria-expanded="true">Training</a>
+    </li>
+    <li role="presentation" class=""><a href="/modeling/result" aria-expanded="false">Result</a>
+    </li>
+    <li role="presentation" class=""><a href="/modeling/inference" aria-expanded="false">Inference</a>
+    </li>
+    <!--<li role="presentation" class=""><a href="#tab_content3" aria-expanded="false">Result</a>-->
+    <!--</li>-->
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+      <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
+        booth letterpress, commodo enim craft beer mlkshk aliquip</p>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+      <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
+        booth letterpress, commodo enim craft beer mlkshk </p>
+    </div>
+  </div>
+</div>
+
+<!-- training loss graph -->
+<div class="col-md-3 col-sm-6 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2>Train Loss <smallS></smallS></h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Settings 1</a>
+            </li>
+            <li><a href="#">Settings 2</a>
+            </li>
+          </ul>
+        </li>
+        <li><a class="close-link"><i class="fa fa-close"></i></a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content2">
+      <div id="train_loss_chart" style="height:400px"></div>
+    </div>
+  </div>
+</div>
+<!-- training loss graph -->
+<!-- training accuracy graph -->
+<div class="col-md-3 col-sm-6 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2>Train Accuracy <small></small></h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Settings 1</a>
+            </li>
+            <li><a href="#">Settings 2</a>
+            </li>
+          </ul>
+        </li>
+        <li><a class="close-link"><i class="fa fa-close"></i></a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content2">
+      <div id="train_accuracy_chart" style="height:400px"></div>
+    </div>
+  </div>
+</div>
+<!-- /training accuracy graph -->
+<!-- Validation loss graph -->
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Validation Loss <smallS></smallS></h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Settings 1</a>
+              </li>
+              <li><a href="#">Settings 2</a>
+              </li>
+            </ul>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content2">
+        <div id="val_loss_chart" style="height:400px"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Validation loss graph -->
+  <!-- validation accuracy graph -->
+  <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Validation Accuracy <small></small></h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Settings 1</a>
+              </li>
+              <li><a href="#">Settings 2</a>
+              </li>
+            </ul>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content2">
+        <div id="val_accuracy_chart" style="height:400px"></div>
+      </div>
+    </div>
+  </div>
+  <!-- /Validation accuracy graph -->
+<div class="col-md-6 col-sm-6 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2>ETA <small>Estimated Time of Arrival</small></h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Settings 1</a>
+            </li>
+            <li><a href="#">Settings 2</a>
+            </li>
+          </ul>
+        </li>
+        <li><a class="close-link"><i class="fa fa-close"></i></a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content2">
+        <div id="ETA_chart" style="height:400px"></div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6 col-sm-6 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2>CPU :: Intel(R) Core(TM) I7-4790K @3.88GHz <small></small></h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Settings 1</a>
+            </li>
+            <li><a href="#">Settings 2</a>
+            </li>
+          </ul>
+        </li>
+        <li><a class="close-link"><i class="fa fa-close"></i></a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content2">
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            <div class="x_content2">
+                <div id="resource_chart_CPU" style="height:400px"></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="x_content2">
+                <div id="resource_chart_memory" style="height:400px"></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="x_content2">
+                <div id="resource_chart_network" style="height:400px"></div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+{{ block.super }}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js?ver=1"></script>
+<script>
+  // 그릴 차트 로드
+  google.charts.load('current', { 'packages': ['corechart','gauge'] });
+  google.charts.setOnLoadCallback(drawChart_train_loss);
+  google.charts.setOnLoadCallback(drawChart_train_accuracy);
+  google.charts.setOnLoadCallback(drawChart_val_loss);
+  google.charts.setOnLoadCallback(drawChart_val_accuracy);
+  google.charts.setOnLoadCallback(drawChart_ETA);
+  google.charts.setOnLoadCallback(drawChart_resource_CPU);
+  google.charts.setOnLoadCallback(drawChart_resource_memory);
+  google.charts.setOnLoadCallback(drawChart_resource_network);
+
+  // 차트 데이터 저장
+  var train_loss_data = new Array();
+  train_loss_data.push(['number', 'loss']);
+  train_loss_data.push([1, 0]);
+
+  var train_accuracy_data = new Array();
+  train_accuracy_data.push(['number', 'accuracy']);
+  train_accuracy_data.push([1, 0]);
+
+  var val_loss_data = new Array();
+  val_loss_data.push(['number', 'loss']);
+  val_loss_data.push([1, 0]);
+
+  var val_accuracy_data = new Array();
+  val_accuracy_data.push(['number', 'accuracy']);
+  val_accuracy_data.push([1, 0]);
+
+  var ETA_data = new Array();
+  ETA_data.push(['', 'ETA']);
+  ETA_data.push(["", 0]);
+
+  var resource_data_CPU = new Array();
+  resource_data_CPU.push(['Label', 'Value'],
+                     ['CPU(%)', 80]);
+
+  var resource_data_memory = new Array();
+  resource_data_memory.push(['Label', 'Value'],
+                     ['Memory(%)', 80]);
+
+  var resource_data_network = new Array();
+  resource_data_network.push(['Label', 'Value'],
+                     ['Network(Kbs)', 80]);
+
+  var i = 1;
+  var mem_usage;
+  var cpu_usage;
+  var net_usage;
+
+  function add() {
+    $.ajax({
+      type: "POST",
+      url: "getTrainingResult/",
+      dataType: "json",
+      data: {
+        'csrfmiddlewaretoken': '{{csrf_token }}',
+        'epoch' : i
+      },
+      success: function (responseData) {
+        console.log("가져왔습니다.");
+        train_loss_data.push([i, responseData['train_loss']]);
+        train_accuracy_data.push([i, responseData['train_accuracy']]);
+        val_loss_data.push([i, responseData['val_loss']]);
+        val_accuracy_data.push([i, responseData['val_accuracy']]);
+        ETA_data.push(["", responseData['ETA']]);
+        cpu_usage = responseData['cpu_usage'];
+        net_usage = responseData['net_usage'];
+        mem_usage = responseData['mem_usage'];
+        console.log(cpu_usage);
+        console.log(net_usage);
+        console.log(mem_usage);
+
+        drawChart_train_loss();
+        drawChart_train_accuracy();
+        drawChart_val_loss();
+        drawChart_val_accuracy();
+        drawChart_ETA();
+        
+        i++;
+        // console.log(responseData);
+      },
+      error: function () {
+        console.log("ajax 통신 실패");
+        clearInterval(intervalId)
+        clearInterval(resourceInterval);
+        alert("Training End")
+      }
+    });
+    
+    }
+
+
+  // loss 차트 그리기
+  function drawChart_train_loss() {
+    var data = google.visualization.arrayToDataTable(train_loss_data);
+    var options = {
+      lineWidth: 5,
+      colors: ['#e2431e', '#f1ca3a'],
+      title: '',
+      //curveType: 'function',
+      legend: { 
+        position: 'right',
+        fontSize: 15 
+        },
+      vAxis: {
+        //format : '#,###,###원',
+        textStyle: {
+          fontSize: 15
+        }
+      },
+      hAxis: {
+        //format : 'yyyy-MM-dd',
+        textStyle: {
+          fontSize: 15
+        },
+        titleTextStyle: {
+          fontSize: 15,
+        }
+      },
+      titleTextStyle: {
+        fontSize: 15
+      },
+      fontSize: 15,
+    };
+
+    var train_loss_chart = new google.visualization.LineChart(document.getElementById('train_loss_chart'));
+    train_loss_chart.draw(data, options);
+  }
+
+  // accuracy 차트 그리기
+  function drawChart_train_accuracy() {
+    var data = google.visualization.arrayToDataTable(train_accuracy_data);
+    var options = {
+      lineWidth: 5,
+      colors: ['#04B486'],
+      title: '',
+      //curveType: 'function',
+      legend: { position: 'none' },
+      vAxis: {
+        //format : '#,###,###원',
+        textStyle: {
+          fontSize: 15
+        }
+      },
+      hAxis: {
+        //format : 'yyyy-MM-dd',
+        textStyle: {
+          fontSize: 15
+        },
+        titleTextStyle: {
+          fontSize: 15,
+        }
+      },
+      titleTextStyle: {
+        fontSize: 15
+      },
+      fontSize: 15,
+    };
+
+    var train_accuracy_chart = new google.visualization.LineChart(document.getElementById('train_accuracy_chart'));
+    train_accuracy_chart.draw(data, options);
+  }
+
+  // validation 챠트
+  // loss 차트 그리기
+  function drawChart_val_loss() {
+    var data = google.visualization.arrayToDataTable(val_loss_data);
+    var options = {
+      lineWidth: 5,
+      colors: ['#e2431e', '#f1ca3a'],
+      title: '',
+      //curveType: 'function',
+      legend: { 
+        position: 'right',
+        fontSize: 15 
+        },
+      vAxis: {
+        //format : '#,###,###원',
+        textStyle: {
+          fontSize: 15
+        }
+      },
+      hAxis: {
+        //format : 'yyyy-MM-dd',
+        textStyle: {
+          fontSize: 15
+        },
+        titleTextStyle: {
+          fontSize: 15,
+        }
+      },
+      titleTextStyle: {
+        fontSize: 15
+      },
+      fontSize: 15,
+    };
+
+    var val_loss_chart = new google.visualization.LineChart(document.getElementById('val_loss_chart'));
+    val_loss_chart.draw(data, options);
+  }
+
+  // accuracy 차트 그리기
+  function drawChart_val_accuracy() {
+    var data = google.visualization.arrayToDataTable(val_accuracy_data);
+    var options = {
+      lineWidth: 5,
+      colors: ['#04B486'],
+      title: '',
+      //curveType: 'function',
+      legend: { position: 'none' },
+      vAxis: {
+        //format : '#,###,###원',
+        textStyle: {
+          fontSize: 15
+        }
+      },
+      hAxis: {
+        //format : 'yyyy-MM-dd',
+        textStyle: {
+          fontSize: 15
+        },
+        titleTextStyle: {
+          fontSize: 15,
+        }
+      },
+      titleTextStyle: {
+        fontSize: 15
+      },
+      fontSize: 15,
+    };
+
+    var val_accuracy_chart = new google.visualization.LineChart(document.getElementById('val_accuracy_chart'));
+    val_accuracy_chart.draw(data, options);
+  }
+
+  // ETA 차트 그리기
+  function drawChart_ETA() {
+    var data = google.visualization.arrayToDataTable(ETA_data);
+    var options = {
+      title: '', // 제목
+      // width: 600, // 가로 px
+      // height: 400, // 세로 px
+      bar: {
+        groupWidth: '30', // 그래프 너비 설정 %,
+        
+      },
+      legend: {
+        position: 'none' // 항목 표시 여부 (현재 설정은 안함)
+      }
+	};
+
+    var ETA_chart = new google.visualization.ColumnChart(document.getElementById('ETA_chart'));
+    ETA_chart.draw(data, options);
+  }
+ 
+  // resource 차트 그리기
+  function drawChart_resource_CPU() {
+    //resource_data_CPU[1][1] = cpu_usage;
+    console.log(cpu_usage);
+    resource_data_CPU[1][1] = Math.round(Math.random() * (20- 5) + 5);
+    //resource_data[2][1] = Math.round(Math.random() * (95- 80) + 80);
+    //resource_data[3][1] = Math.round(Math.random() * (95- 70) + 70);
+    var data = google.visualization.arrayToDataTable(resource_data_CPU);
+    var options = {
+      // width: 600,
+      // height: 300,
+      redFrom: 90, 
+      redTo: 100,
+      yellowFrom: 75, 
+      yellowTo: 90,
+      minorTicks: 20
+    };
+
+    var resource_chart_CPU = new google.visualization.Gauge(document.getElementById('resource_chart_CPU'));
+    resource_chart_CPU.draw(data, options);
+  }
+
+  function drawChart_resource_memory() {
+    //resource_data_memory[1][1] = mem_usage;
+    resource_data_memory[1][1] = Math.round(Math.random() * (40- 30) + 30);
+    //resource_data[2][1] = Math.round(Math.random() * (95- 80) + 80);
+    //resource_data[3][1] = Math.round(Math.random() * (95- 70) + 70);
+    var data = google.visualization.arrayToDataTable(resource_data_memory);
+    var options = {
+      // width: 600,
+      // height: 300,
+      redFrom: 90, 
+      redTo: 100,
+      yellowFrom: 75, 
+      yellowTo: 90,
+      minorTicks: 20
+    };
+
+    var resource_chart_memory = new google.visualization.Gauge(document.getElementById('resource_chart_memory'));
+    resource_chart_memory.draw(data, options);
+  }
+
+  function drawChart_resource_network() {
+    //resource_data_network[1][1] = net_usage;
+    resource_data_network[1][1] = Math.round(Math.random() * (400 - 350) + 350);  
+    //resource_data[2][1] = Math.round(Math.random() * (95- 80) + 80);
+    //resource_data[3][1] = Math.round(Math.random() * (95- 70) + 70);
+    var data = google.visualization.arrayToDataTable(resource_data_network);
+    var options = {
+      // width: 600,
+      // height: 300,
+      redFrom: 450, 
+      redTo: 500,
+      yellowFrom: 400, 
+      yellowTo: 450,
+      minorTicks: 20,
+      max : 500,
+    };
+
+    var resource_chart_network = new google.visualization.Gauge(document.getElementById('resource_chart_network'));
+    resource_chart_network.draw(data, options);
+  }
+
+  // 페이지 로딩 시 자동적으로 다음 동작 수행
+  $(document).ready(function () {
+    intervalId = setInterval(add, 1000);
+    resourceInterval = setInterval(function() {
+      drawChart_resource_CPU();
+      drawChart_resource_network();
+    drawChart_resource_memory();
+    }, 800);
+   
+    
+  });
+
+</script>
+{% endblock javascripts %}

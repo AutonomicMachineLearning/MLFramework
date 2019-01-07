@@ -1,0 +1,162 @@
+{% extends "tab_base.html" %}
+
+{% block title %} General Elements {% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+{% endblock stylesheets %}
+
+{% block name %}
+<h2><i class="fa fa-bars"></i> Hyperparameter <small></small></h2>
+{% endblock %}
+
+{% block tab %}
+<div class="" role="tabpanel" data-example-id="togglable-tabs">
+    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+        <li role="presentation" class=""><a href="/modeling/data" aria-expanded="false">Data</a>
+        </li>
+        <li role="presentation" class=""><a href="/modeling/model" aria-expanded="false">Model</a>
+        </li>
+        <li role="presentation" class="active"><a href="/modeling/hyperparameter" aria-expanded="true">Hyperparameter</a>
+        </li>
+        <li role="presentation" class=""><a href="/modeling/training" aria-expanded="false">Training</a>
+        </li>
+        <li role="presentation" class=""><a href="/modeling/result" aria-expanded="false">Result</a>
+        </li>
+        <li role="presentation" class=""><a href="/modeling/inference" aria-expanded="false">Inference</a>
+        </li>
+        <!--<li role="presentation" class=""><a href="#tab_content3" aria-expanded="false">Result</a>-->
+        <!--</li>-->
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+            <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
+                booth letterpress, commodo enim craft beer mlkshk aliquip</p>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+            <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
+                booth letterpress, commodo enim craft beer mlkshk </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-3"></div>
+<div class="col-md-6 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Hyperparameter Settings <small></small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <br />
+            <form class="form-horizontal form-label-left">
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Number of Epoch</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" placeholder="1000 :: Default">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Batch Size</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" placeholder="2000 :: Default">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Loss Function</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <select class="form-control">
+                            <option>mean_squared_error</option>
+                            <option>mean_absolute_error</option>
+                            <option>mean_absolute_percentage_error</option>
+                            <option>mean_squared_logarithmic_error</option>
+                            <option>squared_hinge</option>
+                            <option>binary_crossentropy</option>
+                            <option>sparse_categorical_crossentropy</option>
+                            <option>kullback_leibler_divergence</option>
+                            <option>poisson</option>
+                            <option>cosine_proximity</option>
+                            <option>custom_loss_function</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Optimizer</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <select class="form-control">
+                            <option>Adadelta</option>
+                            <option>Adagrad</option>
+                            <option>Adam</option>
+                            <option>Adamax</option>
+                            <option>Nadam</option>
+                            <option>RMSprop</option>
+                            <option>SGD</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Learning Rate</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" placeholder="0.7 :: Default">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">epsilon</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" placeholder="1e-08 :: Default">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Decay</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" placeholder="0 :: Default">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">rho</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" placeholder="0.95 :: Default">
+                    </div>
+                </div>
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                        <button type="button" class="btn btn-primary">Cancel</button>
+                        <button type="reset" class="btn btn-primary">Reset</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+{% block javascripts %}
+{{ block.super }}
+<!-- PNotify -->
+<script src="/static/vendors/pnotify/dist/pnotify.js"></script>
+<script src="/static/vendors/pnotify/dist/pnotify.buttons.js"></script>
+<script src="/static/vendors/pnotify/dist/pnotify.nonblock.js"></script>
+{% endblock javascripts %}

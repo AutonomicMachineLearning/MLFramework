@@ -1,0 +1,207 @@
+{% extends "tab_base.html" %}
+
+{% block title %} General Elements {% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+{% endblock stylesheets %}
+
+{% block name %}
+<h2><i class="fa fa-bars"></i> Result <small></small></h2>
+{% endblock %}
+
+{% block tab %}
+<div class="" role="tabpanel" data-example-id="togglable-tabs">
+  <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+    <li role="presentation" class=""><a href="/modeling/data" aria-expanded="false">Data</a>
+    </li>
+    <li role="presentation" class=""><a href="/modeling/model" aria-expanded="false">Model</a>
+    </li>
+    <li role="presentation" class=""><a href="/modeling/hyperparameter" aria-expanded="false">Hyperparameter</a>
+    </li>
+    <li role="presentation" class=""><a href="/modeling/training" aria-expanded="false">Training</a>
+    </li>
+    <li role="presentation" class="active"><a href="/modeling/result" aria-expanded="true">Result</a>
+    </li>
+    <li role="presentation" class=""><a href="/modeling/inference" aria-expanded="false">Inference</a>
+    </li>
+    <!--<li role="presentation" class=""><a href="#tab_content3" aria-expanded="false">Result</a>-->
+    <!--</li>-->
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+      <!-- <p>model block</p> -->
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+      <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
+        booth letterpress, commodo enim craft beer mlkshk aliquip</p>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+      <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
+        booth letterpress, commodo enim craft beer mlkshk </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- Loss -->
+<div class="col-md-6 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Loss<smallS></smallS></h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Settings 1</a>
+              </li>
+              <li><a href="#">Settings 2</a>
+              </li>
+            </ul>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content2">
+          <div id="loss" style="height: 500px"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Loss -->
+
+
+<!-- validation accuracy -->
+<div class="col-md-6 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2>Accuracy <smallS></smallS></h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Settings 1</a>
+            </li>
+            <li><a href="#">Settings 2</a>
+            </li>
+          </ul>
+        </li>
+        <li><a class="close-link"><i class="fa fa-close"></i></a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content2">
+        <div id="accuracy" style="height: 500px"></div>
+    </div>
+  </div>
+</div>
+<!-- /validation accuracy -->
+{% endblock %}
+
+
+
+{% block javascripts %}
+{{ block.super }}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+      google.charts.load('current', { packages: ['corechart', 'line'] });
+      google.charts.setOnLoadCallback(drawCurveTypes_loss);
+      google.charts.setOnLoadCallback(drawCurveTypes_accuracy);
+
+      function drawCurveTypes_loss() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'X');
+        data.addColumn('number', 'Train Loss');
+        data.addColumn('number', 'Validation Loss');
+
+        data.addRows(loss_data);
+
+        var options = {
+          hAxis: {
+            title: 'epoch'
+          },
+          vAxis: {
+            title: 'Loss'
+          },
+          series: {
+            1: { curveType: 'function' }
+          },
+          fontSize: 18,
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('loss'));
+        chart.draw(data, options);
+      }
+
+      function drawCurveTypes_accuracy() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'X');
+        data.addColumn('number', 'Train Accuracy');
+        data.addColumn('number', 'Validation Accuracy');
+
+        data.addRows(accuracy_data);
+
+        var options = {
+          hAxis: {
+            title: 'epoch'
+          },
+          vAxis: {
+            title: 'Accuracy'
+          },
+          series: {
+            1: { curveType: 'function' }
+          },
+          fontSize: 18,
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('accuracy'));
+        chart.draw(data, options);
+      }
+
+
+    var loss_data = [];
+    var accuracy_data = [];
+
+
+    function add() {
+      $.ajax({
+        type: "POST",
+        url: "getResultAll/",
+        dataType: "json",
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token }}',
+        },
+        success: function (responseData) {
+          var test = responseData['train_loss'];
+          console.log("가져왔습니다.");
+          for (var i = 0; i < test.length; i++) {
+            accuracy_data.push([parseFloat(test[i][0]), parseFloat(test[i][1]), parseFloat(test[i][3])]);
+            loss_data.push([parseFloat(test[i][0]), parseFloat(test[i][2]), parseFloat(test[i][4])]);
+          }
+          console.log(loss_data);
+         
+        },
+        error: function () {
+          console.log("ajax 통신 실패");
+          alert("Training End")
+        }
+      });
+      
+      }
+
+    $(document).ready(function () {
+      add();
+      
+    });
+    
+</script>
+{% endblock javascripts %}

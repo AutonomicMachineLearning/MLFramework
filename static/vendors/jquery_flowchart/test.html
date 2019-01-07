@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="jquery.flowchart.js"></script>
+    <link rel="stylesheet" href="jquery.flowchart.min.css">
+    <link rel="stylesheet" href="stylesheets/custom.css">
+    <script src="./js/jquery.panzoom.min.js"></script>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        // hide the menu when the page load
+        $('#navigation-list').hide();
+        // when .menuBtn is clicked, do this
+        $('.menuBtn').click(function() {
+          // open the menu with slide effect
+          $('#nevigation-list').slideToggle(300);
+        });
+      });
+    </script>
+</head>
+<body>
+  <span class="menuBtn"><img src="icon.svg" alt="Menu icon"><a>asdfaf</a></span>
+    <nav id="navigation-list">
+      <ul>
+        <li><a href="#item1">item1</a></li>
+        <li><a href="#item2">item1</a></li>
+        <li><a href="#item3">item1</a></li>
+        <li><a href="#item4">item1</a></li>
+        <li><a href="#item5">item1</a></li>
+      </ul>
+    </nav>
+  <div style="width: 100%; display: flex; justify-content: space-between">
+    
+
+
+    <div class="draggable_operators" style="width: 250px; margin-right: 5px; background-color: whitesmoke; border: solid 1px black">
+      <div class="draggable_operators_label">
+      </div>
+      <div class="draggable_operators_divs">
+        <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">InputLayer</div>
+        <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Convolution2D</div>
+        <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPulling2D</div>
+        <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">OutputLayer</div>
+      </div>
+      <div id="link_properties">
+        <label for="link_color">Link's color: </label><input type="color" id="link_color">
+      </div>
+    </div>
+    <div id="chart_container" style="flex-grow: 1; height: 720px; border: solid 1px black">
+      <div class="flowchart-example-container flowchart-container" id="example_9" ></div>
+   </div>
+   <div class="draggable_operators" style="width: 400px; margin-left: 5px; background-color: whitesmoke; border: solid 1px black">
+    <div id="operator_properties">
+        <label for="operator_title">title: </label><input type="text" id="operator_title">
+        <label for="operator_parameter1">parameter1: </label><input type="text" id="operator_parameter1">
+        <label for="operator_parameter2">parameter2: </label><input type="text" id="operator_parameter2">
+        <label for="operator_parameter3">parameter3: </label><input type="text" id="operator_parameter3">
+      </div>
+   </div>
+  </div>
+
+
+
+  
+
+  <button class="delete_selected_button">Delete selected operator / link</button>
+
+  <script>
+    
+    
+  var $operatorTitle = $('#operator_title');
+  var $operatorParameter1 = $('#operator_parameter1');
+  var $operatorParameter2 = $('#operator_parameter2');
+  var $operatorParameter3 = $('#operator_parameter3');
+  var $linkColor = $('#link_color');
+  var $operatorProperties = $('#operator_properties');
+  var $linkProperties = $('#link_properties');
+
+  $(document).ready(function() {
+    var $flowchart = $('#example_9');
+    var $container = $flowchart.parent();
+    
+    var cx = $flowchart.width() / 2;
+    var cy = $flowchart.height() / 2;
+    
+    
+    // Panzoom initialization...
+    $flowchart.panzoom();
+    
+    // Centering panzoom
+    $flowchart.panzoom('pan', -cx + $container.width() / 2, -cy + $container.height() / 2);
+
+    // Panzoom zoom handling...
+    var possibleZooms = [0.5, 0.75, 1, 2, 3];
+    var currentZoom = 2;
+    $container.on('mousewheel.focal', function( e ) {
+        e.preventDefault();
+        var delta = (e.delta || e.originalEvent.wheelDelta) || e.originalEvent.detail;
+        var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
+        currentZoom = Math.max(0, Math.min(possibleZooms.length - 1, (currentZoom + (zoomOut * 2 - 1))));
+        $flowchart.flowchart('setPositionRatio', possibleZooms[currentZoom]);
+        $flowchart.panzoom('zoom', possibleZooms[currentZoom], {
+            animate: false,
+            focal: e
+        });
+    });
+    
+    // 처음에 미리 생성할 노드들 설정
+    var data = {
+      operators: {
+       // 노드
+
+      },
+      links: {
+        // 화살표
+      },
+      parameter1: {
+      },
+      parameter2: {
+      },
+      parameter3: {
+      }
+    };
+    
+
+    // Apply the plugin on a standard, empty div...
+    $flowchart.flowchart({
+      data: data,
+      onOperatorSelect: function(operatorId) {
+        $operatorProperties.show();
+        $operatorTitle.val($flowchart.flowchart('getOperatorTitle', operatorId));
+        $operatorParameter1.val($flowchart.flowchart('getOperatorParameter1', operatorId));
+        $operatorParameter2.val($flowchart.flowchart('getOperatorParameter2', operatorId));
+        $operatorParameter3.val($flowchart.flowchart('getOperatorParameter3', operatorId));
+        return true;
+      },
+      onOperatorUnselect: function() {
+        $operatorProperties.hide();
+        return true;
+      },
+      onLinkSelect: function(linkId) {
+        $linkProperties.show();
+        $linkColor.val($flowchart.flowchart('getLinkMainColor', linkId));
+        return true;
+      },
+      onLinkUnselect: function() {
+        $linkProperties.hide();
+        return true;
+      }
+    });
+
+    $flowchart.parent().siblings('.delete_selected_button').click(function() {
+      $flowchart.flowchart('deleteSelected');
+    });
+    
+    
+    var $draggableOperators = $('.draggable_operator');
+    
+    function getOperatorData($element) {
+      var nbInputs = parseInt($element.data('nb-inputs'));
+      var nbOutputs = parseInt($element.data('nb-outputs'));
+      var data = {
+        properties: {
+          title: $element.text(),
+          inputs: {},
+          outputs: {},
+          parameter1 : "",
+          parameter2 : "",
+          parameter2 : "",
+        } 
+      };
+      
+      // var i = 0;
+      // for (i = 0; i < nbInputs; i++) {
+      //   data.properties.inputs['input_' + i] = {
+      //     label: 'Input ' + (i + 1)
+      //   };
+      // }
+      // for (i = 0; i < nbOutputs; i++) {
+      //   data.properties.outputs['output_' + i] = {
+      //     label: 'Output ' + (i + 1)
+      //   };
+      // }
+      
+      data.properties.inputs['input_'] = {
+          label: 'Input '
+        };
+
+      data.properties.outputs['output_'] = {
+          label: 'Output '
+        };
+
+      data.properties.parameter1 = "parameter1";
+      data.properties.parameter2 = "parameter2";
+      data.properties.parameter3 = "parameter3";
+
+      return data;
+    }
+    
+    var operatorId = 0;
+        
+    $draggableOperators.draggable({
+        cursor: "move",
+        opacity: 0.7,
+        
+        helper: 'clone', 
+        appendTo: 'body',
+        zIndex: 1000,
+        
+        helper: function(e) {
+          var $this = $(this);
+          var data = getOperatorData($this);
+          return $flowchart.flowchart('getOperatorElement', data);
+        },
+        stop: function(e, ui) {
+            var $this = $(this);
+            var elOffset = ui.offset;
+            var containerOffset = $container.offset();
+            if (elOffset.left > containerOffset.left &&
+                elOffset.top > containerOffset.top && 
+                elOffset.left < containerOffset.left + $container.width() &&
+                elOffset.top < containerOffset.top + $container.height()) {
+
+                var flowchartOffset = $flowchart.offset();
+
+                var relativeLeft = elOffset.left - flowchartOffset.left;
+                var relativeTop = elOffset.top - flowchartOffset.top;
+
+                var positionRatio = $flowchart.flowchart('getPositionRatio');
+                relativeLeft /= positionRatio;
+                relativeTop /= positionRatio;
+                
+                var data = getOperatorData($this);
+                data.left = relativeLeft;
+                data.top = relativeTop;
+                
+                $flowchart.flowchart('addOperator', data);
+                operatorId++;
+            }
+        }
+    });
+    
+
+    $operatorTitle.keyup(function() {
+      var selectedOperatorId = $flowchart.flowchart('getSelectedOperatorId');
+      if (selectedOperatorId != null) {
+        $flowchart.flowchart('setOperatorTitle', selectedOperatorId, $operatorTitle.val());
+      }
+    });
+
+    $operatorParameter1.keyup(function() {
+      var selectedOperatorId = $flowchart.flowchart('getSelectedOperatorId');
+      if (selectedOperatorId != null) {
+        $flowchart.flowchart('setOperatorParameter1', selectedOperatorId, $operatorParameter1.val());
+      }
+    });
+
+    $operatorParameter2.keyup(function() {
+      var selectedOperatorId = $flowchart.flowchart('getSelectedOperatorId');
+      if (selectedOperatorId != null) {
+        $flowchart.flowchart('setOperatorParameter2', selectedOperatorId, $operatorParameter2.val());
+      }
+    });
+
+    $operatorParameter3.keyup(function() {
+      var selectedOperatorId = $flowchart.flowchart('getSelectedOperatorId');
+      if (selectedOperatorId != null) {
+        $flowchart.flowchart('setOperatorParameter3', selectedOperatorId, $operatorParameter3.val());
+      }
+    });
+    
+    $linkColor.change(function() {
+      var selectedLinkId = $flowchart.flowchart('getSelectedLinkId');
+      if (selectedLinkId != null) {
+        $flowchart.flowchart('setLinkMainColor', selectedLinkId, $linkColor.val());
+      }
+    });
+
+    $flowchart.parent().siblings('.delete_selected_button').click(function() {
+      $flowchart.flowchart('deleteSelected');
+    });
+  });
+  </script>
+</div>
+</body>
+</html>

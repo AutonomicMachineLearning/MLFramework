@@ -1,0 +1,305 @@
+    {% extends "tab_base.html" %}
+
+    {% block title %} General Elements {% endblock title %}
+
+    {% block stylesheets %}
+    {{ block.super }}
+    <style>
+        @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+    </style>
+    {% endblock stylesheets %}
+
+    {% block name %}
+    <h2><i class="fa fa-bars"></i> My Projects <small></small></h2>
+    {% endblock %}
+
+    {% block tab %}
+    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+            <li role="presentation" class="active"><a href="." aria-expanded="true">My Project</a>
+            </li>
+            <li role="presentation" class=""><a href="/upload/" aria-expanded="false">Sample Project</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-8 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <!-- <h2>프로젝트 등록 <small></small></h2> -->
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="" ><i class="fa fa-upload"></i></a></li>
+                    <li><a class="" data-target="#layerpop" data-toggle="modal"><i class="fa fa-plus"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <div class="row" id="project_list">
+                    {% for project in project_list %}
+                    <div class="x_panel">
+                        <div class="project">
+                            <div class="col-md-3 col-xs-12 projectName">{{ project.projectName }}
+                                <small></small>
+                            </div>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        <i class="fa fa-wrench"  data-project-name="{{ project.projectName }}" data-project-description="{{ project.projectDescription }}" data-project-tags="{{ project.projectTag }}" data-target="#project_info_modal" data-toggle="modal"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="" href="/upload/">
+                                        <i class="fa fa-external-link" ></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="">
+                                        <i class="fa fa-close" data-project-name="{{ project.projectName }}"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 모달 -->
+    <div class="modal fade" id="layerpop">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- header -->
+                <div class="modal-header">
+                    <!-- 닫기(x) 버튼 -->
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <!-- header title -->
+                    <center>
+                        <h2 class="modal-title">프로젝트 생성</h2>
+                    </center>
+                </div>
+                <!-- body -->
+                <form id="create_project_form" class="form-horizontal form-label-left" action="." method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Name
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input id="project_name" type="text" class="form-control" placeholder="프로젝트 이름을 입력해 주세요.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Description
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <textarea id="project_description" class="form-control" rows="3" placeholder="프로젝트의 설명을 입력 해주세요."></textarea>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Tags</label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input id="tags_1" type="text" class="tags form-control" value="" />
+                                <div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <center>
+                        <input id="create_project_form_sumit" type="submit" class="btn btn-dark" value="submit" data-dismiss="modal">&nbsp;&nbsp;
+                        <input type="button" class="btn btn-dark" value="cancel" data-dismiss="modal">
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- project info 모달 -->
+    <div class="modal fade" id="project_info_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- header -->
+                <div class="modal-header">
+                    <!-- 닫기(x) 버튼 -->
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <!-- header title -->
+                    <center>
+                        <h2 class="modal-title">프로젝트 정보</h2>
+                    </center>
+                </div>
+                <!-- body -->
+                <form id="create_project_form" class="form-horizontal form-label-left" action="." method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Name
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="text" class="form-control project_name" value="" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Description
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <textarea class="form-control project_description" rows="3" value="" disabled></textarea>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Project Tags</label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="text" class="tags form-control project_tags" value="" disabled/>
+                                {% comment %} <div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div> {% endcomment %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <center>
+                        <!--<input id="create_project_form_sumit" type="submit" class="btn btn-dark" value="submit" data-dismiss="modal">&nbsp;&nbsp;-->
+                        <input type="button" class="btn btn-dark" value="cancel" data-dismiss="modal">
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery-1.10.2.js?ver=1"></script>
+    <script>
+        var $project_name;
+        var $project_description;
+        var $project_tag;
+        var $selected_project;
+
+        /////////// 프로젝트 생성
+        function create_projects() {
+            var content = '<div class="x_panel">' + 
+                            '<div class="project">' +
+                                '<div class="col-md-3 col-xs-12">'+ $project_name +
+                                    '<small></small>' +
+                                '</div>' +
+                                '<ul class="nav navbar-right panel_toolbox">' +
+                                    '<li class="dropdown">' +
+                                        '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
+                                            '<i class="fa fa-wrench" data-project-name="' + $project_name +'" data-project-description="' + $project_description + '" data-project-tags="' + $project_tags + '" data-target="#project_info_modal" data-toggle="modal"></i>' +
+                                        '</a>' +
+                                    '</li>' +
+                                    '<li>' +
+                                        '<a class="" href="/upload/">' +
+                                            '<i class="fa fa-external-link"></i>' + 
+                                        '</a>' +
+                                    '</li>' +
+                                    '<li>' +
+                                        '<a class="">' +
+                                            '<i class="fa fa-close" data-project-name=' + $project_name + ' ></i>' +
+                                        '</a>' +
+                                    '</li>' +
+                                '</ul>' +
+                            '</div>' +
+                        '</div>';
+            $('#project_list').append(content);   
+        }
+
+
+        /////////// 프로젝트 리스트 불러오기(초기화면-자동)
+        function load_project_list() {
+
+        }
+        
+        $(document).ready(function () {
+                $(document).on('click', "#create_project_form_sumit", function () {
+                    $project_name = $('#project_name').val();
+                    $project_description = $('#project_description').val();
+                    $project_tags = $('#tags_1').val();
+                    
+                    $.ajax({
+                        type: "POST",
+                        url: "create_project/",
+                        dataType: "json",
+                        data: {
+                            'csrfmiddlewaretoken': '{{csrf_token }}',
+                            'project_name': $project_name,
+                            'project_description': $project_description,
+                            'project_tags': $project_tags,
+                        },
+                        success: function (responseData) {
+                            console.log("ajax 통신 성공");
+                            $(':input','#create_project_form').val("");
+                            $('#tags_1_tagsinput > span').remove();
+                            create_projects();
+                        },
+                        error: function () {
+                            console.log("ajax 통신 실패");
+                        }
+                    });
+                });
+
+                // 프로젝트-detail 버튼을 클릭하면 프로젝트 정보를 불러온다.
+                $(document).on('click', '#project_list .fa.fa-wrench', function() {
+                    $selected_project = this;
+                     console.log($selected_project.getAttribute("data-project-name"));
+                     console.log($selected_project.getAttribute("data-project-description"));
+                     console.log($selected_project.getAttribute("data-project-tags"));
+                    $('#project_info_modal .form-control.project_name').val($selected_project.getAttribute("data-project-name"));
+                    $('#project_info_modal .form-control.project_description').val($selected_project.getAttribute("data-project-description"));
+                    $('#project_info_modal .tags.form-control.project_tags').val($selected_project.getAttribute("data-project-tags"));
+                }); 
+
+                // 프로젝트-close 버튼을 클릭하면 해당 프로젝트를 삭제한다.
+                $(document).on('click', '#project_list .fa.fa-close', function() {
+                    $selected_projectName = this.getAttribute("data-project-name");
+                    console.log($selected_projectName);
+                    var selected = $(this);
+                    console.log(selected);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "delete_project/",
+                        dataType: "json",
+                        data: {
+                            'csrfmiddlewaretoken': '{{csrf_token }}',
+                            'project_name': $selected_projectName,
+                        },
+                        success: function (responseData) {
+                            console.log("ajax 통신 성공!");
+                            console.log(selected);
+                            selected.parent().parent().parent().parent().parent().remove();
+                        },
+                        error: function () {
+                            console.log("ajax 통신 실패");
+                            alert("Error!!! 프로젝트를 삭제하지 못했습니다.")
+                        }
+                    });
+                })
+        });
+
+
+        
+    </script>
+    
+    {% endblock %}
+
+
+
+    {% block javascripts %}
+     {{ block.super }}
+    <!-- PNotify -->
+    <script src="/static/vendors/pnotify/dist/pnotify.js?ver=1"></script>
+    <script src="/static/vendors/pnotify/dist/pnotify.buttons.js?ver=1"></script>
+    <script src="/static/vendors/pnotify/dist/pnotify.nonblock.js?ver=1"></script>
+    <!-- Chart.js -->
+    <script src="/static/vendors/Chart.js/dist/Chart.min.js?ver=1"></script>
+    <!-- jQuery Sparklines -->
+    <script src="/static/vendors/jquery-sparkline/dist/jquery.sparkline.min.js?ver=1"></script>
+    <!-- easy-pie-chart -->
+    <script src="/static/vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js?ver=1"></script> 
+    <script src="/static/vendors/jquery.tagsinput/src/jquery.tagsinput.js?ver=1"></script>
+    {% endblock javascripts %}
