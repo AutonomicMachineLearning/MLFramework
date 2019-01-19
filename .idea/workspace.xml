@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6232c0f7-fb44-4beb-9713-374dcfb390d3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ch2-Py36-Dj20.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ch2-Py36-Dj20.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JetBrains.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/JetBrains.gitignore" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -72,8 +71,8 @@
       <file leaf-file-name="JetBrains.gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/JetBrains.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1560">
-              <caret line="65" column="37" selection-start-line="65" selection-start-column="37" selection-end-line="65" selection-end-column="37" />
+            <state relative-caret-position="768">
+              <caret line="32" column="13" lean-forward="true" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -112,8 +111,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Table</find>
-      <find>data</find>
       <find>Network</find>
       <find>getDatasetList</find>
       <find>graph_line</find>
@@ -142,6 +139,8 @@
       <find>home</find>
       <find>my</find>
       <find>body</find>
+      <find>vcs</find>
+      <find>iml</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -740,8 +739,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/JetBrains.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1560">
-          <caret line="65" column="37" selection-start-line="65" selection-start-column="37" selection-end-line="65" selection-end-column="37" />
+        <state relative-caret-position="768">
+          <caret line="32" column="13" lean-forward="true" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
         </state>
       </provider>
     </entry>
