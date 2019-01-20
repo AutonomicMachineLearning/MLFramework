@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6232c0f7-fb44-4beb-9713-374dcfb390d3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/JetBrains.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/JetBrains.gitignore" afterDir="false" />
-    </list>
+    <list default="true" id="6232c0f7-fb44-4beb-9713-374dcfb390d3" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -56,23 +54,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="model.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="model.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modeling/templates/model.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+            <state relative-caret-position="552">
+              <caret line="23" column="9" lean-forward="true" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
               <folding>
                 <element signature="e#5167#5233#0#HTML" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JetBrains.gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/JetBrains.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="768">
-              <caret line="32" column="13" lean-forward="true" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -381,7 +370,7 @@
     <option name="totallyTimeSpent" value="183005000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="728" y="0" width="1618" height="1407" extended-state="0" />
+    <frame x="728" y="0" width="1618" height="1407" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -719,18 +708,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md" />
     <entry file="file://$PROJECT_DIR$/modeling/templates/model.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+        <state relative-caret-position="552">
+          <caret line="23" column="9" lean-forward="true" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
           <folding>
             <element signature="e#5167#5233#0#HTML" expanded="true" />
           </folding>
