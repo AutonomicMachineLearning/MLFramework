@@ -1,0 +1,8 @@
+////
+/// Shared Utilities
+/// Animation
+////
+
+@mixin jelly-animation {
+  animation: jelly get-duration(slower) linear both;
+}

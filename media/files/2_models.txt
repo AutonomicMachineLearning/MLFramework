@@ -1,0 +1,24 @@
+{
+	"source_graph": {
+		"op_0": {
+			"operator_title": "Dense",
+			"output_dimentions": "",
+			"activation": "softmax",
+			"tb_button_0": "on",
+			"weights": "None",
+			"weight_initialization_function": "zero",
+			"regularizer_for_input_wegiht": "None",
+			"activitiy_regularizer": "None",
+			"bias_regularizer": "None",
+			"bias": "None",
+			"bias_constraint": "None",
+			"input_dimention": "None",
+			"weight": "None",
+			"toLayer": [],
+			"left": 640,
+			"top": 820
+		}
+	},
+	"articulable_subgraph": {},
+	"abstract_graph": {}
+}

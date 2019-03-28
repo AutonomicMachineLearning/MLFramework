@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="jquery.flowchart.js"></script>
+    <link rel="stylesheet" href="jquery.flowchart.min.css">
+    <link rel="stylesheet" href="stylesheets/custom.css">
+
+	<script>
+		$(document).ready(function() {
+    var data = {
+      operators: {
+        operator1: {
+          top: 20,
+          left: 20,
+          properties: {
+            title: 'Convolution2D',
+            inputs: {
+              input_1: {
+                label: 'Input 1',
+              },
+              // input_2: {
+              //   label: 'Input 2',
+              // }
+            },
+            outputs: {
+              output_1: {
+                label: 'Output 1',
+              }
+              
+            }
+          }
+        },
+        operator2: {
+          top: 20,
+          left: 20,
+          properties: {
+            title: 'Convolution2D',
+            inputs: {
+              input_1: {
+                label: 'Input 1',
+              },
+              // input_2: {
+              //   label: 'Input 2',
+              // }
+            },
+            outputs: {
+              output_1: {
+                label: 'Output 1',
+              }
+              
+            }
+          }
+        }
+      }
+    };  
+
+    // Apply the plugin on a standard, empty div...
+    $('#example_1').flowchart({
+      data: data
+    });
+  });
+	</script>
+</head>
+<body>
+	<div class="flowchart-example-container flowchart-container" id="example_1">
+  </div>
+</body>
+</html>

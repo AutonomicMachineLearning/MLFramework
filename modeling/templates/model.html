@@ -1,0 +1,2359 @@
+{% extends "tab_base.html" %}
+
+{% block title %} General Elements {% endblock title %}
+
+{% block stylesheets %}
+    {{ block.super }}
+    <link href="/static/vendors/titatoggle-master/dist/titatoggle-dist.css?ver=1" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block name %}
+    <h2><i class="fa fa-bars"></i> Model <small></small></h2>
+{% endblock %}
+
+{% block tab %}
+    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+            <li role="presentation" class=""><a href="/modeling/data" aria-expanded="false">Data</a>
+            </li>
+            <li role="presentation" class="active"><a href="/modeling/model" aria-expanded="true">Model</a>
+            </li>
+            <li role="presentation" class=""><a href="/modeling/hyperparameter" aria-expanded="false">Hyperparameter</a>
+            </li>
+            <li role="presentation" class=""><a href="/modeling/training" aria-expanded="false">Training</a>
+            </li>
+            <li role="presentation" class=""><a href="/modeling/result" aria-expanded="false">Result</a>
+            </li>
+            <li role="presentation" class=""><a href="/modeling/inference" aria-expanded="false">Inference</a>
+            </li>
+            <!--<li role="presentation" class=""><a href="#tab_content3" aria-expanded="false">Result</a>-->
+            <!--</li>-->
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <!-- <section id="SimpleList" class="SimpleList"><article class="StackedListWrapper StackedListWrapper--hasScrollIndicator"><header class="StackedListHeader"><h3 class="Heading Heading--size3 Heading--colorWhite">Simple list</h3></header><ul class="StackedList StackedList--hasScroll" tabindex="0"><li class="StackedListItem StackedListItem--isDraggable StackedListItem--item1" tabindex="1"><div class="StackedListContent"><h4 class="Heading Heading--size4 text-no-select">item one</h4><div class="DragHandle"></div><div class="Pattern Pattern--typeHalftone"></div><div class="Pattern Pattern--typePlaced"></div></div></li><li class="StackedListItem StackedListItem--isDraggable StackedListItem--item2" tabindex="1"><div class="StackedListContent"><h4 class="Heading Heading--size4 text-no-select">item two</h4><div class="DragHandle"></div><div class="Pattern Pattern--typeHalftone"></div><div class="Pattern Pattern--typePlaced"></div></div></li><li class="StackedListItem StackedListItem--isDraggable StackedListItem--item3" tabindex="1"><div class="StackedListContent"><h4 class="Heading Heading--size4 text-no-select">item three</h4><div class="DragHandle"></div><div class="Pattern Pattern--typeHalftone"></div><div class="Pattern Pattern--typePlaced"></div></div></li><li class="StackedListItem StackedListItem--isDraggable StackedListItem--item4" tabindex="1"><div class="StackedListContent"><h4 class="Heading Heading--size4 text-no-select">item four</h4><div class="DragHandle"></div><div class="Pattern Pattern--typeHalftone"></div><div class="Pattern Pattern--typePlaced"></div></div></li><li class="StackedListItem StackedListItem--item5"><div class="StackedListContent"><h4 class="Heading Heading--size4 text-no-select">item five</h4><div class="NopeHandle"></div></div></li><li class="StackedListItem StackedListItem--isDraggable StackedListItem--item6" tabindex="1"><div class="StackedListContent"><h4 class="Heading Heading--size4 text-no-select">item six</h4><div class="DragHandle"></div><div class="Pattern Pattern--typeHalftone"></div><div class="Pattern Pattern--typePlaced"></div></div></li><li class="StackedListItem StackedListItem--isDraggable StackedListItem--item7" tabindex="1"><div class="StackedListContent"><h4 class="Heading Heading--size4 text-no-select">item seven</h4><div class="DragHandle"></div><div class="Pattern Pattern--typeHalftone"></div><div class="Pattern Pattern--typePlaced"></div></div></li><li class="StackedListItem StackedListItem--item8"><div class="StackedListContent"><h4 class="Heading Heading--size4 text-no-select">item eight</h4><div class="NopeHandle"></div></div></li><li class="StackedListItem StackedListItem--item9"><div class="StackedListContent"><h4 class="Heading Heading--size4 text-no-select">item nine</h4><div class="NopeHandle"></div></div></li><li class="StackedListItem StackedListItem--isDraggable StackedListItem--item10" tabindex="1"><div class="StackedListContent"><h4 class="Heading Heading--size4 text-no-select">item ten</h4><div class="DragHandle"></div><div class="Pattern Pattern--typeHalftone"></div><div class="Pattern Pattern--typePlaced"></div></div></li><li class="StackedListItem StackedListItem--item11"><div class="StackedListContent"><h4 class="Heading Heading--size4 text-no-select">item eleven</h4><div class="NopeHandle"></div></div></li><li class="StackedListItem StackedListItem--isDraggable StackedListItem--item12" tabindex="1"><div class="StackedListContent"><h4 class="Heading Heading--size4 text-no-select">item twelve</h4><div class="DragHandle"></div><div class="Pattern Pattern--typeHalftone"></div><div class="Pattern Pattern--typePlaced"></div></div></li></ul></article></section> -->
+
+
+            <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                <div style="width: 100%; display: flex; justify-content: space-between">
+                    <div class="col-xs-2">
+                        <div class="draggable_operators" style="width: 100%; height: 800px; margin-right: 5px; background-color: whitesmoke; border: solid 1px black">
+                            <div class="x_panel">
+                                <div class="x_content">
+                                    <!-- start accordion -->
+                                    <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                                        <div class="panel">
+                                            <a class="panel-heading collapsed" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                <h4 class="panel-title">Input/Output Layers</h4>
+                                            </a>
+                                            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                                <div class="panel-body">
+                                                    <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">InputLayer</div>
+                                                    <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">OutputLayer</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel">
+                                            <a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                <h4 class="panel-title">Core Layers</h4>
+                                            </a>
+                                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                                <div class="panel-body">
+                                                    <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Dense</div>
+                                                    <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Dropout</div>
+                                                    <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Flatten</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel">
+                                            <a class="panel-heading collapsed" role="tab" id="headingThree" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                <h4 class="panel-title">Convolution Layers</h4></a>
+                                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                                <div class="panel-body">
+                                                    <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Convolution2D</div>
+                                                    <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">ZeroPadding2D</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel">
+                                            <a class="panel-heading collapsed" role="tab" id="headingFour" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="headingFour">
+                                                <h4 class="panel-title">Pooling Layers</h4></a>
+                                            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                                                <div class="panel-body">
+                                                    <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPooling2D</div>
+                                                    <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">AveragePooling2D</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel">
+                                            <a class="panel-heading collapsed" role="tab" id="headingFive" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+                                                <h4 class="panel-title">Recurrent Layers</h4></a>
+                                            <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                                                <div class="panel-body">
+                                                    <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">LSTM</div>
+                                                    <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">SimpleRNN</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel">
+                                            <a class="panel-heading collapsed" role="tab" id="headingSix" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseThree">
+                                                <h4 class="panel-title">Normalization Layers</h4></a>
+                                            <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                                                <div class="panel-body">
+                                                    <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">BatchNormalization</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel">
+                                            <a class="panel-heading collapsed" role="tab" id="headingSeven" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseThree">
+                                                <h4 class="panel-title">Well Known Model</h4></a>
+                                            <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+                                                <div class="panel-body">
+                                                    <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">VGG 16 Net.</div>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">VGG 19 Net.</div>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Alext Net.</div>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Google Net.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel">
+                                            <a class="panel-heading collapsed" role="tab" id="headingEight" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false" aria-controls="collapseThree">
+                                                <h4 class="panel-title">Customizing Modules</h4></a>
+                                            <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
+                                                
+                                            </div>
+                                        </div>
+                                        <!-- end of accordion -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="draggable_operators_label"></div>
+                            <div class="draggable_operators_divs"></div>
+                            <!-- <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">InputLayer</div>
+                            <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Convolution2D</div>
+                            <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPulling2D</div>
+                            <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">OutputLayer</div> -->
+
+                            <div id="link_properties">
+                                <label for="link_color">Link's color: </label><input type="color" id="link_color">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-8" id="drawing_sheet">
+                        <div id="" style="flex-grow: 1; height: 60px; width: 100%; margin-bottom: 10px; ">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div>
+                                    {{ form }}
+                                    <input type="submit" value="Upload" />
+                                </div>
+                            </form>
+                            <!-- <button class="btn btn-primary" style="margin-right: 5px;" id="save_button"><i class="fa fa-save"></i> Save</button>
+                            <label class="btn btn-primary" style="margin-right: 5px;" for="inputImage" title="Upload image file">
+                                <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*"><i class="fa fa-upload"></i> Load
+                            </label>   -->
+                        </div>
+                        <br/>
+
+
+                    </div>
+                    <div class="col-xs-2">
+                        <div id="parameter_bar" class="draggable_operators" style="width: 100%; height: 800px; margin-left: 5px; background-color: whitesmoke; border: solid 1px black">
+                            <!--  <div id="operator_properties" clsss="properties">
+                                 <label for="operator_title">title: </label><input type="text" id="operator_title">
+                                 <label for="operator_parameter1">parameter1: </label><input type="text" id="operator_parameter1">
+                                 <label for="operator_parameter2">parameter2: </label><input type="text" id="operator_parameter2">
+                                 <label for="operator_parameter3">parameter3: </label><input type="text" id="operator_parameter3">
+                             </div> -->
+                            <!-- <div id="Convolution2D_properties" class="properties">
+                              <form id="picker">
+                                <lable for="title">title: </lable><br><input type="text" id="operator_title"><br>
+                                <lable for="filter_rows">Filter Rows : </lable><br><input type="text" id="filter_rows"><br>
+                                <lable for="number_of_filters">Number of Filters : </lable><br><input type="text" id="number_of_filters"><br>
+                                <lable for="filter_columns">Filter Columns : </lable><br><input type="text" id="filter_columns"><br>
+                                <lable for="activation">Activation : </lable><br>
+                                <select id="activation">
+                                    <option value="softmax">softmax</option>
+                                    <option value="softplus">softplus</option>
+                                    <option value="softsign">softsign</option>
+                                    <option value="relu">relu</option>
+                                    <option value="tanh">tanh</option>
+                                    <option value="sigmoid">sigmoid</option>
+                                    <option value="hard_sigmoid">hard_sigmoid</option>
+                                    <option value="linear">linear</option>
+                                </select>
+                              </form>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <!-- <button class="delete_selected_button">Delete selected operator / link</button>
+
+            <div id="data">
+              <ul>
+                <li class="draggable_operator ui-draggable ui-draggable-handle">One</li>
+                <li class="draggable_operator ui-draggable ui-draggable-handle">Two</li>
+                <li id="upper">Node with Children
+                  <ul>
+                    <li>Convolution2D</li>
+                    <li>ZeroPaddi</li>
+                  </ul>
+                </li>
+                <li class="draggable_operator ui-draggable ui-draggable-handle">Threee</li>
+              </ul>
+            </div>
+
+
+            <div id="layerTree"></div>
+
+
+            <div class="checkbox-slider--b-flat checkbox-slider-info">
+                    <label>
+                        <input type="checkbox" class="tottle_button" id="tb"><span>Show Advance Options</span>
+                    </label>
+              </div>
+              <div class="default_options" style="display:none;">
+                    <lable for="weights">Weights: </lable><br><input type="text" id="weights" value="None"><br>
+              </div> -->
+
+        </div>
+        <div class="alert alert-success" id="successMessage" style="display: none;">
+            <strong>성공했습니다.</strong>
+        </div>
+        <div class="alert alert-danger sticky-top" id="dangerMessage" style="display: none;">
+            <strong>실패했습니다.</strong>
+        </div>
+        <div class="alert alert-warning" id="warningMessage" style="display: none;">
+            <strong>데이터베이스 오류가 발생 하였습니다.</strong>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ block.super }}
+    <!-- PNotify -->
+    <script  src="http://code.jquery.com/jquery-latest.min.js?ver=1.0"></script>
+    <!-- <script src="//code.jquery.com/jquery-1.11.0.min.js?ver=1.0"></script> -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <!-- <script src="http://code.jquery.com/jquery-1.10.2.js?ver=1"></script> -->
+    <script src="/static/vendors/pnotify/dist/pnotify.js?ver=1"></script>
+    <script src="/static/vendors/pnotify/dist/pnotify.buttons.js?ver=1"></script>
+    <script src="/static/vendors/pnotify/dist/pnotify.nonblock.js?ver=1"></script>
+
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js?ver=1.3"></script>
+    <script src="/static/vendors/jquery_flowchart/jquery.flowchart.js?ver=3.5"></script>
+    <link rel="stylesheet" href="/static/vendors/jquery_flowchart/jquery.flowchart.min.css?ver=1.4">
+    <link rel="stylesheet" href="/static/vendors/jquery_flowchart/css/custom.css?ver=1.8">
+    <script src="/static/vendors/jquery_flowchart/jquery.panzoom.min.js?ver=1.3"></script>
+
+    <!-- draggable.js - Entire bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.7/lib/draggable.bundle.js?ver=1.0"></script>
+    <!-- <link rel="stylesheet" href="/static/vendors/draggable-1.0.0-beta.6/examples/src/styles/examples-app.scss"> -->
+
+    <link rel="stylesheet" href="/static/vendors/jquery_flowchart/jstree/dist/themes/default/style.min.css?ver=1" />
+    <script type="text/javascript" src="/static/vendors/jquery_flowchart/jstree/dist/jstree.min.js?ver=1"></script>
+    <script>
+        var $operatorTitle = $('#operator_title');
+        var $operatorParameter1 = $('#operator_parameter1');
+        var $operatorParameter2 = $('#operator_parameter2');
+        var $operatorParameter3 = $('#operator_parameter3');
+        var $linkColor = $('#link_color');
+        var $operatorProperties = $('#operator_properties');
+        var $linkProperties = $('#link_properties');
+
+        var $flowchart = $('#sheet_0');
+        var $container = $flowchart.parent();
+        var operatorId = 0;
+        var linkId = 0;
+
+
+
+
+        function getOperatorData($element) {
+            //var title = $flowchart.flowchart('getOperatorTitle', operatorId);
+            var nbInputs = parseInt($element.data('nb-inputs'));
+            var nbOutputs = parseInt($element.data('nb-outputs'));
+            var data = {
+                properties: {
+                    title: $element.text(),
+                    inputs: {},
+                    outputs: {},
+                    parameter1: "",
+                    parameter2: "",
+                    parameter2: "",
+                }
+            };
+
+            // var i = 0;
+            // for (i = 0; i < nbInputs; i++) {
+            //   data.properties.inputs['input_' + i] = {
+            //     label: 'Input ' + (i + 1)
+            //   };
+            // }
+            // for (i = 0; i < nbOutputs; i++) {
+            //   data.properties.outputs['output_' + i] = {
+            //     label: 'Output ' + (i + 1)
+            //   };
+            // }
+
+            data.properties.inputs['input_' + operatorId] = {
+                label: 'Input '
+            };
+
+            data.properties.outputs['output_' + operatorId] = {
+                label: 'Output '
+            };
+
+            data.properties.parameter1 = "parameter1";
+            data.properties.parameter2 = "parameter2";
+            data.properties.parameter3 = "parameter3";
+
+            return data;
+        }
+
+        //우측 세부 파라미터 설정 bar(tab) 태그 생성
+        function appendOperatorParam(op_id, type) {
+            op_id = String(op_id);
+            var content = "";
+            var parameterElementId = "operator_" + op_id;
+            var picker = "arg_" + op_id;
+            var toggleButtonId = "tb_button_" + op_id
+            var toggleContentsId = "tb_contents_" + op_id
+
+            switch (type) {
+                case "InputLayer":
+                    content += '<div id="' + parameterElementId + '" class="properties">' +
+                        '<form id="' + picker + '">' +
+                        '<lable for="title">title: </lable><br><input type="text" id="operator_title" disabled value="' + type + '"><br>' +
+                        '<lable for="dimention_ordering">Input Port : </lable><br>' +
+                        '<select id="input_port">' +
+                        '<option value="input_port">Input Port</option>' +
+                        '</select><br>' +
+                        '<lable for="dimention_ordering">Dimention Ordering : </lable><br>' +
+                        '<select id="dimention_ordering">' +
+                        '<option value="default">softmax</option>' +
+                        '<option value="tf">tf (tensorflow)</option>' +
+                        '<option value="th">th (theano)</option>' +
+                        '</select>' +
+                        '</from>' +
+                        '</div>';
+                    break;
+
+                case "OutputLayer":
+                    content += '<div id="' + parameterElementId + '" class="properties">' +
+                        '<form id="' + picker + '">' +
+                        '<lable for="title">title: </lable><br><input type="text" id="operator_title" disabled value="' + type + '"><br>' +
+                        '<lable for="dimention_ordering">Output Port : </lable><br>' +
+                        '<select id="output_port">' +
+                        '<option value="output_port">Output Port</option>' +
+                        '</select><br>' +
+                        '</from>' +
+                        '</div>';
+                    break;
+
+                case "Dense":
+                    content += '<div id="' + parameterElementId + '" class="properties">' +
+                        '<form id="' + picker + '">' +
+                        '<lable for="title">title: </lable><br><input type="text" id="operator_title" disabled value="' + type + '"><br>' +
+                        '<lable for="ouput_dimentions">Output Dimentions : </lable><br><input type="text" id="output_dimentions" placeholder="int > 0"><br>' +
+                        '<lable for="activation">Activation : </lable><br>' +
+                        '<select id="activation">' +
+                        '<option value="softmax">softmax</option>' +
+                        '<option value="softplus">softplus</option>' +
+                        '<option value="softsign">softsign</option>' +
+                        '<option value="relu">relu</option>' +
+                        '<option value="tanh">tanh</option>' +
+                        '<option value="sigmoid">sigmoid</option>' +
+                        '<option value="hard_sigmoid">hard_sigmoid</option>' +
+                        '<option value="linear">linear</option>' +
+                        '</select><br><br>' +
+                        '<div class=" checkbox-slider--b-flat checkbox-slider-info">' +
+                        '<label>' +
+                        '<input type="checkbox" class="tottle_button" id="' + toggleButtonId + '"><span>Show Advance Options</span>' +
+                        '</label>' +
+                        '</div>' +
+                        '<div id="' + toggleContentsId + '" style="display:none;">' +
+                        '<lable for="weights">Weights: </lable><br><input type="text" id="weights" value="None"><br>' +
+                        '<lable for="weight_initialization_function">Weight Initialization Function : </lable><br>' +
+                        '<select id="weight_initialization_function">' +
+                        '<option value="zero">zero</option>' +
+                        '<option value="glorot_normal">glorot_normal</option>' +
+                        '<option value="glorot_uniform">glorot_uniform</option>' +
+                        '<option value="he_normal">he_normal</option>' +
+                        '<option value="he_uniform">he_uniform</option>' +
+                        '<option value="one">one</option>' +
+                        '</select><br>' +
+                        '<lable for="regularizer_for_input_wegiht">Regularizer for input wegiht : </lable><br><input type="text" id="regularizer_for_input_wegiht" value="None"><br>' +
+                        '<lable for="activitiy_regularizer">Activity Regularizer : </lable><br><input type="text" id="activitiy_regularizer" value="None"><br>' +
+                        '<lable for="bias_regularizer">Bias Regularizer : </lable><br><input type="text" id="bias_regularizer" value="None"><br>' +
+                        '<lable for="bias">Bias : </lable><br><input type="text" id="bias" value="None"><br>' +
+                        '<lable for="bias_constraint">Bias Constraint : </lable><br><input type="text" id="bias_constraint" value="None"><br>' +
+                        '<lable for="input_dimention">Input Dimention : </lable><br><input type="text" id="input_dimention" value="None"><br>' +
+                        '<lable for="weight">Weight : </lable><br><input type="text" id="weight" value="None"><br>' +
+                        '</div>' +
+                        '</form>' +
+                        '</div>';
+                    break;
+                case "Dropout":
+                    content += '<div id="' + parameterElementId + '" class="properties">' +
+                        '<form id="' + picker + '">' +
+                        '<lable for="title">title: </lable><br><input type="text" id="operator_title" disabled value="' + type + '"><br>' +
+                        '<lable for="fraction_to_drop">Fraction to Drop: </lable><br><input type="text" id="fraction_to_drop" placeholder="Float between 0 and 1. fraction of the input units to drop."><br><br>' +
+                        '<div class=" checkbox-slider--b-flat checkbox-slider-info">' +
+                        '<label>' +
+                        '<input type="checkbox" class="tottle_button" id="' + toggleButtonId + '"><span>Show Advance Options</span>' +
+                        '</label>' +
+                        '</div>' +
+                        '<div id="' + toggleContentsId + '" style="display:none;">' +
+                        '<lable for="noise_shape">Noise Shape : </lable><br><input type="text" id="noise_shape" value="None"><br>' +
+                        '<lable for="seed">Seed : </lable><br><input type="text" id="seed" value="None"><br>' +
+                        '</div>' +
+                        '</from>' +
+                        '</div>';
+                    break;
+                case "Flatten":
+                    content += '<div id="' + parameterElementId + '" class="properties">' +
+                        '<form id="' + picker + '">' +
+                        '<lable for="title">title: </lable><br><input type="text" id="operator_title" disabled value="' + type + '"><br>' +
+                        '</form>' +
+                        '</div>';
+                    break;
+
+                case "Convolution2D":
+                    content += '<div id="' + parameterElementId + '" class="properties">' +
+                        '<form id="' + picker + '">' +
+                        '<lable for="title">title: </lable><br><input type="text" id="operator_title" disabled value="' + type + '"><br>' +
+                        '<lable for="filter_rows">Filter Rows : </lable><br><input type="text" id="filter_rows"><br>' +
+                        '<lable for="number_of_filters">Number of Filters : </lable><br><input type="text" id="number_of_filters"><br>' +
+                        '<lable for="filter_columns">Filter Columns : </lable><br><input type="text" id="filter_columns"><br>' +
+                        '<lable for="activation">Activation : </lable><br>' +
+                        '<select id="activation">' +
+                        '<option value="softmax">softmax</option>' +
+                        '<option value="softplus">softplus</option>' +
+                        '<option value="softsign">softsign</option>' +
+                        '<option value="relu">relu</option>' +
+                        '<option value="tanh">tanh</option>' +
+                        '<option value="sigmoid">sigmoid</option>' +
+                        '<option value="hard_sigmoid">hard_sigmoid</option>' +
+                        '<option value="linear">linear</option>' +
+                        '</select><br><br>' +
+                        '<div class=" checkbox-slider--b-flat checkbox-slider-info">' +
+                        '<label>' +
+                        '<input type="checkbox" class="tottle_button" id="' + toggleButtonId + '"><span>Show Advance Options</span>' +
+                        '</label>' +
+                        '</div>' +
+                        '<div id="' + toggleContentsId + '" style="display:none;">' +
+                        '<lable for="weight">Weight : </lable><br><input type="text" id="weight" value="None"><br>' +
+                        '<lable for="bias_regularizer">Bias Regularizer : </lable><br><input type="text" id="bias_regularizer" value="None"><br>' +
+                        '<lable for="regularizer_for_input_weight">Regularizer for Input Weight : </lable><br><input type="text" id="regularizer_for_input_weight" value="None"><br>' +
+                        '<lable for="activity_regularizer">Activity Regularizer : </lable><br><input type="text" id="activity_regularizer" value="None"><br>' +
+                        '<lable for="weight_initialization_function">Weight Initialization Function : </lable><br>' +
+                        '<select id="weight_initialization_function">' +
+                        '<option value="zero">zero</option>' +
+                        '<option value="glorot_normal">glorot_normal</option>' +
+                        '<option value="glorot_uniform">glorot_uniform</option>' +
+                        '<option value="he_normal">he_normal</option>' +
+                        '<option value="he_uniform">he_uniform</option>' +
+                        '<option value="one">one</option>' +
+                        '</select><br>' +
+                        '<lable for="dimension_ordering">Dimension Ordering : </lable><br>' +
+                        '<select id="dimension_ordering">' +
+                        '<option value="default">zero</option>' +
+                        '<option value="tf">tf (tensorflow)</option>' +
+                        '<option value="th">th (theano)</option>' +
+                        '</select><br>' +
+                        '<lable for="subsampling">Subsampling : </lable><br><input type="text" id="subsampling" value="(1, 1)"><br>' +
+                        '<lable for="border_mode">Border Mode : </lable><br>' +
+                        '<select id="border_mode">' +
+                        '<option value="valid">valid</option>' +
+                        '<option value="same">same</option>' +
+                        '</select><br>' +
+                        '<lable for="bias_constraint">Bias Constraint : </lable><br><input type="text" id="bias_constraint" value="None"><br>' +
+                        '<lable for="bias">Bias : </lable><br><input type="text" id="bias" value="None"><br>' +
+                        '<lable for="weight_constraint">Weight Constraint : </lable><br><input type="text" id="weight_constraint" value="None"><br>' +
+                        '</div>' +
+                        '</form>' +
+                        '</div>';
+                    break;
+
+                case "ZeroPadding2D":
+                    content += '<div id="' + parameterElementId + '" class="properties">' +
+                        '<form id="' + picker + '">' +
+                        '<lable for="title">title: </lable><br><input type="text" id="operator_title" disabled value="' + type + '"><br>' +
+                        '<lable for="zero_padding_layer">Zero-Padding layer for 2d input</lable><br><input type="text" id="zero_padding_layer"><br>' +
+                        '</form>' +
+                        '<div>';
+                    break;
+
+                case "MaxPooling2D":
+                    content += '<div id="' + parameterElementId + '" class="properties">' +
+                        '<form id="' + picker + '">' +
+                        '<lable for="title">title: </lable><br><input type="text" id="operator_title" disabled value="' + type + '"><br>' +
+                        '<lable for="pool_size">Pool Size: </lable><br><input type="text" id="pool_size" placeholder="Number of rows in the convolution kernel."><br><br>' +
+                        '<div class=" checkbox-slider--b-flat checkbox-slider-info">' +
+                        '<label>' +
+                        '<input type="checkbox" class="tottle_button" id="' + toggleButtonId + '"><span>Show Advance Options</span>' +
+                        '</label>' +
+                        '</div>' +
+                        '<div id="' + toggleContentsId + '" style="display:none;">' +
+                        '<lable for="strides">Strides : </lable><br><input type="text" id="strides" value="None"><br>' +
+                        '<lable for="border_mode">Border Mode : </lable><br>' +
+                        '<select id="border_mode">' +
+                        '<option value="valid">valid</option>' +
+                        '<option value="same">same</option>' +
+                        '</select><br>' +
+                        '<lable for="dimension_ordering">Dimension Ordering : </lable><br>' +
+                        '<select id="dimension_ordering">' +
+                        '<option value="default">zero</option>' +
+                        '<option value="tf">tf (tensorflow)</option>' +
+                        '<option value="th">th (theano)</option>' +
+                        '</select><br>' +
+                        '</div>' +
+                        '</from>' +
+                        '</div>';
+                    break;
+                case "AveragePooling2D":
+                    content += '<div id="' + parameterElementId + '" class="properties">' +
+                        '<form id="' + picker + '">' +
+                        '<lable for="title">title: </lable><br><input type="text" id="operator_title" disabled value="' + type + '"><br>' +
+                        '<lable for="pool_size">Pool Size: </lable><br><input type="text" id="pool_size" placeholder="Number of rows in the convolution kernel."><br><br>' +
+                        '<div class=" checkbox-slider--b-flat checkbox-slider-info">' +
+                        '<label>' +
+                        '<input type="checkbox" class="tottle_button" id="' + toggleButtonId + '"><span>Show Advance Options</span>' +
+                        '</label>' +
+                        '</div>' +
+                        '<div id="' + toggleContentsId + '" style="display:none;">' +
+                        '<lable for="strides">Strides : </lable><br><input type="text" id="strides" value="None"><br>' +
+                        '<lable for="border_mode">Border Mode : </lable><br>' +
+                        '<select id="border_mode">' +
+                        '<option value="valid">valid</option>' +
+                        '<option value="same">same</option>' +
+                        '</select><br>' +
+                        '<lable for="dimension_ordering">Dimension Ordering : </lable><br>' +
+                        '<select id="dimension_ordering">' +
+                        '<option value="default">zero</option>' +
+                        '<option value="tf">tf (tensorflow)</option>' +
+                        '<option value="th">th (theano)</option>' +
+                        '</select><br>' +
+                        '</div>' +
+                        '</from>' +
+                        '</div>';
+                    break;
+                case "LSTM":
+                    content += '<div id="' + parameterElementId + '" class="properties">' +
+                        '<form id="' + picker + '">' +
+                        '<lable for="title">title: </lable><br><input type="text" id="operator_title" disabled value="' + type + '"><br>' +
+                        '<lable for="activation">Activation : </lable><br>' +
+                        '<select id="activation">' +
+                        '<option value="softmax">softmax</option>' +
+                        '<option value="softplus">softplus</option>' +
+                        '<option value="relu">relu</option>' +
+                        '<option value="tanh">tanh</option>' +
+                        '<option value="sigmoid">sigmoid</option>' +
+                        '<option value="hard_sigmoid">hard_sigmoid</option>' +
+                        '<option value="linear">linear</option>' +
+                        '</select><br><br>' +
+                        '<div class=" checkbox-slider--b-flat checkbox-slider-info">' +
+                        '<label>' +
+                        '<input type="checkbox" class="tottle_button" id="' + toggleButtonId + '"><span>Show Advance Options</span>' +
+                        '</label>' +
+                        '</div>' +
+                        '<div id="' + toggleContentsId + '" style="display:none;">' +
+                        '<lable for="go_backwards">Go Backwards : </lable><br>' +
+                        '<select id="go_backwards">' +
+                        '<option value="true">true</option>' +
+                        '<option value="false">false</option>' +
+                        '</select><br>' +
+                        '<lable for="unroll">Unroll : </lable><br>' +
+                        '<select id="unroll">' +
+                        '<option value="true">true</option>' +
+                        '<option value="false">false</option>' +
+                        '</select><br>' +
+                        '<lable for="regularizer_for_input_weight">Regularizer for Input Weight : </lable><br><input type="text" id="regularizer_for_input_weight" value="None"><br>' +
+                        '<lable for="dropout_rate_for_grate">Dropout Rate for Grate : </lable><br><input type="text" id="dropout_rate_for_grate" value="0"><br>' +
+                        '<lable for="input_length">Input Length : </lable><br><input type="text" id="input_length" value="None"><br>' +
+                        '<lable for="stateful">Stateful : </lable><br>' +
+                        '<select id="stateful">' +
+                        '<option value="true">true</option>' +
+                        '<option value="false">false</option>' +
+                        '</select><br>' +
+                        '<lable for="input_dimention">Input Dimention : </lable><br><input type="text" id="input_dimention" value="None"><br>' +
+                        '<lable for="forge_bias_init">Forge Bias init : </lable><br>' +
+                        '<select id="forge_bias_init">' +
+                        '<option value="uniform">uniform</option>' +
+                        '<option value="lecun_uniform">lecun_uniform</option>' +
+                        '<option value="normal">normal</option>' +
+                        '<option value="identity">identity</option>' +
+                        '<option value="orthogonal">orthogonal</option>' +
+                        '<option value="zero">zero</option>' +
+                        '<option value="glorot_normal">glorot_normal</option>' +
+                        '<option value="glorot_uniform">glorot_uniform</option>' +
+                        '<option value="he_normal">he_normal</option>' +
+                        '<option value="he_uniform">he_uniform</option>' +
+                        '<option value="one">one</option>' +
+                        '</select><br>' +
+                        '<lable for="weight_initialization_function">Weight Initialization Function : </lable><br>' +
+                        '<select id="weight_initialization_function">' +
+                        '<option value="zero">zero</option>' +
+                        '<option value="glorot_normal">glorot_normal</option>' +
+                        '<option value="glorot_uniform">glorot_uniform</option>' +
+                        '<option value="he_normal">he_normal</option>' +
+                        '<option value="he_uniform">he_uniform</option>' +
+                        '<option value="one">one</option>' +
+                        '</select><br>' +
+                        '<lable for="return_sequence">Return Sequence : </lable><br>' +
+                        '<select id="return_sequence">' +
+                        '<option value="true">true</option>' +
+                        '<option value="false">false</option>' +
+                        '</select><br>' +
+                        '<lable for="drop_rate">Drop Rate : </lable><br><input type="text" id="drop_rate" value="0"><br>' +
+                        '</div>' +
+                        '</form>' +
+                        '</div>';
+                    break;
+                case "SimpleRNN":
+                    content += '<div id="' + parameterElementId + '" class="properties">' +
+                        '<form id="' + picker + '">' +
+                        '<lable for="title">title: </lable><br><input type="text" id="operator_title" disabled value="' + type + '"><br>' +
+                        '<lable for="activation">Activation : </lable><br>' +
+                        '<select id="activation">' +
+                        '<option value="softmax">softmax</option>' +
+                        '<option value="softplus">softplus</option>' +
+                        '<option value="relu">relu</option>' +
+                        '<option value="tanh">tanh</option>' +
+                        '<option value="sigmoid">sigmoid</option>' +
+                        '<option value="hard_sigmoid">hard_sigmoid</option>' +
+                        '<option value="linear">linear</option>' +
+                        '</select><br><br>' +
+                        '<div class=" checkbox-slider--b-flat checkbox-slider-info">' +
+                        '<label>' +
+                        '<input type="checkbox" class="tottle_button" id="' + toggleButtonId + '"><span>Show Advance Options</span>' +
+                        '</label>' +
+                        '</div>' +
+                        '<div id="' + toggleContentsId + '" style="display:none;">' +
+                        '<lable for="go_backwards">Go Backwards : </lable><br>' +
+                        '<select id="go_backwards">' +
+                        '<option value="true">true</option>' +
+                        '<option value="false">false</option>' +
+                        '</select><br>' +
+                        '<lable for="unroll">Unroll : </lable><br>' +
+                        '<select id="unroll">' +
+                        '<option value="true">true</option>' +
+                        '<option value="false">false</option>' +
+                        '</select><br>' +
+                        '<lable for="regularizer_for_input_weight">Regularizer for Input Weight : </lable><br><input type="text" id="regularizer_for_input_weight" value="None"><br>' +
+                        '<lable for="dropout_rate_for_grate">Dropout Rate for Grate : </lable><br><input type="text" id="dropout_rate_for_grate" value="0"><br>' +
+                        '<lable for="input_length">Input Length : </lable><br><input type="text" id="input_length" value="None"><br>' +
+                        '<lable for="stateful">Stateful : </lable><br>' +
+                        '<select id="stateful">' +
+                        '<option value="true">true</option>' +
+                        '<option value="false">false</option>' +
+                        '</select><br>' +
+                        '<lable for="input_dimention">Input Dimention : </lable><br><input type="text" id="input_dimention" value="None"><br>' +
+                        '<lable for="consume_less">Consume Less : </lable><br>' +
+                        '<select id="consume_less">' +
+                        '<option value="CPU">CPU</option>' +
+                        '<option value="mem">mem</option>' +
+                        '<option value="GPU">GPU</option>' +
+                        '</select><br>' +
+                        '<lable for="weights">Weights : </lable><br><input type="text" id="weights" value="None"><br>' +
+                        '<lable for="bias_regularizer">Bias Regularizer : </lable><br><input type="text" id="bias_regularizer" value="None"><br>' +
+                        '<lable for="return_sequence">Return Sequence : </lable><br>' +
+                        '<select id="return_sequence">' +
+                        '<option value="true">true</option>' +
+                        '<option value="false">false</option>' +
+                        '</select><br>' +
+                        '<lable for="initialization_for_inner_cells">Initialization for Inner Cells : </lable><br>' +
+                        '<select id="initialization_for_inner_cells">' +
+                        '<option value="uniform">uniform</option>' +
+                        '<option value="lecun_uniform">lecun_uniform</option>' +
+                        '<option value="normal">normal</option>' +
+                        '<option value="identity">identity</option>' +
+                        '<option value="orthogonal">orthogonal</option>' +
+                        '<option value="zero">zero</option>' +
+                        '<option value="glorot_normal">glorot_normal</option>' +
+                        '<option value="glorot_uniform">glorot_uniform</option>' +
+                        '<option value="he_normal">he_normal</option>' +
+                        '<option value="he_uniform">he_uniform</option>' +
+                        '<option value="one">one</option>' +
+                        '</select><br>' +
+                        '<lable for="weight_initialization_function">Weight Inititalization Function : </lable><br>' +
+                        '<select id="weight_initialization_function">' +
+                        '<option value="zero">zero</option>' +
+                        '<option value="glorot_normal">glorot_normal</option>' +
+                        '<option value="glorot_uniform">glorot_uniform</option>' +
+                        '<option value="he_normal">he_normal</option>' +
+                        '<option value="he_uniform">he_uniform</option>' +
+                        '<option value="one">one</option>' +
+                        '</select><br>' +
+                        '<lable for="regularizer_for_recurrent_weight">Regularizer for Recurrent Weight : </lable><br><input type="text" id="regularizer_for_recurrent_weight" value="None"><br>' +
+                        '<lable for="dropout_rate">Dropout Rate : </lable><br><input type="text" id="dropout_rate" value="0"><br>' +
+                        '</div>' +
+                        '</form>' +
+                        '</div>';
+                    break;
+
+                case "BatchNormalization":
+                    content += '<div id="' + parameterElementId + '" class="properties">' +
+                        '<form id="' + picker + '">' +
+                        '<lable for="title">title: </lable><br><input type="text" id="operator_title" disabled value="' + type + '"><br>' +
+                        '<lable for="mode">Mode : </lable><br>' +
+                        '<select id="mode">' +
+                        '<option value="0">0</option>' +
+                        '<option value="1">1</option>' +
+                        '<option value="2">2</option>' +
+                        '</select><br><br>' +
+                        '<div class=" checkbox-slider--b-flat checkbox-slider-info">' +
+                        '<label>' +
+                        '<input type="checkbox" class="tottle_button" id="' + toggleButtonId + '"><span>Show Advance Options</span>' +
+                        '</label>' +
+                        '</div>' +
+                        '<div id="' + toggleContentsId + '" style="display:none;">' +
+                        '<lable for="numeric_stability_constant">Numeric Stability Constant: </lable><br><input type="text" id="numeric_stability_constant" value="0.001"><br>' +
+                        '<lable for="parameter_update_momentum">Parameter Update Momentum: </lable><br><input type="text" id="parameter_update_momentum" value="0.99"><br>' +
+                        '<lable for="beta_regulrizer">Beta Regularizer: </lable><br><input type="text" id="beta_regulrizer" value="None"><br>' +
+                        '<lable for="weights">Weights: </lable><br><input type="text" id="weights" value="None"><br>' +
+                        '<lable for="gamma_init">Gamma Init: </lable><br>' +
+                        '<select id="gamma_init">' +
+                        '<option value="uniform">uniform</option>' +
+                        '<option value="lecun_uniform">lecun_uniform</option>' +
+                        '<option value="normal">normal</option>' +
+                        '<option value="identity">identity</option>' +
+                        '<option value="orthogonal">orthogonal</option>' +
+                        '<option value="zero">zero</option>' +
+                        '<option value="glorot_normal">glorot_normal</option>' +
+                        '<option value="glorot_uniform">glorot_uniform</option>' +
+                        '<option value="he_normal">he_normal</option>' +
+                        '<option value="he_uniform">he_uniform</option>' +
+                        '<option value="one">one</option>' +
+                        '</select><br>' +
+                        '<lable for="axis">Axis: </lable><br><input type="text" id="axis" value="-1"><br>' +
+                        '<lable for="beta_init">Beta Init: </lable><br>' +
+                        '<select id="beta_init">' +
+                        '<option value="uniform">uniform</option>' +
+                        '<option value="lecun_uniform">lecun_uniform</option>' +
+                        '<option value="normal">normal</option>' +
+                        '<option value="identity">identity</option>' +
+                        '<option value="orthogonal">orthogonal</option>' +
+                        '<option value="zero">zero</option>' +
+                        '<option value="glorot_normal">glorot_normal</option>' +
+                        '<option value="glorot_uniform">glorot_uniform</option>' +
+                        '<option value="he_normal">he_normal</option>' +
+                        '<option value="he_uniform">he_uniform</option>' +
+                        '<option value="one">one</option>' +
+                        '</select><br>' +
+                        '<lable for="gamma_regularizer">Gamma Regularizer: </lable><br><input type="text" id="gamma_regularizer" value="None"><br>' +
+                        '</div>' +
+                        '</from>' +
+                        '</div>';
+                    break;
+
+                {#default:#}
+                {#    console.log("nothing");#}
+                default :
+                {#console.log("this is default layer");#}
+                    content += '<div id="' + parameterElementId + '" class="properties">' +
+                        '<form id="' + picker + '">' +
+                        '<lable for="title">title: </lable><br><input type="text" id="operator_title" disabled value="' + type + '"><br>' +
+                        '<lable for="default_layer">default layer</lable><br><input type="text" id="default_layer"><br>' +
+                        '</form>' +
+                        '<div>';
+                    break;
+            }
+
+            $("#parameter_bar").append(content);
+
+            return parameterElementId;
+
+        }
+
+
+        var $draggableOperators = $('.draggable_operator');
+
+        function drawOverall() {
+            // #1. Initialize drwaing pannel.
+            var sheetId = 'sheet_' + -1;
+            var contents = '<div class="x_panel">' +
+                '<div class="x_title">' +
+                '<h2 id="">"Top Level" - GoogleNet/</h2>' +
+                '<ul class="nav navbar-right panel_toolbox">' +
+                '<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>' +
+                '<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>' +
+                '<ul class="dropdown-menu" role="menu">' +
+                '<li><a href="#">Settings 1</a></li>' +
+                '<li><a href="#">Settings 2</a></li>' +
+                '</ul>' +
+                '</li>' +
+                '<li><a class="close-link"><i class="fa fa-close"></i></a></li>' +
+                '</ul>' +
+                '<div class="clearfix"></div>' +
+                '</div>\n' +
+                '<div class="x_content">' +
+                '<div id="chart_container" style="flex-grow: 1;  border: solid 1px black">' +
+                '<div class="flowchart-example-container flowchart-container drawing_sheet" id="'+ sheetId +'" ></div>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '<br/>';
+
+            $("#drawing_sheet").append(contents);
+            var flowchartId = "#" + sheetId;
+            var $flowchart = $(flowchartId);
+
+            $container = $flowchart.parent();
+
+            var cx = $flowchart.width() / 2;
+            var cy = $flowchart.height() / 2;
+            var possibleZooms = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0];
+            var currentZoom = 9;
+
+            // Panzoom initialization...
+            $flowchart.panzoom();
+
+            // Centering panzoom
+            $flowchart.panzoom('pan', -cx + $container.width() / 2, -cy + $container.height() / 2);
+            $container.on('mousewheel.focal', function (e) {
+                e.preventDefault();
+                var delta = (e.delta || e.originalEvent.wheelDelta) || e.originalEvent.detail;
+                var zoomOut = delta ? delta > 0 : e.originalEvent.deltaY > 0;
+                currentZoom = Math.max(0, Math.min(possibleZooms.length - 1, (currentZoom + (zoomOut * 2 - 1))));
+                console.log("currentZoom: ",currentZoom);
+                $flowchart.flowchart('setPositionRatio', possibleZooms[currentZoom]);
+                $flowchart.panzoom('zoom', possibleZooms[currentZoom], {
+                    animate: false,
+                    focal: e
+                });
+            });
+
+            // 처음에 미리 생성할 노드들 설정
+            var data = {
+                operators: {
+                },
+                links: {
+                },
+                parameter1: {
+                },
+                parameter2: {
+                },
+                parameter3: {
+                }
+            };
+
+            // Apply the plugin on a standard, empty div...
+            $flowchart.flowchart({
+                data: data,
+                onOperatorSelect: function (operatorId) {
+                    // var temp = $flowchart.flowchart('getData');
+
+                    var op_id = "#operator_" + operatorId;
+                    $('.properties').hide();
+                    $(op_id).show();
+
+                    $operatorProperties.show();
+                    // $operatorTitle.val($flowchart.flowchart('getOperatorTitle', operatorId));
+                    // $operatorParameter1.val($flowchart.flowchart('getOperatorParameter1', operatorId));
+                    // $operatorParameter2.val($flowchart.flowchart('getOperatorParameter2', operatorId));
+                    // $operatorParameter3.val($flowchart.flowchart('getOperatorParameter3', operatorId));
+                    $(op_id).show();
+
+                    // if keyup in properties then save values.
+
+                    $(op_id).keyup(function () {
+                        //alert("!!!");
+                        var selectedOperatorId = $flowchart.flowchart('getSelectedOperatorId');
+                        if (selectedOperatorId != null) {
+                            $flowchart.flowchart('setOperatorTitle', selectedOperatorId, $operatorTitle.val());
+                        }
+                    });
+
+                    return true;
+                },
+                onOperatorUnselect: function () {
+                    $('.properties').hide();
+                    //$operatorProperties.hide();
+                    return true;
+                },
+                onLinkSelect: function (linkId) {
+                    $linkProperties.show();
+                    $linkColor.val($flowchart.flowchart('getLinkMainColor', linkId));
+                    return true;
+                },
+                onLinkUnselect: function () {
+                    $linkProperties.hide();
+                    return true;
+                }
+            });
+            $flowchart.parent().siblings('.delete_selected_button').click(function () {
+                $flowchart.flowchart('deleteSelected');
+            });
+
+            $(document).on("click", flowchartId, function () {
+                /**
+                 * onClick method for the sheet
+                 *
+                 */
+                $flowchart = $(flowchartId);
+                $container = $flowchart.parent();
+                $draggableOperators = $('.draggable_operator');
+                $draggableOperators.draggable({
+                    cursor: "move",
+                    opacity: 0.7,
+
+                    helper: 'clone',
+                    appendTo: 'body',
+                    zIndex: 1000,
+
+                    helper: function (e) {
+                        console.log("this.");
+                        var $this = $(this);
+                        var data = getOperatorData($this);
+                        return $flowchart.flowchart('getOperatorElement', data);
+                    },
+                    stop: function (e, ui) {
+                        console.log("this2.");
+                        var $this = $(this);
+                        var elOffset = ui.offset;
+                        var containerOffset = $flowchart.offset();
+                        if (1) {
+
+                            var flowchartOffset = $flowchart.offset();
+
+                            var relativeLeft = elOffset.left - flowchartOffset.left;
+                            var relativeTop = elOffset.top - flowchartOffset.top;
+
+                            var positionRatio = $flowchart.flowchart('getPositionRatio');
+                            relativeLeft /= positionRatio;
+                            relativeTop /= positionRatio;
+
+                            var data = getOperatorData($this);
+                            data.left = relativeLeft;
+                            data.top = relativeTop;
+
+                            var newName = "0_" + operatorId;
+                            var $temp = $flowchart.flowchart('addOperator', newName, data);
+
+                            var type = $flowchart.flowchart("getOperatorTitle", newName);
+                            appendOperatorParam(newName, type);       // 우측 파라미터 설정 bar 태그 생성
+
+                            operatorId++;
+                        } else {
+                            console.log("can not");
+                        }
+                    }
+                });
+            });
+
+            $(document).on("click", ".flowchart-operator.flowchart-default-operator.ui-draggable.selected", function () {
+                /**
+                 * onClick method for the sheet
+                 *
+                 */
+                console.log("this : ", this.id);
+                if (this.id == 3) {
+                    var element = document.getElementById("panel_0");
+                    element.style.visibility="visible";
+                } else if (this.id == 4) {
+                    var element = document.getElementById("panel_1");
+                    element.style.visibility="visible";
+                }
+
+                $flowchart = $(flowchartId);
+                $container = $flowchart.parent();
+                $draggableOperators = $('.draggable_operator');
+                $draggableOperators.draggable({
+                    cursor: "move",
+                    opacity: 0.7,
+
+                    helper: 'clone',
+                    appendTo: 'body',
+                    zIndex: 1000,
+
+                    helper: function (e) {
+                        console.log("this.");
+                        var $this = $(this);
+                        var data = getOperatorData($this);
+                        return $flowchart.flowchart('getOperatorElement', data);
+                    },
+                    stop: function (e, ui) {
+                        console.log("this2.");
+                        var $this = $(this);
+                        var elOffset = ui.offset;
+                        var containerOffset = $flowchart.offset();
+                        if (1) {
+
+                            var flowchartOffset = $flowchart.offset();
+
+                            var relativeLeft = elOffset.left - flowchartOffset.left;
+                            var relativeTop = elOffset.top - flowchartOffset.top;
+
+                            var positionRatio = $flowchart.flowchart('getPositionRatio');
+                            relativeLeft /= positionRatio;
+                            relativeTop /= positionRatio;
+
+                            var data = getOperatorData($this);
+                            data.left = relativeLeft;
+                            data.top = relativeTop;
+
+                            var newName = "0_" + operatorId;
+                            var $temp = $flowchart.flowchart('addOperator', newName, data);
+
+                            var type = $flowchart.flowchart("getOperatorTitle", newName);
+                            appendOperatorParam(newName, type);       // 우측 파라미터 설정 bar 태그 생성
+
+                            operatorId++;
+                        } else {
+                            console.log("can not");
+                        }
+                    }
+                });
+            });
+
+            //////////////////////////////////////
+            var op_index = 0;
+            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">InputLayer</div>'));
+            var tempOperatorId = op_index++;
+            data.top = 940;
+            data.left = 140;
+            var $temp = $flowchart.flowchart('addOperator', tempOperatorId, data);  // 레이어 노드를 추가한다.
+            var type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+
+            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Convolution2D</div>'));
+            var tempOperatorId = op_index++;
+            data.top = 940;
+            data.left = 380;
+            var $temp = $flowchart.flowchart('addOperator', tempOperatorId, data);  // 레이어 노드를 추가한다.
+            var type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+
+            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Convolution2D</div>'));
+            var tempOperatorId = op_index++;
+            data.top = 940;
+            data.left = 620;
+            var $temp = $flowchart.flowchart('addOperator', tempOperatorId, data);  // 레이어 노드를 추가한다.
+            var type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+
+            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1" onClick="open(Module_0);">Module_0</div>'));
+            var tempOperatorId = op_index++;
+            console.log("data : ", data);
+            data.top = 940;
+            data.left = 860;
+            var $temp = $flowchart.flowchart('addOperator', tempOperatorId, data);  // 레이어 노드를 추가한다.
+            var type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+
+            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1" onClick="open(Module_1);">Module_1</div>'));
+            var tempOperatorId = op_index++;
+            data.top = 940;
+            data.left = 1100;
+            var $temp = $flowchart.flowchart('addOperator', tempOperatorId, data);  // 레이어 노드를 추가한다.
+            var type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+
+            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPooling2D</div>'));
+            var tempOperatorId = op_index++;
+            data.top = 940;
+            data.left = 1340;
+            var $temp = $flowchart.flowchart('addOperator', tempOperatorId, data);  // 레이어 노드를 추가한다.
+            var type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+
+            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPooling2D</div>'));
+            var tempOperatorId = op_index++;
+            data.top = 940;
+            data.left = 1580;
+            var $temp = $flowchart.flowchart('addOperator', tempOperatorId, data);  // 레이어 노드를 추가한다.
+            var type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+
+            for (var j = 0; j < 7 - 1; j++) {
+                var from_tempOperatorId = j
+                var to_tempOperatorId = j+1;
+                var linkData = {
+                    fromOperator: from_tempOperatorId,
+                    fromConnector: "output_" + 0,
+                    fromSubConnetor: 0,
+                    toOperator: to_tempOperatorId,
+                    toConnector: "input_" + 0,
+                    toSubConnector: 0
+                };
+
+                $flowchart.flowchart('myLinkDiagram', linkId++, linkData);
+            }
+        }
+
+        function flow(json_dict, ag_index) {
+            // #1. Initialize drwaing pannel.
+            var sheetId = 'sheet_' + ag_index;
+            var panelId = "panel_" + ag_index;
+            var level = json_dict.abstract_graph[ag_index].depth;
+            var contents = '<div class="x_panel" id=' + panelId + ' style="visibility:hidden;">' +
+                                '<div class="x_title">' +
+                                    '<h2 id="">"Level '+ level +'" - GoogleNet/Module_' + ag_index + '/</h2>' +
+                                        '<ul class="nav navbar-right panel_toolbox">' +
+                                            '<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>' +
+                                            '<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>' +
+                                                '<ul class="dropdown-menu" role="menu">' +
+                                                    '<li><a href="#">Settings 1</a></li>' +
+                                                    '<li><a href="#">Settings 2</a></li>' +
+                                                '</ul>' +
+                                            '</li>' +
+                                            '<li><a class="close-link"><i class="fa fa-close"></i></a></li>' +
+                                        '</ul>' +
+                                        '<div class="clearfix"></div>' +
+                                '</div>\n' +
+                                '<div class="x_content">' +
+                                    '<div id="chart_container" style="flex-grow: 1;  border: solid 1px black">' +
+                                        '<div class="flowchart-example-container flowchart-container drawing_sheet" id="'+ sheetId +'" ></div>' +
+                                    '</div>' +
+                                '</div>' +
+                           '</div>' +
+                           '<br/>';
+
+            $("#drawing_sheet").append(contents);
+            var flowchartId = "#" + sheetId;
+            var $flowchart = $(flowchartId);
+
+            $container = $flowchart.parent();
+
+            var cx = $flowchart.width() / 2;
+            var cy = $flowchart.height() / 2;
+            var possibleZooms = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0];
+            var currentZoom = 9;
+
+            // Panzoom initialization...
+            $flowchart.panzoom();
+
+            // Centering panzoom
+            $flowchart.panzoom('pan', -cx + $container.width() / 2, -cy + $container.height() / 2);
+            $container.on('mousewheel.focal', function (e) {
+                e.preventDefault();
+                var delta = (e.delta || e.originalEvent.wheelDelta) || e.originalEvent.detail;
+                var zoomOut = delta ? delta > 0 : e.originalEvent.deltaY > 0;
+                currentZoom = Math.max(0, Math.min(possibleZooms.length - 1, (currentZoom + (zoomOut * 2 - 1))));
+                console.log("currentZoom: ",currentZoom);
+                $flowchart.flowchart('setPositionRatio', possibleZooms[currentZoom]);
+                $flowchart.panzoom('zoom', possibleZooms[currentZoom], {
+                    animate: false,
+                    focal: e
+                });
+            });
+
+            // 처음에 미리 생성할 노드들 설정
+            var data = {
+                operators: {
+                },
+                links: {
+                },
+                parameter1: {
+                },
+                parameter2: {
+                },
+                parameter3: {
+                }
+            };
+
+            // Apply the plugin on a standard, empty div...
+            $flowchart.flowchart({
+                data: data,
+                onOperatorSelect: function (operatorId) {
+                    // var temp = $flowchart.flowchart('getData');
+
+                    var op_id = "#operator_" + operatorId;
+                    $('.properties').hide();
+                    $(op_id).show();
+
+                    $operatorProperties.show();
+                    // $operatorTitle.val($flowchart.flowchart('getOperatorTitle', operatorId));
+                    // $operatorParameter1.val($flowchart.flowchart('getOperatorParameter1', operatorId));
+                    // $operatorParameter2.val($flowchart.flowchart('getOperatorParameter2', operatorId));
+                    // $operatorParameter3.val($flowchart.flowchart('getOperatorParameter3', operatorId));
+                    $(op_id).show();
+
+                    // if keyup in properties then save values.
+
+                    $(op_id).keyup(function () {
+                        //alert("!!!");
+                        var selectedOperatorId = $flowchart.flowchart('getSelectedOperatorId');
+                        if (selectedOperatorId != null) {
+                            $flowchart.flowchart('setOperatorTitle', selectedOperatorId, $operatorTitle.val());
+                        }
+                    });
+
+                    return true;
+                },
+                onOperatorUnselect: function () {
+                    $('.properties').hide();
+                    //$operatorProperties.hide();
+                    return true;
+                },
+                onLinkSelect: function (linkId) {
+                    $linkProperties.show();
+                    $linkColor.val($flowchart.flowchart('getLinkMainColor', linkId));
+                    return true;
+                },
+                onLinkUnselect: function () {
+                    $linkProperties.hide();
+                    return true;
+                }
+            });
+            $flowchart.parent().siblings('.delete_selected_button').click(function () {
+                $flowchart.flowchart('deleteSelected');
+            });
+
+            $(document).on("click", flowchartId, function () {
+                /**
+                 * onClick method for the sheet
+                 *
+                 */
+
+                console.log("onClick");
+
+                $flowchart = $(flowchartId);
+                $container = $flowchart.parent();
+                $draggableOperators = $('.draggable_operator');
+                $draggableOperators.draggable({
+                    cursor: "move",
+                    opacity: 0.7,
+
+                    helper: 'clone',
+                    appendTo: 'body',
+                    zIndex: 1000,
+
+                    helper: function (e) {
+                        console.log("this.");
+                        var $this = $(this);
+                        var data = getOperatorData($this);
+                        return $flowchart.flowchart('getOperatorElement', data);
+                    },
+                    stop: function (e, ui) {
+                        console.log("this2.");
+                        var $this = $(this);
+                        var elOffset = ui.offset;
+                        var containerOffset = $flowchart.offset();
+                        if (1) {
+
+                            var flowchartOffset = $flowchart.offset();
+
+                            var relativeLeft = elOffset.left - flowchartOffset.left;
+                            var relativeTop = elOffset.top - flowchartOffset.top;
+
+                            var positionRatio = $flowchart.flowchart('getPositionRatio');
+                            relativeLeft /= positionRatio;
+                            relativeTop /= positionRatio;
+
+                            var data = getOperatorData($this);
+                            data.left = relativeLeft;
+                            data.top = relativeTop;
+
+                            var newName = "0_" + operatorId;
+                            var $temp = $flowchart.flowchart('addOperator', newName, data);
+
+                            var type = $flowchart.flowchart("getOperatorTitle", newName);
+                            appendOperatorParam(newName, type);       // 우측 파라미터 설정 bar 태그 생성
+
+                            operatorId++;
+                        } else {
+                            console.log("can not");
+                        }
+                    }
+                });
+            });
+        }
+
+        function open(moduleId) {
+            alert("asdf");
+            var element = document.getElementById("panel_0");
+            console.log(element);
+        }
+
+        $(document).ready(function () {
+            //     $(document).on("click", ".jstree-icon.jstree-ocl.draggable_operator", function() {
+            //   alert("!!!");
+            //   $('.jstree-children').children().addClass("draggable_operator");
+            //   $('.jstree-children').children().addClass("ui-draggable-handle");
+            //   $('.jstree-children').children().addClass("ui-draggable");
+            // });
+            //////////////////////////////
+            // jsTree 생성
+            $('#data').jstree({
+                "plugins": ["changed"],//[ "wholerow", "checkbox", "changed" ],
+            });
+
+            //////////////////////// 페이지 이동 시 데이터 자동 저장
+            var checkUnload = true;
+            $(window).on("beforeunload", function () {
+                //var sequence = getLayerSequence();
+                {#var sequence = getLayerSequence();#}
+                var sequence = getLayerSequenceFromEditor();
+                var jsonOfGraph = graph2json(sequence);
+
+                {#sequence = JSON.stringify(sequence);#}
+
+                $.ajax({
+                    type: "POST",
+                    url: "save/",
+                    dataType: "json",
+                    data: {
+                        'csrfmiddlewaretoken': '{{csrf_token }}',
+                        'sequence': jsonOfGraph,
+                    },
+                    success: function (responseData) {
+                        console.log("save success!")
+                    }
+                });
+
+
+                if (checkUnload) return "이 페이지를 벗어나면 작성된 내용은 저장되지 않습니다.";
+            });
+
+            $(document).on("click", "#tottle_button", function () {
+                $(".default_options").slideToggle("slow");
+            });
+
+            $(document).on("click", ".tottle_button", function () {
+                /**
+                 * onClick method for toggle button
+                 *
+                 */
+
+                var operatorId = this.id.substring(10, this.id.length);
+                var id = "#tb_contents_" + operatorId;
+                $(id).slideToggle("slow");
+            });
+
+            // when save_button on click
+            $(document).on("click", "#save_button", function () {
+                var sequence = getLayerSequence();
+
+                sequence = JSON.stringify(sequence);
+
+                var upper = {};
+
+                $.ajax({
+                    type: "POST",
+                    url: "save/",
+                    dataType: "json",
+                    data: {
+                        'csrfmiddlewaretoken': '{{csrf_token }}',
+                        'sequence': sequence,
+                    },
+                    success: function (responseData) {
+                        autoclosingAlert('#successMessage', 2000);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error);
+                        autoclosingAlert('#dangerMessage', 2000);
+                    }
+                });
+            });
+
+            // when load button on click
+            $(document).on("click", "#load_button", function () {
+                alert("load");
+            });
+
+            //////////////////////// return layer sequence
+            function getLayerSequence() {
+                var links = $flowchart.flowchart('getData').links;
+
+                var s = getLayerSequenceFromEditor();
+                getJsonFromSequence(s);
+
+                {#console.log("document.getElementById(picker_name).elements : ", document.getElementById("arg_0"))#}
+                {#console.log("document.getElementById(picker_name) : ", document.getElementById(0))#}
+
+                var sequence = {};
+
+                var i = 0;
+                while (1) {
+                    if (links[i] == undefined) {
+                        if (links.length != 0) {
+                            var picker_name = "arg_" + links[i - 1].toOperator;
+                            var operator = {};
+
+                            for (var j = 0; j < document.getElementById(picker_name).elements.length; j++) {
+                                var operator_key = document.getElementById(picker_name).elements[j].id;           // id
+                                operator[operator_key] = document.getElementById(picker_name).elements[j].value;  // value
+                            }
+
+                            // 좌표값 저장
+                            operator["left"] = document.getElementById(links[i - 1].toOperator).offsetLeft;
+                            operator["top"] = document.getElementById(links[i - 1].toOperator).offsetTop;
+
+                            var sequence_key = "op_" + i;
+                            sequence[sequence_key] = operator;
+                        }
+                        break;
+                    }
+
+                    var picker_name = "arg_" + links[i].fromOperator;
+                    var operator = {};
+
+                    for (var j = 0; j < document.getElementById(picker_name).elements.length; j++) {
+
+                        var operator_key = document.getElementById(picker_name).elements[j].id;           // id
+                        operator[operator_key] = document.getElementById(picker_name).elements[j].value;  // value
+                    }
+
+                    // 좌표값 저장
+                    operator["left"] = document.getElementById(links[i].fromOperator).offsetLeft;
+                    operator["top"] = document.getElementById(links[i].fromOperator).offsetTop;
+
+                    var sequence_key = "op_" + i;
+                    sequence[sequence_key] = operator;
+
+                    i++;
+                }
+
+                var temp = $("#op0").css("left");
+
+                {#console.log("sequence : ", sequence)#}
+                return sequence;
+            }
+
+            function getLayerSequenceFromEditor() {
+                /**
+                 * getLayerSequenceFromEditor()
+                 * Get the sequence of layer on current editor.
+                 *
+                 * @return sequence: a `dictionary`
+                 * The sequence. It means adjacent list structure.
+                 */
+                var links = $flowchart.flowchart('getData').links;  // the connections between each layers.
+                {#console.log("links : ", links);#}
+                {#console.log("opeartors : ", $flowchart.flowchart('getData').operators);#}
+
+                var sequence = {}      // the sequence of the flow.
+
+                // get connections without last layer.
+                for (var i = 0; i < Object.keys(links).length; i++) {
+                    var fromOperator = links[i]["fromOperator"]
+                    var toOperator = links[i]["toOperator"]
+
+                    // if the 'sequence' on the given key is empty, add a array '[]'.
+                    if (!sequence[fromOperator]) {
+                        sequence[fromOperator] = []
+                    }
+
+                    sequence[fromOperator].push(toOperator)
+                }
+
+                // get connection the last layer.
+                var last = -1;
+                var layers = Object.keys($flowchart.flowchart('getData').operators);
+                for (var i = 0; i < layers.length; i++) {
+                    if (sequence[i] == undefined) {
+                        last = i;
+                        break;
+                    }
+                }
+
+                sequence[last] = []     // add the last layer
+
+                {#console.log("The sequence :", sequence)#}
+
+                return sequence
+            }
+
+            function graph2json(sequence) {
+                /**
+                 * graph2json(sequence)
+                 * Map the given sequence of the diagram and each layer and return its information of layer as json format.
+                 *
+                 * @param sequence: a `dictionary`
+                 * The sequence of the layer.
+                 *
+                 * @return json: a `json formed data`
+                 * The json file of the layer information.
+                 */
+
+                var json;   // the json format of the layer information. It will be returned later.
+
+                var layers = {};
+                for (var i = 0; i < Object.keys(sequence).length; i++) {
+                    var argId = "arg_" + i;     // the id of the each argument setting tag.
+                    var layer = {};             // each layer
+
+                    // for during the length of the arguments in each layer.
+                    for (var j = 0; j < document.getElementById(argId).elements.length; j++) {
+                        var argKey = document.getElementById(argId).elements[j].id;
+                        layer[argKey] = document.getElementById(argId).elements[j].value;  // value
+                    }
+
+                    // add the connections of its layer.
+                    layer["toLayer"] = sequence[i];
+
+                    // add the offsets of its layer.
+                    layer["left"] = document.getElementById(i).offsetLeft;
+                    layer["top"] = document.getElementById(i).offsetTop;
+
+                    var layerKey = "op_" + i;
+                    layers[layerKey] = layer;
+                }
+
+                // integrate the source graph, articulable subgraph list, and abstract graph.
+                var graph = {}
+                graph["source_graph"] = layers;     // source graph
+                graph["articulable_subgraph"] = {}
+                graph["abstract_graph"] = {}
+
+                {#console.log("layers : ", layers);#}
+                json = JSON.stringify(graph);        // convert information of layers into json format.
+
+                return json
+            }
+
+            // JSON dictioanary 형태의 데이터에서 다이어그램 구성 정보를 추출하여 다이어그램을 그리는 함수
+            function DrawDiagram(JSON_dict) {
+                var dict_index = 0;     // JSON dictionary 데이터에 접근할 인덱스 ("op_0", "op_1", ...)
+
+                // JSON dictionary 데이터가 끝날때까지 차례로 순회한다.
+                while (JSON_dict["op_" + dict_index] != undefined) {
+                    var operatorObject = JSON_dict["op_" + dict_index];         // operator 객체 지정
+                    var data;        // 왼쪽 탭에 있는 data(레이어 종류)
+
+                    // var default_left = 400;
+                    // var default_top = 600;
+
+                    switch (operatorObject.operator_title) {
+                        case "InputLayer":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">InputLayer</div>'));
+                            break;
+
+                        case "OutputLayer":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">OutputLayer</div>'));
+                            break;
+
+                        case "Dense":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Dense</div>'));
+                            break;
+
+                        case "Dropout":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Dropout</div>'));
+                            break;
+
+                        case "Flatten":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Flatten</div>'));
+                            break;
+
+                        case "Convolution2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Convolution2D</div>'));
+                            break;
+
+                        case "ZeroPadding2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">ZeroPadding2D</div>'));
+                            break;
+
+                        case "MaxPooling2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPooling2D</div>'));
+                            break;
+
+                        case "AveragePooling2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">AveragePooling2D</div>'));
+                            break;
+
+                        case "LSTM":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">LSTM</div>'));
+                            break;
+
+                        case "SimpleRNN":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">SimpleRNN</div>'));
+                            break;
+
+                        case "BatchNormalization":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">BatchNormalization</div>'));
+                            break;
+                    }
+
+                    data.left = operatorObject.left;        // 레이어 노드의 좌표(left, top)
+                    data.top = operatorObject.top;
+
+                    //  레이어 파라미터 정보 설정하는 부분 추가해야됨
+                    var $temp = $flowchart.flowchart('addOperator', operatorId, data);  // 레이어 노드를 추가한다.
+                    var type = $flowchart.flowchart('getOperatorTitle', operatorId);
+                    appendOperatorParam(operatorId, type);
+                    operatorId++;
+
+                    dict_index++;
+                }   // while end
+
+                // Link 그리는 부분
+                var i = 0;
+                while (JSON_dict["op_" + (i + 1)] != undefined) {
+                    var linkData = {
+                        fromOperator: i,
+                        fromConnector: "output_" + i,
+                        fromSubConnetor: 0,
+                        toOperator: i + 1,
+                        toConnector: "input_" + (i + 1),
+                        toSubConnector: 0
+                    };
+
+                    $flowchart.flowchart('myLinkDiagram', linkId++, linkData);
+                    i++;
+                }
+
+                {#console.log(i);#}
+                {#console.log(data);#}
+            }
+
+            function drawDiagrams(JSON_dict) {
+                /**
+                 * drawDiagrams(JSON_dict)
+                 * Draw the diagrams on the editor by the layer information which consist of json dictionary.
+                 *
+                 * @param JSON_dict: a `dictionary`
+                 * The dictionary which includes the information of the layers.
+                 */
+
+                    {#getNodeLevel(JSON_dict);#}
+
+
+                    // 1. Draw source graph
+                    // JSON dictionary 데이터가 끝날때까지 차례로 순회한다.
+                var dict_index = 0;     // JSON dictionary 데이터에 접근할 인덱스 ("op_0", "op_1", ...)
+                var accessKey = "source_graph";
+                while (JSON_dict[accessKey]["op_" + dict_index] != undefined) {
+                    var operatorObject = JSON_dict[accessKey]["op_" + dict_index];         // operator 객체 지정
+                    var data;        // 왼쪽 탭에 있는 data(레이어 종류)
+
+                    // var default_left = 400;
+                    // var default_top = 600;
+
+                    switch (operatorObject.operator_title) {
+                        case "InputLayer":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">InputLayer</div>'));
+                            break;
+
+                        case "OutputLayer":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">OutputLayer</div>'));
+                            break;
+
+                        case "Dense":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Dense</div>'));
+                            break;
+
+                        case "Dropout":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Dropout</div>'));
+                            break;
+
+                        case "Flatten":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Flatten</div>'));
+                            break;
+
+                        case "Convolution2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Convolution2D</div>'));
+                            break;
+
+                        case "ZeroPadding2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">ZeroPadding2D</div>'));
+                            break;
+
+                        case "MaxPooling2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPooling2D</div>'));
+                            break;
+
+                        case "AveragePooling2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">AveragePooling2D</div>'));
+                            break;
+
+                        case "LSTM":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">LSTM</div>'));
+                            break;
+
+                        case "SimpleRNN":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">SimpleRNN</div>'));
+                            break;
+
+                        case "BatchNormalization":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">BatchNormalization</div>'));
+                            break;
+                        default:
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">default</div>'));
+                    }
+
+                    {#// if the offset is undefined, locate the layers automatically.#}
+                    {#if (data.left == undefined || data.top == undefined) {#}
+                    {#    #}
+
+                    data.left = operatorObject.left;        // 레이어 노드의 좌표(left, top)
+                    data.top = operatorObject.top;
+
+                    //  레이어 파라미터 정보 설정하는 부분 추가해야됨
+                    var $temp = $flowchart.flowchart('addOperator', operatorId, data);  // 레이어 노드를 추가한다.
+                    var type = $flowchart.flowchart('getOperatorTitle', operatorId);
+                    appendOperatorParam(operatorId, type);
+                    operatorId++;
+
+                    dict_index++;
+                }   // while end
+                return;
+                // Link 그리는 부분
+                var i = 0;
+                for (var i = 0; i < Object.keys(JSON_dict[accessKey]).length; i++) {
+                    var layer = JSON_dict[accessKey]["op_" + i];
+
+                    for (var j = 0; j < Object.keys(layer["toLayer"]).length; j++) {
+                        var linkData = {
+                            fromOperator: i,
+                            fromConnector: "output_" + i,
+                            fromSubConnetor: 0,
+                            toOperator: layer["toLayer"][j],
+                            toConnector: "input_" + layer["toLayer"][j],
+                            toSubConnector: 0
+                        };
+
+                        {#console.log("linkData : ", linkData);#}
+                        $flowchart.flowchart('myLinkDiagram', linkId++, linkData);
+                    }
+                }
+            }
+
+
+            function drawOverallGraph(JSON_dict, flowchart_index) {
+                /**
+                 * drawDiagrams(JSON_dict)
+                 * Draw the diagrams on the editor by the layer information which consist of json dictionary.
+                 *
+                 * @param JSON_dict: a `dictionary`
+                 * The dictionary which includes the information of the layers.
+                 *
+                 * @param articulableSubgraph: a `int`
+                 * The articulable subgraph index.
+                 */
+
+
+                var flowchartId = '#sheet_' + flowchart_index;
+                var $flowchart = $(flowchartId);
+
+                var leftStart = 470;
+                var topStart = 750;
+                var articulableSubgraph = abstractData.subgraph;
+                var nodeLevel = getNodeLevel_subgraph(JSON_dict, abstractData.subgraph);
+                {#getNodeLevel_subgraph(JSON_dict, articulableSubgraph);#}
+
+                // 1. Draw source graph
+                // JSON dictionary 데이터가 끝날때까지 차례로 순회한다.
+                {#var dict_index = articulableSubgraph[0];     // JSON dictionary 데이터에 접근할 인덱스 ("op_0", "op_1", ...)#}
+                var accessKey = "source_graph";
+                var op_index = 0;
+                for (var dict_index of articulableSubgraph) {
+                    var operator = JSON_dict[accessKey]["op_" + dict_index];         // operator 객체 지정
+                    {#console.log("dict_index : ", dict_index);#}
+                    var data;        // 왼쪽 탭에 있는 data(레이어 종류)
+
+                    // var default_left = 400;
+                    // var default_top = 600;
+
+                    switch (operator.operator_title) {
+                        case "InputLayer":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">InputLayer</div>'));
+                            break;
+
+                        case "OutputLayer":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">OutputLayer</div>'));
+                            break;
+
+                        case "Dense":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Dense</div>'));
+                            break;
+
+                        case "Dropout":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Dropout</div>'));
+                            break;
+
+                        case "Flatten":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Flatten</div>'));
+                            break;
+
+                        case "Convolution2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Convolution2D</div>'));
+                            break;
+
+                        case "ZeroPadding2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">ZeroPadding2D</div>'));
+                            break;
+
+                        case "MaxPooling2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPooling2D</div>'));
+                            break;
+
+                        case "AveragePooling2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">AveragePooling2D</div>'));
+                            break;
+
+                        case "LSTM":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">LSTM</div>'));
+                            break;
+
+                        case "SimpleRNN":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">SimpleRNN</div>'));
+                            break;
+
+                        case "BatchNormalization":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">BatchNormalization</div>'));
+                            break;
+                        default:
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">default</div>'));
+                    }
+
+                    {#// if the offset is undefined, locate the layers automatically.#}
+                    {#if (data.left == undefined || data.top == undefined) {#}
+                    {#    #}
+
+                    var leftLevel = function(arr, item) {
+                        var level = -1;
+
+                        for (var i in arr) {
+                            if (arr[i].indexOf(item) != -1) {
+                                level = i;
+                                break;
+                            }
+                        }
+
+                        return level;
+                    };
+
+                    var topLevel = function(arr, item) {
+                        var index = -1;
+
+                        for (i of arr) {
+                            index = i.indexOf(item);
+
+                            if (index != -1) break;
+                        }
+
+                        return index;
+                    };
+
+                    var maxLength = function(arr) {
+                        var length = new Array();
+                        for (i of arr) {
+                            length.push(i.length);
+                        }
+                        {#console.log("length : ", length);#}
+                        return Math.max.apply(null, length);
+                    }
+
+                    // the top of the first node and last node should be same. And they should be located center of overall graph.
+                    if (dict_index == articulableSubgraph[0] || dict_index == articulableSubgraph[articulableSubgraph.length - 1]) {
+                        data.top = topStart + ( maxLength(nodeLevel) * 140) / 2;
+                        {#console.log(maxLength(nodeLevel));#}
+                    } else {
+                        data.top = topStart + topLevel(nodeLevel, dict_index) * 140;
+                    }
+                    data.left = leftStart + leftLevel(nodeLevel, dict_index) * 300;        // 레이어 노드의 좌표(left, top)
+
+
+                    //  레이어 파라미터 정보 설정하는 부분 추가해야됨
+                    var tempOperatorId = flowchart_index + "_" + abstract_index + "_" + op_index++;
+                    var $temp = $flowchart.flowchart('addOperator', tempOperatorId, data);  // 레이어 노드를 추가한다.
+                    var type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+                    appendOperatorParam(tempOperatorId, type);
+                }   // for end
+
+                // Link 그리는 부분
+                {#var index = 0;#}
+                for (var i = 0; i < articulableSubgraph.length - 1; i++) {
+                    var layer = JSON_dict[accessKey]["op_" + articulableSubgraph[i]];
+
+                    for (var j = 0; j < Object.keys(layer["toLayer"]).length; j++) {
+                        var from_tempOperatorId = flowchart_index + "_" + abstract_index + "_" + i
+                        var to_tempOperatorId = flowchart_index + "_" + abstract_index + "_" + articulableSubgraph.indexOf(layer["toLayer"][j])
+                        var linkData = {
+                            fromOperator: from_tempOperatorId,
+                            fromConnector: "output_" + 0,
+                            fromSubConnetor: 0,
+                            toOperator: to_tempOperatorId,
+                            toConnector: "input_" + 0,
+                            toSubConnector: 0
+                        };
+
+                        $flowchart.flowchart('myLinkDiagram', linkId++, linkData);
+                    }
+                }
+            }
+
+            function drawArticulableSubgraph(JSON_dict, abstract_index, flowchart_index) {
+                /**
+                 * drawDiagrams(JSON_dict)
+                 * Draw the diagrams on the editor by the layer information which consist of json dictionary.
+                 *
+                 * @param JSON_dict: a `dictionary`
+                 * The dictionary which includes the information of the layers.
+                 *
+                 * @param articulableSubgraph: a `int`
+                 * The articulable subgraph index.
+                 */
+
+
+                var flowchartId = '#sheet_' + flowchart_index;
+                var $flowchart = $(flowchartId);
+
+                var leftStart = 470;
+                var topStart = 750;
+                var abstractData = JSON_dict["abstract_graph"][abstract_index];
+                var articulableSubgraph = abstractData.subgraph;
+                var nodeLevel = getNodeLevel_subgraph(JSON_dict, abstractData.subgraph);
+                {#getNodeLevel_subgraph(JSON_dict, articulableSubgraph);#}
+
+                // 1. Draw source graph
+                // JSON dictionary 데이터가 끝날때까지 차례로 순회한다.
+                {#var dict_index = articulableSubgraph[0];     // JSON dictionary 데이터에 접근할 인덱스 ("op_0", "op_1", ...)#}
+                var accessKey = "source_graph";
+                var op_index = 0;
+                for (var dict_index of articulableSubgraph) {
+                    var operator = JSON_dict[accessKey]["op_" + dict_index];         // operator 객체 지정
+                    {#console.log("dict_index : ", dict_index);#}
+                    var data;        // 왼쪽 탭에 있는 data(레이어 종류)
+
+                    // var default_left = 400;
+                    // var default_top = 600;
+
+                    switch (operator.operator_title) {
+                        case "InputLayer":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">InputLayer</div>'));
+                            break;
+
+                        case "OutputLayer":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">OutputLayer</div>'));
+                            break;
+
+                        case "Dense":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Dense</div>'));
+                            break;
+
+                        case "Dropout":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Dropout</div>'));
+                            break;
+
+                        case "Flatten":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Flatten</div>'));
+                            break;
+
+                        case "Convolution2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Convolution2D</div>'));
+                            break;
+
+                        case "ZeroPadding2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">ZeroPadding2D</div>'));
+                            break;
+
+                        case "MaxPooling2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPooling2D</div>'));
+                            break;
+
+                        case "AveragePooling2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">AveragePooling2D</div>'));
+                            break;
+
+                        case "LSTM":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">LSTM</div>'));
+                            break;
+
+                        case "SimpleRNN":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">SimpleRNN</div>'));
+                            break;
+
+                        case "BatchNormalization":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">BatchNormalization</div>'));
+                            break;
+                        default:
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">default</div>'));
+                    }
+
+                    {#// if the offset is undefined, locate the layers automatically.#}
+                    {#if (data.left == undefined || data.top == undefined) {#}
+                    {#    #}
+
+                    var leftLevel = function(arr, item) {
+                        var level = -1;
+
+                        for (var i in arr) {
+                            if (arr[i].indexOf(item) != -1) {
+                                level = i;
+                                break;
+                            }
+                        }
+
+                        return level;
+                    };
+
+                    var topLevel = function(arr, item) {
+                        var index = -1;
+
+                        for (i of arr) {
+                            index = i.indexOf(item);
+
+                            if (index != -1) break;
+                        }
+
+                        return index;
+                    };
+
+                    var maxLength = function(arr) {
+                        var length = new Array();
+                        for (i of arr) {
+                            length.push(i.length);
+                        }
+                        {#console.log("length : ", length);#}
+                        return Math.max.apply(null, length);
+                    }
+
+                    // the top of the first node and last node should be same. And they should be located center of overall graph.
+                    if (dict_index == articulableSubgraph[0] || dict_index == articulableSubgraph[articulableSubgraph.length - 1]) {
+                        data.top = topStart + ( maxLength(nodeLevel) * 140) / 2;
+                        {#console.log(maxLength(nodeLevel));#}
+                    } else {
+                        data.top = topStart + topLevel(nodeLevel, dict_index) * 140;
+                    }
+                    data.left = leftStart + leftLevel(nodeLevel, dict_index) * 300;        // 레이어 노드의 좌표(left, top)
+
+
+                    //  레이어 파라미터 정보 설정하는 부분 추가해야됨
+                    var tempOperatorId = flowchart_index + "_" + abstract_index + "_" + op_index++;
+                    var $temp = $flowchart.flowchart('addOperator', tempOperatorId, data);  // 레이어 노드를 추가한다.
+                    var type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+                    appendOperatorParam(tempOperatorId, type);
+                }   // for end
+
+                // Link 그리는 부분
+                {#var index = 0;#}
+                for (var i = 0; i < articulableSubgraph.length - 1; i++) {
+                    var layer = JSON_dict[accessKey]["op_" + articulableSubgraph[i]];
+
+                    for (var j = 0; j < Object.keys(layer["toLayer"]).length; j++) {
+                        var from_tempOperatorId = flowchart_index + "_" + abstract_index + "_" + i
+                        var to_tempOperatorId = flowchart_index + "_" + abstract_index + "_" + articulableSubgraph.indexOf(layer["toLayer"][j])
+                        var linkData = {
+                            fromOperator: from_tempOperatorId,
+                            fromConnector: "output_" + 0,
+                            fromSubConnetor: 0,
+                            toOperator: to_tempOperatorId,
+                            toConnector: "input_" + 0,
+                            toSubConnector: 0
+                        };
+
+                        $flowchart.flowchart('myLinkDiagram', linkId++, linkData);
+                    }
+                }
+            }
+
+            // alert
+            function autoclosingAlert(selector, delay) {
+                var alert = $(selector).alert();
+                alert.show();
+                window.setTimeout(function () { alert.hide() }, delay);
+            }
+
+            // Django에서 넘어온 JSON String 형태의 데이터를 Json Dict 형태로 변환하여 반환하는 함수
+            function parseJSON2Dict() {
+                json_str = "{{ foo }}".replace(/&quot;/gi, "\""); // 정규식을 이용하여 &quot; 를 " 으로 모두 치환한다.
+                json_data = JSON.parse(json_str);   // string 타입의 json정보를 갖고 있는 변수를 json 타입으로 변환한다.
+
+                return json_data;
+            }
+
+            function getNodeLevel(JSON_dict) {
+                /**
+                 * getNodeLevel(JSON_dict)
+                 * Get the level of each nodes in the graph for drawing on the sheet.
+                 *
+                 * @param JSON_dict: a `dictionary`
+                 * The dictionary which includes the information of the layers.
+                 *
+                 * @return nodeLevel: a`dictionary`
+                 * The node level.
+                 */
+
+                var nodeLevel = new Array();      // the node level needed to locate each nodes.
+
+
+                var adjList = JSON_dict["source_graph"];
+                {#var adjList = JSON_dict;#}
+                {#console.log("adjList : ", adjList);#}
+
+                nodeLevel[0] = [0];       // push the first node.
+
+                var currLevel = 0;
+                while (nodeLevel[currLevel] != undefined) {
+                    for (var i of nodeLevel[currLevel]) {
+                        var dictKey = "op_" + i;        // the access key
+                        // 1-1) concatenate every next nodes.
+                        if (nodeLevel[currLevel + 1] == undefined) {
+                            nodeLevel[currLevel + 1] = adjList[dictKey].toLayer;
+                        } else {
+                            nodeLevel[currLevel + 1] = nodeLevel[currLevel + 1].concat(adjList[dictKey].toLayer);
+                        }
+
+                        // 1-2) filter out overlapped nodes.
+                        nodeLevel[currLevel + 1] = nodeLevel[currLevel + 1].filter(function(value, index, self) {
+                            return self.indexOf(value) === index;
+                        });
+                    }
+
+                    currLevel++;
+                }
+
+                // 2) remove the overlapped nodes from next nodes.
+                for (var i = 0; i < nodeLevel.length; i++) {
+                    var filterNode = nodeLevel[i + 1];
+                    nodeLevel[i] = nodeLevel[i].filter(item => !filterNode.includes(item));     // remove overlapped elements.
+                }
+
+                {#console.log("nodeLevel : ", nodeLevel);#}
+                return nodeLevel;
+            }
+
+            function getNodeLevel_subgraph(JSON_dict, subgraph) {
+                /**
+                 * getNodeLevel(JSON_dict)
+                 * Get the level of each nodes in the graph for drawing on the sheet.
+                 *
+                 * @param JSON_dict: a `dictionary`
+                 * The dictionary which includes the information of the layers.
+                 *
+                 * @param subgraph: a `array`
+                 * The subgraph set.
+                 *
+                 * @return nodeLevel: a`dictionary`
+                 * The node level.
+                 */
+
+                var nodeLevel = new Array();      // the node level needed to locate each nodes.
+
+
+                var adjList = JSON_dict["source_graph"];
+                {#var adjList = JSON_dict;#}
+
+                nodeLevel[0] = [subgraph[0]];       // push the first node.
+                var currLevel = 0;
+                while (nodeLevel[currLevel] != undefined) {
+                    {#console.log("(nodeLevel[currLevel] : ", (nodeLevel[currLevel]));#}
+                    {#console.log(nodeLevel[currLevel].length, nodeLevel[currLevel][0], subgraph[subgraph.length - 1]);#}
+
+                    for (var i of nodeLevel[currLevel]) {
+                        var dictKey = "op_" + i;        // the access key
+
+                        // 1-0) if the node in current level is the last node, stop pushing.
+                        if (i == subgraph[subgraph.length - 1]) {
+                            break;
+                        }
+
+                        // 1-1) concatenate every next nodes.
+                        if (nodeLevel[currLevel + 1] == undefined) {
+                            nodeLevel[currLevel + 1] = adjList[dictKey].toLayer;
+                        } else {
+                            nodeLevel[currLevel + 1] = nodeLevel[currLevel + 1].concat(adjList[dictKey].toLayer);
+                        }
+
+                        // 1-2) filter out overlapped nodes.
+                        nodeLevel[currLevel + 1] = nodeLevel[currLevel + 1].filter(function(value, index, self) {
+                            return self.indexOf(value) === index;
+                        });
+                    }
+
+                    currLevel++;
+
+                }
+
+                // 2) remove the overlapped nodes from next nodes.
+                for (var i = 0; i < nodeLevel.length - 1; i++) {
+                    var filterNode = nodeLevel[i + 1];
+                    nodeLevel[i] = nodeLevel[i].filter(item => !filterNode.includes(item));     // remove overlapped elements.
+                }
+
+                {#console.log("nodeLevel : ", nodeLevel);#}
+                return nodeLevel;
+            }
+
+            function json2graph() {
+                /**
+                 * json2graph()
+                 * convert json file into graph on editor.
+                 */
+
+                    // get the json from POST method.
+                var json_str = "{{ foo }}".replace(/&quot;/gi, "\""); // 정규식을 이용하여 &quot; 를 " 으로 모두 치환한다.
+                var json_data = JSON.parse(json_str);   // string 타입의 json정보를 갖고 있는 변수를 json 타입으로 변환한다.
+
+                return json_data;
+            }
+
+            var json_data = json2graph();
+
+            // draw diagrams by loaded json file.
+            addCustomizingModules(json_data.articulable_subgraph);
+
+            drawOverall();
+
+            flow(json_data, 0);
+            drawArticulableSubgraph(json_data, 0, 0);
+
+            flow(json_data, 1);
+            drawArticulableSubgraph(json_data, 1, 1);
+
+            flow(json_data, 2);
+            drawArticulableSubgraph(json_data, 2, 2);
+
+            var overall = [];
+            for (var i = 0; i < Object.keys(json_data.source_graph).length; i++) {
+                overall.push(i);
+            }
+            console.log("overall : ", overall);
+            {#substitueOverallGraph(json_data, overall, -1);#}
+
+            {#drawDiagrams(json_data);#}
+            {#var JSON_dict =  parseJSON2Dict();#}
+            {#DrawDiagram(JSON_dict);#}
+
+        }); // on ready end
+
+        function Queue() {
+            /**
+             *  Queue()
+             *  A user defined queue.
+             */
+
+            this.dataStore = [];
+            this.enqueue = function enqueue(element) {
+                this.dataStore.push(element);
+            };
+            this.dequeue = function dequeue() {
+                return this.dataStore.shift();
+            };
+            this.front = function front() {
+                return this.dataStore[0];
+            };
+            this.back = function back() {
+                return this.dataStore[this.dataStore.length - 1];
+            };
+            this.empty = function empty() {
+                if (this.dataStore.length == 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            this.toString = function toString() {
+                var str = "";
+                for (var i = 0; i < this.dataStore.length; i++) {
+                    str += this.dataStore[i] + " ";
+                }
+
+                return str;
+            }
+        }
+
+        // var data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">InputLayer</div>'));
+        //     data.left = 700;
+        //     data.top = 700;
+        //     $temp = $flowchart.flowchart('addOperator', data);
+        //     var type = $flowchart.flowchart("getOperatorTitle", operatorId);
+        //     appendOperatorParam(operatorId, type);       // 우측 파라미터 설정 bar 태그 생성
+        //     operatorId++;
+        ////////////////////////// slide toggle
+        function toggle(op_id) {
+            var id = "#" + "tb_contents_" + op_id;
+
+            $(id).slideToggle("slow");
+        }
+
+        function addCustomizingModules(articulableSubgraph) {
+            var content;
+            console.log(articulableSubgraph.index);
+            for (var i in articulableSubgraph) {
+
+                var module_name = "Module_" + i;
+                content = '<div class="panel-body">' +
+                '<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1" >'+ module_name + '</div>' +
+                '</div>';
+                {#content = '<div class="panel-body">' +#}
+                {#    '<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">'+ module_name + '</div>' +#}
+                {#    '</div>';#}
+                $("#collapseEight").append(content);
+            }
+        }
+
+        function substitueOverallGraph(json_dict, subgraph, currLevel) {
+            var abstractGraph = new Array();
+            var queue = new Queue();
+
+            queue.enqueue(subgraph[0]);     // push the fisrt node.
+            abstractGraph[subgraph[0]] = {"toLayer" : [], "type" : -1};
+
+            var as_index = 0;
+            while (!queue.empty()) {
+                var curr = queue.dequeue();
+                console.log("curr : ", curr);
+                console.log("queue : ", queue.toString());
+                console.log("abstractGraph[curr] : ", abstractGraph[curr]);
+                console.log("abstractGraph : ", abstractGraph);
+
+
+                if (abstractGraph[curr].type == -1) {
+                    console.log("here!!!!!");
+                    // 1-1) The 'curr' node is not a module.
+                    if (curr >= subgraph[subgraph.length - 1]) {
+                        continue;
+                    }
+
+                    for (var next of json_dict.source_graph["op_" + curr].toLayer) {
+                        var flag = -1;
+                        for (ag of json_dict.abstract_graph) {
+                            if (next == ag.subgraph[0]) {
+                                var module = "as_" + as_index++;
+                                abstractGraph[curr].toLayer.push(module);
+                                abstractGraph[module] = {"toLayer" : [], "type" : ag.index_articulableSubgraph};
+                                queue.enqueue(module);
+                                flag++;
+                            }
+                        }
+                        if (flag == -1) {
+                            abstractGraph[curr].toLayer.push(next);
+                            abstractGraph[next] = {"toLayer" : [], "type" : -1};
+                            queue.enqueue(next);
+                        }
+                    }
+                } else {
+                    console.log("here!!");
+                    // 1-2) The 'curr' node is a module.
+                    var articulableSubgraph = json_dict.articulable_subgraph[abstractGraph[curr].type];
+                    console.log("articulableSubgraph : ", articulableSubgraph);
+                    var startingNode = articulableSubgraph[articulableSubgraph.length - 1];
+
+                    if (startingNode >= subgraph[subgraph.length - 1]) {
+                        continue;
+                    }
+
+                    for (next of json_dict.source_graph["op_" + startingNode].toLayer) {
+                        var flag = -1;
+                        for (ag of json_dict.abstract_graph) {
+                            if(next == ag.subgraph[0]) {
+                                var module = "as_" + as_index++;
+                                abstractGraph[curr].toLayer.push(module);
+                                abstractGraph[module] = {"toLayer" : [], "type" : ag.index_articulableSubgraph};
+                                queue.enqueue(module);
+                                flag++;
+                            }
+                        }
+                        if (flag == -1) {
+                            abstractGraph[curr].toLayer.push(next);
+                            abstractGraph[next] = {"toLayer" : [], "type" : -1};
+                            queue.enqueue(next);
+                        }
+                    }
+                }
+            }
+
+            console.log("abstractGraph : ", abstractGraph);
+
+            return abstractGraph;
+        }
+
+    </script>
+{% endblock javascripts %}

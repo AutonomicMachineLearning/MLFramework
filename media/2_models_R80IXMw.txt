@@ -1,0 +1,56 @@
+{
+	"source_graph": {
+		"op_0": {
+			"operator_title": "InputLayer",
+			"input_port": "input_port",
+			"dimention_ordering": "default",
+			"toLayer": [
+				1,
+				2,
+				3
+			],
+			"left": 460,
+			"top": 700
+		},
+		"op_1": {
+			"operator_title": "InputLayer",
+			"input_port": "input_port",
+			"dimention_ordering": "default",
+			"toLayer": [
+				3
+			],
+			"left": 660,
+			"top": 640
+		},
+		"op_2": {
+			"operator_title": "InputLayer",
+			"input_port": "input_port",
+			"dimention_ordering": "default",
+			"toLayer": [
+				3
+			],
+			"left": 680,
+			"top": 780
+		},
+		"op_3": {
+			"operator_title": "InputLayer",
+			"input_port": "input_port",
+			"dimention_ordering": "default",
+			"toLayer": [
+				4
+			],
+			"left": 940,
+			"top": 700
+		},
+		"op_4": {
+			"operator_title": "InputLayer",
+			"input_port": "input_port",
+			"dimention_ordering": "default",
+			"toLayer": [],
+			"left": 1180,
+			"top": 680
+		}
+	},
+	"articulable_subgraph": {},
+	"abstract_graph": {}
+}

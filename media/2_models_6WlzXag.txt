@@ -1,0 +1,56 @@
+{
+	"source_graph": {
+		"op_0": {
+			"operator_title": "InputLayer",
+			"input_port": "input_port",
+			"dimention_ordering": "default",
+			"toLayer": [
+				1,
+				2
+			],
+			"left": 560,
+			"top": 680
+		},
+		"op_1": {
+			"operator_title": "Dense",
+			"output_dimentions": "",
+			"activation": "softmax",
+			"tb_button_1": "on",
+			"weights": "None",
+			"weight_initialization_function": "zero",
+			"regularizer_for_input_wegiht": "None",
+			"activitiy_regularizer": "None",
+			"bias_regularizer": "None",
+			"bias": "None",
+			"bias_constraint": "None",
+			"input_dimention": "None",
+			"weight": "None",
+			"toLayer": [
+				3
+			],
+			"left": 840,
+			"top": 700
+		},
+		"op_2": {
+			"operator_title": "Dropout",
+			"fraction_to_drop": "",
+			"tb_button_2": "on",
+			"noise_shape": "None",
+			"seed": "None",
+			"toLayer": [
+				3
+			],
+			"left": 880,
+			"top": 840
+		},
+		"op_3": {
+			"operator_title": "OutputLayer",
+			"output_port": "output_port",
+			"toLayer": [],
+			"left": 1100,
+			"top": 660
+		}
+	},
+	"articulable_subgraph": {},
+	"abstract_graph": {}
+}
