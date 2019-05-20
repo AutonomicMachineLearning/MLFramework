@@ -74,7 +74,6 @@ def code2diagram(dir):
     return data
 
 
-
 # json file을 읽어와서 DB에 저장
 def createAndInsert_json(dir):
     dir = "media/" + str(dir)
