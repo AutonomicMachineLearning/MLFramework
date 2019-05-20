@@ -1,0 +1,114 @@
+{
+	"source_graph": {
+		"op_0": {
+			"operator_title": "InputLayer",
+			"input_port": "input_port",
+			"dimention_ordering": "default",
+			"toLayer": [
+				2
+			],
+			"left": 280,
+			"top": 700
+		},
+		"op_1": {
+			"operator_title": "OutputLayer",
+			"output_port": "output_port",
+			"toLayer": [],
+			"left": 1620,
+			"top": 720
+		},
+		"op_2": {
+			"operator_title": "Flatten",
+			"toLayer": [
+				3,
+				4,
+				5
+			],
+			"left": 520,
+			"top": 700
+		},
+		"op_3": {
+			"operator_title": "Convolution2D",
+			"filter_rows": "",
+			"number_of_filters": "",
+			"filter_columns": "",
+			"activation": "softmax",
+			"tb_button_3": "on",
+			"weight": "None",
+			"bias_regularizer": "None",
+			"regularizer_for_input_weight": "None",
+			"activity_regularizer": "None",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"subsampling": "(1, 1)",
+			"border_mode": "valid",
+			"bias_constraint": "None",
+			"bias": "None",
+			"weight_constraint": "None",
+			"toLayer": [
+				6
+			],
+			"left": 760,
+			"top": 600
+		},
+		"op_4": {
+			"operator_title": "Convolution2D",
+			"filter_rows": "",
+			"number_of_filters": "",
+			"filter_columns": "",
+			"activation": "softmax",
+			"tb_button_4": "on",
+			"weight": "None",
+			"bias_regularizer": "None",
+			"regularizer_for_input_weight": "None",
+			"activity_regularizer": "None",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"subsampling": "(1, 1)",
+			"border_mode": "valid",
+			"bias_constraint": "None",
+			"bias": "None",
+			"weight_constraint": "None",
+			"toLayer": [
+				6
+			],
+			"left": 780,
+			"top": 760
+		},
+		"op_5": {
+			"operator_title": "ZeroPadding2D",
+			"zero_padding_layer": "",
+			"toLayer": [
+				1
+			],
+			"left": 780,
+			"top": 900
+		},
+		"op_6": {
+			"operator_title": "Convolution2D",
+			"filter_rows": "",
+			"number_of_filters": "",
+			"filter_columns": "",
+			"activation": "softmax",
+			"tb_button_6": "on",
+			"weight": "None",
+			"bias_regularizer": "None",
+			"regularizer_for_input_weight": "None",
+			"activity_regularizer": "None",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"subsampling": "(1, 1)",
+			"border_mode": "valid",
+			"bias_constraint": "None",
+			"bias": "None",
+			"weight_constraint": "None",
+			"toLayer": [
+				1
+			],
+			"left": 1080,
+			"top": 740
+		}
+	},
+	"articulable_subgraph": {},
+	"abstract_graph": {}
+}

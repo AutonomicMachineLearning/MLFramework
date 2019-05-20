@@ -1,0 +1,14 @@
+{
+	"source_graph": {
+		"op_0": {
+			"operator_title": "InputLayer",
+			"input_port": "input_port",
+			"dimention_ordering": "default",
+			"toLayer": [],
+			"left": 600,
+			"top": 700
+		}
+	},
+	"articulable_subgraph": {},
+	"abstract_graph": {}
+}

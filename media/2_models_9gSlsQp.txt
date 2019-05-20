@@ -1,0 +1,57 @@
+{
+	"source_graph": {
+		"op_0": {
+			"operator_title": "InputLayer",
+			"input_port": "input_port",
+			"dimention_ordering": "default",
+			"toLayer": [
+				2,
+				3
+			],
+			"left": 560,
+			"top": 680
+		},
+		"op_1": {
+			"operator_title": "OutputLayer",
+			"output_port": "output_port",
+			"toLayer": [],
+			"left": 1180,
+			"top": 680
+		},
+		"op_2": {
+			"operator_title": "Convolution2D",
+			"filter_rows": "",
+			"number_of_filters": "",
+			"filter_columns": "",
+			"activation": "softmax",
+			"tb_button_2": "on",
+			"weight": "None",
+			"bias_regularizer": "None",
+			"regularizer_for_input_weight": "None",
+			"activity_regularizer": "None",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"subsampling": "(1, 1)",
+			"border_mode": "valid",
+			"bias_constraint": "None",
+			"bias": "None",
+			"weight_constraint": "None",
+			"toLayer": [
+				1
+			],
+			"left": 880,
+			"top": 660
+		},
+		"op_3": {
+			"operator_title": "ZeroPadding2D",
+			"zero_padding_layer": "",
+			"toLayer": [
+				1
+			],
+			"left": 780,
+			"top": 840
+		}
+	},
+	"articulable_subgraph": {},
+	"abstract_graph": {}
+}

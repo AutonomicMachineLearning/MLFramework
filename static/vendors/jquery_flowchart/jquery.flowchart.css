@@ -118,7 +118,11 @@
 }
 
 .flowchart-operator.selected {
+<<<<<<< HEAD
+    border: 3px solid #555;
+=======
     border-color: #555;
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
 }
 
 
@@ -135,6 +139,11 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     cursor: move;
+<<<<<<< HEAD
+    font-size: 18px;
+    text-align: center
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
 }
 
 .flowchart-operator .flowchart-operator-inputs-outputs {

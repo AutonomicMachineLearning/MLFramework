@@ -1,0 +1,1795 @@
+{
+	"source_graph": {
+		"op_0": {
+			"operator_title": "InputLayer",
+			"dimention_ordering": "default",
+			"input_port": "input_port",
+			"toLayer": [
+				1
+			]
+		},
+		"op_1": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				2
+			]
+		},
+		"op_2": {
+			"operator_title": "SimpleRNN",
+			"zero_padding_layer": "",
+			"activation": "softmax",
+			"tb_button_5": "on",
+			"go_backwards": "true",
+			"unroll": "true",
+			"regularizer_for_input_weight": "None",
+			"dropout_rate_for_grate": "0",
+			"input_length": "None",
+			"stateful": "true",
+			"input_dimention": "None",
+			"consume_less": "CPU",
+			"weights": "None",
+			"bias_regularizer": "None",
+			"return_sequence": "true",
+			"initialization_for_inner_cells": "uniform",
+			"weight_initialization_function": "zero",
+			"regularizer_for_recurrent_weight": "None",
+			"drop_rate": "0",
+			"toLayer": [
+				3
+			]
+		},
+		"op_3": {
+			"operator_title": "SimpleRNN",
+			"zero_padding_layer": "",
+			"activation": "softmax",
+			"tb_button_5": "on",
+			"go_backwards": "true",
+			"unroll": "true",
+			"regularizer_for_input_weight": "None",
+			"dropout_rate_for_grate": "0",
+			"input_length": "None",
+			"stateful": "true",
+			"input_dimention": "None",
+			"consume_less": "CPU",
+			"weights": "None",
+			"bias_regularizer": "None",
+			"return_sequence": "true",
+			"initialization_for_inner_cells": "uniform",
+			"weight_initialization_function": "zero",
+			"regularizer_for_recurrent_weight": "None",
+			"drop_rate": "0",
+			"toLayer": [
+				4
+			]
+		},
+		"op_4": {
+			"operator_title": "SimpleRNN",
+			"zero_padding_layer": "",
+			"activation": "softmax",
+			"tb_button_5": "on",
+			"go_backwards": "true",
+			"unroll": "true",
+			"regularizer_for_input_weight": "None",
+			"dropout_rate_for_grate": "0",
+			"input_length": "None",
+			"stateful": "true",
+			"input_dimention": "None",
+			"consume_less": "CPU",
+			"weights": "None",
+			"bias_regularizer": "None",
+			"return_sequence": "true",
+			"initialization_for_inner_cells": "uniform",
+			"weight_initialization_function": "zero",
+			"regularizer_for_recurrent_weight": "None",
+			"drop_rate": "0",
+			"toLayer": [
+				5
+			]
+		},
+		"op_5": {
+			"operator_title": "MaxPool2D",
+			"strides": "(,)",
+			"dimention_ordering": "default",
+			"number_of_filters": "",
+			"border_mode": "valid",
+			"tb_button_5": "on",
+			"toLayer": [
+				6
+			]
+		},
+		"op_6": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				7
+			]
+		},
+		"op_7": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				8
+			]
+		},
+		"op_8": {
+			"operator_title": "SimpleRNN",
+			"zero_padding_layer": "",
+			"activation": "softmax",
+			"tb_button_5": "on",
+			"go_backwards": "true",
+			"unroll": "true",
+			"regularizer_for_input_weight": "None",
+			"dropout_rate_for_grate": "0",
+			"input_length": "None",
+			"stateful": "true",
+			"input_dimention": "None",
+			"consume_less": "CPU",
+			"weights": "None",
+			"bias_regularizer": "None",
+			"return_sequence": "true",
+			"initialization_for_inner_cells": "uniform",
+			"weight_initialization_function": "zero",
+			"regularizer_for_recurrent_weight": "None",
+			"drop_rate": "0",
+			"toLayer": [
+				9
+			]
+		},
+		"op_9": {
+			"operator_title": "MaxPool2D",
+			"strides": "(,)",
+			"dimention_ordering": "default",
+			"number_of_filters": "",
+			"border_mode": "valid",
+			"tb_button_5": "on",
+			"toLayer": [
+				10,
+				11,
+				12,
+				13
+			]
+		},
+		"op_10": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				14
+			]
+		},
+		"op_11": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				15
+			]
+		},
+		"op_12": {
+			"operator_title": "MaxPool2D",
+			"strides": "(,)",
+			"dimention_ordering": "default",
+			"number_of_filters": "",
+			"border_mode": "valid",
+			"tb_button_5": "on",
+			"toLayer": [
+				16
+			]
+		},
+		"op_13": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				17
+			]
+		},
+		"op_14": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				17
+			]
+		},
+		"op_15": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				17
+			]
+		},
+		"op_16": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				17
+			]
+		},
+		"op_17": {
+			"operator_title": "Concatenate",
+			"toLayer": [
+				18,
+				19,
+				20,
+				21
+			]
+		},
+		"op_18": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				22
+			]
+		},
+		"op_19": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				23
+			]
+		},
+		"op_20": {
+			"operator_title": "MaxPool2D",
+			"strides": "(,)",
+			"dimention_ordering": "default",
+			"number_of_filters": "",
+			"border_mode": "valid",
+			"tb_button_5": "on",
+			"toLayer": [
+				24
+			]
+		},
+		"op_21": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				25
+			]
+		},
+		"op_22": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				25
+			]
+		},
+		"op_23": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				25
+			]
+		},
+		"op_24": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				25
+			]
+		},
+		"op_25": {
+			"operator_title": "Concatenate",
+			"toLayer": [
+				26
+			]
+		},
+		"op_26": {
+			"operator_title": "MaxPool2D",
+			"strides": "(,)",
+			"dimention_ordering": "default",
+			"number_of_filters": "",
+			"border_mode": "valid",
+			"tb_button_5": "on",
+			"toLayer": [
+				27
+			]
+		},
+		"op_27": {
+			"operator_title": "SimpleRNN",
+			"zero_padding_layer": "",
+			"activation": "softmax",
+			"tb_button_5": "on",
+			"go_backwards": "true",
+			"unroll": "true",
+			"regularizer_for_input_weight": "None",
+			"dropout_rate_for_grate": "0",
+			"input_length": "None",
+			"stateful": "true",
+			"input_dimention": "None",
+			"consume_less": "CPU",
+			"weights": "None",
+			"bias_regularizer": "None",
+			"return_sequence": "true",
+			"initialization_for_inner_cells": "uniform",
+			"weight_initialization_function": "zero",
+			"regularizer_for_recurrent_weight": "None",
+			"drop_rate": "0",
+			"toLayer": [
+				28,
+				29,
+				30,
+				31
+			]
+		},
+		"op_28": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				32
+			]
+		},
+		"op_29": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				33
+			]
+		},
+		"op_30": {
+			"operator_title": "MaxPool2D",
+			"strides": "(,)",
+			"dimention_ordering": "default",
+			"number_of_filters": "",
+			"border_mode": "valid",
+			"tb_button_5": "on",
+			"toLayer": [
+				34
+			]
+		},
+		"op_31": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				35
+			]
+		},
+		"op_32": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				35
+			]
+		},
+		"op_33": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				35
+			]
+		},
+		"op_34": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				35
+			]
+		},
+		"op_35": {
+			"operator_title": "Concatenate",
+			"toLayer": [
+				36,
+				37,
+				38,
+				39
+			]
+		},
+		"op_36": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				40
+			]
+		},
+		"op_37": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				41
+			]
+		},
+		"op_38": {
+			"operator_title": "MaxPool2D",
+			"strides": "(,)",
+			"dimention_ordering": "default",
+			"number_of_filters": "",
+			"border_mode": "valid",
+			"tb_button_5": "on",
+			"toLayer": [
+				42
+			]
+		},
+		"op_39": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				43
+			]
+		},
+		"op_40": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				43
+			]
+		},
+		"op_41": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				43
+			]
+		},
+		"op_42": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				43
+			]
+		},
+		"op_43": {
+			"operator_title": "Concatenate",
+			"toLayer": [
+				44,
+				45,
+				46,
+				47
+			]
+		},
+		"op_44": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				48
+			]
+		},
+		"op_45": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				49
+			]
+		},
+		"op_46": {
+			"operator_title": "MaxPool2D",
+			"strides": "(,)",
+			"dimention_ordering": "default",
+			"number_of_filters": "",
+			"border_mode": "valid",
+			"tb_button_5": "on",
+			"toLayer": [
+				50
+			]
+		},
+		"op_47": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				51
+			]
+		},
+		"op_48": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				51
+			]
+		},
+		"op_49": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				51
+			]
+		},
+		"op_50": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				51
+			]
+		},
+		"op_51": {
+			"operator_title": "Concatenate",
+			"toLayer": [
+				52,
+				53,
+				54,
+				55
+			]
+		},
+		"op_52": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				56
+			]
+		},
+		"op_53": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				57
+			]
+		},
+		"op_54": {
+			"operator_title": "MaxPool2D",
+			"strides": "(,)",
+			"dimention_ordering": "default",
+			"number_of_filters": "",
+			"border_mode": "valid",
+			"tb_button_5": "on",
+			"toLayer": [
+				58
+			]
+		},
+		"op_55": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				59
+			]
+		},
+		"op_56": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				59
+			]
+		},
+		"op_57": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				59
+			]
+		},
+		"op_58": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				59
+			]
+		},
+		"op_59": {
+			"operator_title": "Concatenate",
+			"toLayer": [
+				60,
+				61,
+				62,
+				63
+			]
+		},
+		"op_60": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				64
+			]
+		},
+		"op_61": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				65
+			]
+		},
+		"op_62": {
+			"operator_title": "MaxPool2D",
+			"strides": "(,)",
+			"dimention_ordering": "default",
+			"number_of_filters": "",
+			"border_mode": "valid",
+			"tb_button_5": "on",
+			"toLayer": [
+				66
+			]
+		},
+		"op_63": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				67
+			]
+		},
+		"op_64": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				67
+			]
+		},
+		"op_65": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				67
+			]
+		},
+		"op_66": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				67
+			]
+		},
+		"op_67": {
+			"operator_title": "Concatenate",
+			"toLayer": [
+				68
+			]
+		},
+		"op_68": {
+			"operator_title": "MaxPool2D",
+			"strides": "(,)",
+			"dimention_ordering": "default",
+			"number_of_filters": "",
+			"border_mode": "valid",
+			"tb_button_5": "on",
+			"toLayer": [
+				69,
+				70,
+				71,
+				72
+			]
+		},
+		"op_69": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				73
+			]
+		},
+		"op_70": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				74
+			]
+		},
+		"op_71": {
+			"operator_title": "MaxPool2D",
+			"strides": "(,)",
+			"dimention_ordering": "default",
+			"number_of_filters": "",
+			"border_mode": "valid",
+			"tb_button_5": "on",
+			"toLayer": [
+				75
+			]
+		},
+		"op_72": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				76
+			]
+		},
+		"op_73": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				76
+			]
+		},
+		"op_74": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				76
+			]
+		},
+		"op_75": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				76
+			]
+		},
+		"op_76": {
+			"operator_title": "Concatenate",
+			"toLayer": [
+				77,
+				78,
+				79,
+				80
+			]
+		},
+		"op_77": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				81
+			]
+		},
+		"op_78": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				82
+			]
+		},
+		"op_79": {
+			"operator_title": "MaxPool2D",
+			"strides": "(,)",
+			"dimention_ordering": "default",
+			"number_of_filters": "",
+			"border_mode": "valid",
+			"tb_button_5": "on",
+			"toLayer": [
+				83
+			]
+		},
+		"op_80": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				84
+			]
+		},
+		"op_81": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				84
+			]
+		},
+		"op_82": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				84
+			]
+		},
+		"op_83": {
+			"operator_title": "Convolution2D",
+			"regularizer_for_input_weight": "None",
+			"number_of_filters": "64",
+			"activity_regularizer": "None",
+			"tb_button_3": "on",
+			"border_mode": "valid",
+			"weight_constraint": "None",
+			"input_shape": "relu",
+			"weight_initialization_function": "zero",
+			"dimension_ordering": "default",
+			"weight": "None",
+			"subsampling": "(1,1)",
+			"filter_columns": "3",
+			"bias_regularizer": "None",
+			"bias": "true",
+			"filter_rows": "3",
+			"toLayer": [
+				84
+			]
+		},
+		"op_84": {
+			"operator_title": "Concatenate",
+			"toLayer": [
+				85
+			]
+		},
+		"op_85": {
+			"operator_title": "AveragePooling2D",
+			"pool_size": "",
+			"tb_button_3": "on",
+			"strides": "None",
+			"border_mode": "valid",
+			"dimension_ordering": "default",
+			"toLayer": [
+				86
+			]
+		},
+		"op_86": {
+			"operator_title": "Flatten",
+			"toLayer": [
+				87
+			]
+		},
+		"op_87": {
+			"operator_title": "Dropout",
+			"seed": "None",
+			"number_of_filters": "0.5",
+			"tb_button_6": "on",
+			"noise_shape": "None",
+			"toLayer": [
+				88
+			]
+		},
+		"op_88": {
+			"operator_title": "Dense",
+			"input_dimention": "None",
+			"input_shape": "relu",
+			"bias_constraint": "None",
+			"weight_initialization_function": "zero",
+			"activitiy_regularizer": "None",
+			"number_of_filters": "4096",
+			"weight": "None",
+			"weights": "None",
+			"bias_regularizer": "None",
+			"bias": "None",
+			"regularizer_for_input_wegiht": "None",
+			"tb_button_2": "on",
+			"toLayer": [
+				89
+			]
+		},
+		"op_89": {
+			"operator_title": "Dense",
+			"input_dimention": "None",
+			"input_shape": "relu",
+			"bias_constraint": "None",
+			"weight_initialization_function": "zero",
+			"activitiy_regularizer": "None",
+			"number_of_filters": "4096",
+			"weight": "None",
+			"weights": "None",
+			"bias_regularizer": "None",
+			"bias": "None",
+			"regularizer_for_input_wegiht": "None",
+			"tb_button_2": "on",
+			"toLayer": []
+		}
+	},
+	"articulable_subgraph": {
+		"0": [
+			9,
+			10,
+			11,
+			12,
+			13,
+			14,
+			15,
+			16,
+			17
+		],
+		"1": [
+			17,
+			18,
+			19,
+			20,
+			21,
+			22,
+			23,
+			24,
+			25
+		],
+		"2": [
+			35,
+			36,
+			37,
+			38,
+			39,
+			40,
+			41,
+			42,
+			43
+		]
+	},
+	"abstract_graph": [
+		{
+			"index_articulableSubgraph": 0,
+			"index_outerGraph": -1,
+			"depth": 0,
+			"subgraph": [
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17
+			]
+		},
+		{
+			"index_articulableSubgraph": 1,
+			"index_outerGraph": -1,
+			"depth": 0,
+			"subgraph": [
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25
+			]
+		},
+		{
+			"index_articulableSubgraph": 1,
+			"index_outerGraph": -1,
+			"depth": 0,
+			"subgraph": [
+				27,
+				32,
+				33,
+				34,
+				28,
+				29,
+				30,
+				31,
+				35
+			]
+		},
+		{
+			"index_articulableSubgraph": 2,
+			"index_outerGraph": -1,
+			"depth": 0,
+			"subgraph": [
+				35,
+				36,
+				37,
+				38,
+				39,
+				40,
+				41,
+				42,
+				43
+			]
+		},
+		{
+			"index_articulableSubgraph": 2,
+			"index_outerGraph": -1,
+			"depth": 0,
+			"subgraph": [
+				43,
+				44,
+				45,
+				46,
+				47,
+				48,
+				49,
+				50,
+				51
+			]
+		},
+		{
+			"index_articulableSubgraph": 2,
+			"index_outerGraph": -1,
+			"depth": 0,
+			"subgraph": [
+				51,
+				52,
+				53,
+				54,
+				55,
+				56,
+				57,
+				58,
+				59
+			]
+		},
+		{
+			"index_articulableSubgraph": 2,
+			"index_outerGraph": -1,
+			"depth": 0,
+			"subgraph": [
+				59,
+				64,
+				65,
+				66,
+				60,
+				61,
+				62,
+				63,
+				67
+			]
+		},
+		{
+			"index_articulableSubgraph": 2,
+			"index_outerGraph": -1,
+			"depth": 0,
+			"subgraph": [
+				68,
+				69,
+				70,
+				71,
+				72,
+				73,
+				74,
+				75,
+				76
+			]
+		},
+		{
+			"index_articulableSubgraph": 2,
+			"index_outerGraph": -1,
+			"depth": 0,
+			"subgraph": [
+				76,
+				77,
+				78,
+				79,
+				80,
+				81,
+				82,
+				83,
+				84
+			]
+		}
+	]
+}

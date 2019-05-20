@@ -277,11 +277,48 @@ class FileUploadView(View):
 
         if form.is_valid():
             form.save('media/myJSON/')
+<<<<<<< HEAD
+            documents = Document.objects.last()                     # get the last document which means uploaded one lastly.
+            data = createAndInsert_json(documents.document)         # 1. json --> diagram
+            # data = code2diagram(documents.document)               # 2. exeScript --> diagram
+            file_name = str(documents.document)[0:-5]
+
+            # data = createAndInsert_json(documents.document)     # document를 추가하는 비지니스로직 수행
+            
+            # Parse JSON file to JSON dump
+            # return context(json dump)
+            # return redirect(self.success_url)
+            # print(json.dumps(data))
+            # test = str(data)
+            return render(request, self.template_name, {'foo': json.dumps(data), "file_name": file_name})
+        else:
+            return render(request, self.template_name, {'form': form})
+
+class Testview(View):
+    form_class = DocumentForm               # form 클래스 설정
+    success_url = reverse_lazy('model_base')    # 성공시 'upload'라는 alias를 갖는 url로 이동
+    template_name = 'myTest.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'form':form})
+
+    def post(self, request, *args, **kwargs):
+        form = DocumentForm(request.POST, request.FILES, auto_id=False)
+
+        if form.is_valid():
+            form.save('media/myJSON/')
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             documents = Document.objects.last()
             data = code2diagram(documents.document)
 
             # data = createAndInsert_json(documents.document)     # document를 추가하는 비지니스로직 수행
+<<<<<<< HEAD
+
+=======
             
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             # Parse JSON file to JSON dump
             # return context(json dump)
             # return redirect(self.success_url)

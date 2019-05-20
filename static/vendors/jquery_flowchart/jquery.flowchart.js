@@ -13,8 +13,13 @@ $(function () {
             defaultSelectedLinkColor: 'black',
             linkWidth: 10,
             grid: 20,
+<<<<<<< HEAD
+            multipleLinksOnOutput: true,
+            multipleLinksOnInput: true,
+=======
             multipleLinksOnOutput: false,
             multipleLinksOnInput: false,
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             linkVerticalDecal: 0,
             onOperatorSelect: function (operatorId) {
                 return true;
@@ -63,6 +68,11 @@ $(function () {
         selectedLinkId: null,
         positionRatio: 1,
         globalId: null,
+<<<<<<< HEAD
+        linkColor: ['#c71e1eb5', '#c7c40fc9', '#109510c9', '#a42e7ec9', '#6642a9d1'],
+        linkColorCount: 0,
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
 
         // the constructor
         _create: function () {
@@ -138,10 +148,18 @@ $(function () {
 
 
             this.objs.layers.operators.on('pointerdown mousedown touchstart', '.flowchart-operator', function (e) {
+<<<<<<< HEAD
+                console.log("gg");
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
                 e.stopImmediatePropagation();
             });
 
             this.objs.layers.operators.on('click', '.flowchart-operator', function (e) {
+<<<<<<< HEAD
+                console.log("ss");
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
                 if ($(e.target).closest('.flowchart-operator-connector').length == 0) {
                     self.selectOperator($(this).data('operator_id'));
                 }
@@ -150,6 +168,10 @@ $(function () {
             this.objs.layers.operators.on('click', '.flowchart-operator-connector', function () {
                 var $this = $(this);
                 if (self.options.canUserEditLinks) {
+<<<<<<< HEAD
+
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
                     self._connectorClicked($this.closest('.flowchart-operator').data('operator_id'), $this.data('connector'), $this.data('sub_connector'), $this.closest('.flowchart-operator-connector-set').data('connector_type'));
                 }
             });
@@ -202,11 +224,56 @@ $(function () {
             this.redrawLinksLayer();
         },
 
+<<<<<<< HEAD
+        addLink2: function (linkData) {
+=======
         addLink: function (linkData) {
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             while (typeof this.data.links[this.linkNum] != 'undefined') {
                 this.linkNum++;
             }
 
+<<<<<<< HEAD
+            this.createLink(this.linkNum++, linkData);
+            console.log("this.linkNum : ", this.linkNum);
+
+            // this.createLink(linkData.fromOperator, linkData);
+            return this.linkNum;
+        },
+
+        // addLink: function (linkData) {
+        //     while (typeof this.data.links[this.linkNum] != 'undefined') {
+        //         this.linkNum++;
+        //     }
+        //
+        //     this.createLink(this.linkNum, linkData);
+        //     return this.linkNum;
+        // },
+        addLink: function (linkId, linkData) {
+            // console.log("linkId : ", linkId);
+            // while (typeof this.data.links[this.linkNum] != 'undefined') {
+            //     this.linkNum++;
+            // }
+
+            // var linkData = {
+            //     fromOperator: from_tempOperatorId,
+            //     fromConnector: "output_" + from_tempOperatorId,
+            //     fromSubConnetor: 0,
+            //     toOperator: to_tempOperatorId,
+            //     toConnector: "input_" + to_tempOperatorId,
+            //     toSubConnector: 0
+            // };
+
+            this.createLink(linkId, linkData);
+            this.linkNum++;
+            return this.linkNum++;
+        },
+
+        createLink: function (linkId, linkDataOriginal) {
+            var linkData = $.extend(true, {}, linkDataOriginal);
+            if (!this.callbackEvent('linkCreate', [linkId, linkData])) {
+                console.log("exception!");
+=======
             this.createLink(this.linkNum, linkData);
             return this.linkNum;
         },
@@ -214,6 +281,7 @@ $(function () {
         createLink: function (linkId, linkDataOriginal) {
             var linkData = $.extend(true, {}, linkDataOriginal);
             if (!this.callbackEvent('linkCreate', [linkId, linkData])) {
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
                 return;
             }
 
@@ -242,6 +310,12 @@ $(function () {
                     }
                 }
             }
+<<<<<<< HEAD
+            this.data.links[linkId] = linkDataOriginal;////////////////////////////////////////////////////////////////// 254라인꺼
+            this._autoCreateSubConnector(linkData.fromOperator, linkData.fromConnector, 'outputs', fromSubConnector);
+            this._autoCreateSubConnector(linkData.toOperator, linkData.toConnector, 'inputs', toSubConnector);
+            this._drawLink(linkId);
+=======
             this.data.links[linkId] = linkData;////////////////////////////////////////////////////////////////// 254라인꺼
 
             this._autoCreateSubConnector(linkData.fromOperator, linkData.fromConnector, 'outputs', fromSubConnector);
@@ -249,6 +323,7 @@ $(function () {
 
             this._drawLink(linkId);
 
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             this.callbackEvent('afterChange', ['link_create']);
         },
 
@@ -264,6 +339,10 @@ $(function () {
         },
 
         redrawLinksLayer: function () {
+<<<<<<< HEAD
+            console.log("asdfasfasf");
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             this._clearLinksLayer();
             for (var linkId in this.data.links) {
                 if (this.data.links.hasOwnProperty(linkId)) {
@@ -384,7 +463,41 @@ $(function () {
             linkData.internal.els.rect = shape_rect;
 
             this._refreshLinkPositions(linkId);
+<<<<<<< HEAD
+
+            // console.log("fromT, toT : ", fromToken, toToken);
+            let element_from = document.getElementById(linkData.fromOperator);
+            let element_to = document.getElementById(linkData.toOperator);
+            if (element_from.getAttribute('type') != null && element_to.getAttribute('type') != null){
+                // this link is in articulable subgraph --> colorize specific color
+                if (element_from.getAttribute('type') != element_to.getAttribute('type')) {
+                    // each layers are different type --> normal color
+                    this.uncolorizeLink(linkId);
+                } else {
+                    // each layers are same type --> specific color
+                    let token_from = linkData.fromOperator.split('_');
+                    let token_to = linkData.toOperator.split('_');
+
+                    if (token_from[token_from.length - 2] == token_to[token_to.length - 2]) {
+                        let linkColor = this.linkColor[element_from.getAttribute('type')];
+                        this.colorizeLink_module(linkId, linkColor);
+                    } else {
+                        this.uncolorizeLink(linkId);
+                    }
+                }
+
+            } else {
+                this.uncolorizeLink(linkId);
+            }
+            // this.uncolorizeLink(linkId);
+            // console.log("linkData : ", linkData);
+        },
+
+        colorizeLink_module: function (linkId, color) {
+            this.colorizeLink(linkId, color);
+=======
             this.uncolorizeLink(linkId);
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
         },
 
         _getSubConnectors: function (linkData) {
@@ -525,6 +638,10 @@ $(function () {
             for (var key_i in infos.inputs) {
                 if (infos.inputs.hasOwnProperty(key_i)) {
                     addConnector(key_i, infos.inputs[key_i], $operator_inputs, 'inputs');
+<<<<<<< HEAD
+
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
                 }
             }
 
@@ -568,6 +685,36 @@ $(function () {
             return fullElement.operator;
         },
 
+<<<<<<< HEAD
+        // addOperator: function (operatorData, operatorNum) {
+        //     // console.log("this.operatorNum : ", this.operatorNum);
+        //     // console.log("this.data.operators[this.operatorNum] : ", this.data.operators[this.operatorNum]);
+        //     // while (typeof this.data.operators[this.operatorNum] != 'undefined') {
+        //     //     this.operatorNum++;
+        //     // }
+        //     this.operatorNum = operatorNum;
+        //     this.createOperator(operatorNum, operatorData);
+        //     return operatorNum;
+        // },
+        // addOperator: function (operatorData) {
+        //     while (typeof this.data.operators[this.operatorNum] != 'undefined') {
+        //         this.operatorNum++;
+        //     }
+        //
+        //     this.createOperator(this.operatorNum, operatorData);
+        //     return this.operatorNum;
+        // },
+        addOperator: function (operatorId, operatorData, isEdge, type) {
+            // while (typeof this.data.operators[this.operatorNum] != 'undefined') {
+            //     this.operatorNum++;
+            // }
+
+            this.createOperator(operatorId, operatorData, isEdge, type);
+            return operatorId;
+        },
+
+        createOperator: function (operatorId, operatorData, isEdge, type) {
+=======
         addOperator: function (operatorData) {
             while (typeof this.data.operators[this.operatorNum] != 'undefined') {
                 this.operatorNum++;
@@ -578,14 +725,26 @@ $(function () {
         },
 
         createOperator: function (operatorId, operatorData) {
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             operatorData.internal = {};
             this._refreshInternalProperties(operatorData);
 
             var fullElement = this._getOperatorFullElement(operatorData);
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             if (!this.callbackEvent('operatorCreate', [operatorId, operatorData, fullElement])) {
                 return false;
             }
 
+<<<<<<< HEAD
+            // console.log("operatorData :", operatorData);
+
+
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             var grid = this.options.grid;
 
             if (grid) {
@@ -593,12 +752,73 @@ $(function () {
                 operatorData.left = Math.round(operatorData.left / grid) * grid;
             }
 
+<<<<<<< HEAD
+            var title = operatorData.internal.properties.title;
+
+            // if the element is a module, then add '+' button into them.
+            if (title.substr(0, 6) == 'Module') {
+                var div = document.createElement("div");
+                var a = document.createElement("a");
+                var i = document.createElement("i");
+                i.setAttribute("class", "glyphicon glyphicon-plus");
+                a.setAttribute("class", "plus_button");
+                a.setAttribute("operatorId", operatorId);
+                i.setAttribute("style", "padding-left : 10px; float:right");
+                div.setAttribute("style", "float:right");
+                div.appendChild(a);
+                a.appendChild(i);
+
+                fullElement.operator[0].firstChild.appendChild(div);
+            }
+            // console.log("fullElement.operator[0] : ", fullElement.operator[0]);
+            // if the element is a fan-in or fan-out, then add '-' button into them.
+            if (isEdge) {
+                let div = document.createElement("div");
+                let a = document.createElement("a");
+                let i = document.createElement("i");
+                i.setAttribute("class", "glyphicon glyphicon-minus");
+                a.setAttribute("class", "minus_button");
+                a.setAttribute("operatorId", operatorId);
+                i.setAttribute("style", "padding-left : 10px; float:right");
+                div.setAttribute("style", "float:right");
+                div.appendChild(a);
+                a.appendChild(i);
+
+                // let $operator = $(fullElement.operator[0]);
+                // $operator.addClass('ui-draggable');
+                // console.log("$operator : ", $operator);
+                // console.log("fullElement.operator[0] : ", fullElement.operator[0]);
+                fullElement.operator.attr('isend', true);
+                fullElement.operator[0].firstChild.appendChild(div);
+                // fullElement.operator.attr('class', 'flowchart-operator flowchart-default-operator ui-draggable');
+                // console.log("fullElement.operator[0] : ", fullElement.operator[0]);
+
+                // console.log("bb:", fullElement.operator[0]);
+            }
+
+            fullElement.operator.appendTo(this.objs.layers.operators);
+            // console.log("this.objs.layers.operators : ", this.objs.layers.operators);
+            fullElement.operator.css({top: operatorData.top, left: operatorData.left});
+            fullElement.operator.data('operator_id', operatorId);
+
+            // if (operatorData.properties.title.substring(0, 6) == "Module") {
+            //     console.log("fullElement : ", fullElement.operator);
+            //     fullElement.operator.attr("onclick", "open(1);");
+            // }
+            /////// Assign element id to dragged operator.
+            fullElement.operator.attr('id', operatorId);
+            if (type != undefined) {
+                fullElement.operator.attr('type', type);
+            }
+
+=======
             fullElement.operator.appendTo(this.objs.layers.operators);
             fullElement.operator.css({top: operatorData.top, left: operatorData.left});
             fullElement.operator.data('operator_id', operatorId);
 
             /////// Assign element id to dragged operator.
             fullElement.operator.attr('id', operatorId);
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
 
             this.data.operators[operatorId] = operatorData;
             this.data.operators[operatorId].internal.els = fullElement;
@@ -657,7 +877,12 @@ $(function () {
                             ui.offset.top = Math.round(ui.position.top + elementOffset.top);
                             fullElement.operator.css({left: ui.position.left, top: ui.position.top});
                         }
+<<<<<<< HEAD
+
+                        operatorChangedPosition(operatorId, ui.position);
+=======
                         operatorChangedPosition($(this).data('operator_id'), ui.position);
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
                     },
                     stop: function (e, ui) {
                         self._unsetTemporaryLink();
@@ -678,6 +903,28 @@ $(function () {
             return fullElement.operator;
         },
 
+<<<<<<< HEAD
+        test: function() {
+            console.log("function call1");
+        },
+
+        myMoveOperator: function (operator_id, pos) {
+            let $operator = $("#" + operator_id);
+
+            $operator.css(pos);
+
+            for (var linkId in this.data.links) {
+                if (this.data.links.hasOwnProperty(linkId)) {
+                    var linkData = this.data.links[linkId];
+                    if (linkData.fromOperator == operator_id || linkData.toOperator == operator_id) {
+                        this._refreshLinkPositions(linkId);
+                    }
+                }
+            }
+        },
+
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
         _connectorClicked: function (operator, connector, subConnector, connectorCategory) {
             if (connectorCategory == 'outputs') {
                 var d = new Date();
@@ -705,7 +952,11 @@ $(function () {
                     toSubConnector: subConnector
                 };
 
+<<<<<<< HEAD
+                this.addLink2(linkData);
+=======
                 this.addLink(linkData);
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
                 this._unsetTemporaryLink();
 
             }
@@ -714,7 +965,11 @@ $(function () {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+<<<<<<< HEAD
+        myLinkDiagram : function(paramLinkData, linkId) {
+=======
         myLinkDiagram : function(paramLinkData) {
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             // var linkData = {
             //     fromOperator: 0,
             //     fromConnector: "output_0",
@@ -725,8 +980,16 @@ $(function () {
             // };
             var linkData = paramLinkData;
 
+<<<<<<< HEAD
+            let linkNumber = this.addLink(linkData, linkId);
+            // this.addLink(linkData);
+            this._unsetTemporaryLink();
+
+            return linkNumber;
+=======
             this.addLink(linkData);
             this._unsetTemporaryLink();
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
         },
         
         _unsetTemporaryLink: function () {
@@ -786,6 +1049,10 @@ $(function () {
         },
 
         selectOperator: function (operatorId) {
+<<<<<<< HEAD
+            // event listener :: if 'Backspace' or 'Delete' is pressed, then delete this link.
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             if (!this.callbackEvent('operatorSelect', [operatorId])) {
                 return;
             }
@@ -857,13 +1124,44 @@ $(function () {
 
         _connecterMouseOver: function (linkId) {
             if (this.selectedLinkId != linkId) {
+<<<<<<< HEAD
+                // console.log("linkData : ", linkId, this.data.links[linkId]);
+                // console.log("numOfLinks : ", this.linkNum);
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
                 this.colorizeLink(linkId, this._shadeColor(this.getLinkMainColor(linkId), -0.4));
             }
         },
 
         _connecterMouseOut: function (linkId) {
             if (this.selectedLinkId != linkId) {
+<<<<<<< HEAD
+                let linkData = this.data.links[linkId];
+                let element_from = document.getElementById(linkData.fromOperator);
+                let element_to = document.getElementById(linkData.toOperator);
+
+                if (element_from.getAttribute('type') != null && element_to.getAttribute('type') != null) {
+                    if (element_from.getAttribute('type') != element_to.getAttribute('type')) {
+                        // each layers are different type --> normal color
+                        this.uncolorizeLink(linkId);
+                    } else {
+                        // each layers are same type --> specific color
+                        let token_from = linkData.fromOperator.split('_');
+                        let token_to = linkData.toOperator.split('_');
+
+                        if (token_from[token_from.length - 2] == token_to[token_to.length - 2]) {
+                            let linkColor = this.linkColor[element_from.getAttribute('type')];
+                            this.colorizeLink_module(linkId, linkColor);
+                        } else {
+                            this.uncolorizeLink(linkId);
+                        }
+                    }
+                } else {
+                    this.uncolorizeLink(linkId);
+                }
+=======
                 this.uncolorizeLink(linkId);
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             }
         },
 
@@ -872,19 +1170,72 @@ $(function () {
                 if (!this.callbackEvent('linkUnselect', [])) {
                     return;
                 }
+<<<<<<< HEAD
+
+                var linkData = this.data.links[this.selectedLinkId];
+                let linkId = this.selectedLinkId;
+
+                // let linkData = this.data.links[linkId];
+                let element_from = document.getElementById(linkData.fromOperator);
+                let element_to = document.getElementById(linkData.toOperator);
+
+                if (element_from.getAttribute('type') != null && element_to.getAttribute('type') != null) {
+                    if (element_from.getAttribute('type') != element_to.getAttribute('type')) {
+                        // each layers are different type --> normal color
+                        this.uncolorizeLink(linkId);
+                    } else {
+                        // each layers are same type --> specific color
+                        let token_from = linkData.fromOperator.split('_');
+                        let token_to = linkData.toOperator.split('_');
+
+                        if (token_from[token_from.length - 2] == token_to[token_to.length - 2]) {
+                            let linkColor = this.linkColor[element_from.getAttribute('type')];
+                            this.colorizeLink_module(linkId, linkColor);
+                        } else {
+                            this.uncolorizeLink(linkId);
+                        }
+                    }
+                } else {
+                    this.uncolorizeLink(linkId);
+                }
+                // this.uncolorizeLink(this.selectedLinkId, this.options.defaultSelectedLinkColor);
+=======
                 this.uncolorizeLink(this.selectedLinkId, this.options.defaultSelectedLinkColor);
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
                 this.selectedLinkId = null;
             }
         },
 
         selectLink: function (linkId) {
+<<<<<<< HEAD
+            // event listener :: if 'Backspace' or 'Delete' is pressed, then delete this link.
+            // let realThis = this;
+            // document.addEventListener('keyup', function(event) {
+            //     if (event.keyCode == '8' || event.keyCode == '46') {
+            //         // delete this link.
+            //         realThis.deleteLink(linkId);
+            //         // this.unselectLink();
+            //         // if (!this.callbackEvent('linkSelect', [linkId])) {
+            //         //     return;
+            //         // }
+            //         return;
+            //     }
+            // }, true);
+
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             this.unselectLink();
             if (!this.callbackEvent('linkSelect', [linkId])) {
                 return;
             }
             this.unselectOperator();
             this.selectedLinkId = linkId;
+<<<<<<< HEAD
+
+            this.colorizeLink(linkId, '#000');
+=======
             this.colorizeLink(linkId, this.options.defaultSelectedLinkColor);
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
         },
 
         deleteOperator: function (operatorId) {
@@ -892,10 +1243,18 @@ $(function () {
         },
 
         _deleteOperator: function (operatorId, replace) {
+<<<<<<< HEAD
+            // console.log("_deleteOperator.operatorId : ", operatorId);
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             if (!this.callbackEvent('operatorDelete', [operatorId, replace])) {
                 return false;
             }
             if (!replace) {
+<<<<<<< HEAD
+                // console.log("this.data.links : ", this.data.links);
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
                 for (var linkId in this.data.links) {
                     if (this.data.links.hasOwnProperty(linkId)) {
                         var currentLink = this.data.links[linkId];
@@ -1022,6 +1381,11 @@ $(function () {
         },
 
         getOperatorTitle: function (operatorId) {
+<<<<<<< HEAD
+            // console.log("operatorId :", operatorId );
+            // console.log("internal : ", this.data.operators[operatorId].internal);
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             return this.data.operators[operatorId].internal.properties.title;
         },
 
@@ -1066,6 +1430,10 @@ $(function () {
         },
 
 
+<<<<<<< HEAD
+        setOperatorData: function (operatorId, operatorData, isEdge) {
+            console.log("Aaa");
+=======
 
 
 
@@ -1074,6 +1442,7 @@ $(function () {
 
 
         setOperatorData: function (operatorId, operatorData) {
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             var infos = this.getOperatorCompleteData(operatorData);
             for (var linkId in this.data.links) {
                 if (this.data.links.hasOwnProperty(linkId)) {
@@ -1085,7 +1454,13 @@ $(function () {
                 }
             }
             this._deleteOperator(operatorId, true);
+<<<<<<< HEAD
+
+            // console.log("operatorData in setOperatorDat is : ", operatorData);
+            this.createOperator(operatorId, operatorData, isEdge);
+=======
             this.createOperator(operatorId, operatorData);
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             this.redrawLinksLayer();
             this.callbackEvent('afterChange', ['operator_data_change']);
         },

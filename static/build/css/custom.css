@@ -888,7 +888,11 @@ a:focus {
 .panel_toolbox>li>a {
     padding: 5px;
     color: #C5C7CB;
+<<<<<<< HEAD
+    font-size: 25px
+=======
     font-size: 14px
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
 }
 .panel_toolbox>li>a:hover {
     background: #F5F7FA
@@ -4275,4 +4279,14 @@ body > div.container.body > div.right_col > div > div > div > div > div.x_conten
 /* model - input, select */
 input, select {
     width:100%;
+<<<<<<< HEAD
+}
+
+
+#drawing_sheet > div.x_panel > div.x_title > div:nth-child(1) {
+    /* The name of the model */
+    font-size: 30px;
+    position: absolute;
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
 }
