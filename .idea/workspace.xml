@@ -7,9 +7,7 @@
     <bookmark url="file://$PROJECT_DIR$/modeling/templates/model.html" line="1333" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6232c0f7-fb44-4beb-9713-374dcfb390d3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="6232c0f7-fb44-4beb-9713-374dcfb390d3" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,7 +32,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modeling/templates/model.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2970">
+            <state relative-caret-position="1103">
               <caret line="1653" lean-forward="true" selection-start-line="1653" selection-end-line="1653" />
               <folding>
                 <element signature="e#25474#57651#0#HTML" />
@@ -45,7 +43,6 @@
                 <element signature="e#64191#65964#0#HTML" />
                 <element signature="e#66029#68276#0#HTML" />
                 <element signature="e#68400#71172#0#HTML" />
-                <element signature="e#71240#77724#0#HTML" />
                 <element signature="e#77261#83685#0#HTML" />
                 <element signature="e#78025#78065#0#HTML" />
                 <element signature="e#82470#82910#0#HTML" />
@@ -340,9 +337,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="-9" />
-    <option name="y" value="1" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="205" />
+    <option name="y" value="16" />
     <option name="width" value="1399" />
     <option name="height" value="1047" />
   </component>
@@ -451,7 +448,7 @@
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558336424092" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558339977142" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
@@ -566,16 +563,15 @@
       <workItem from="1555291358938" duration="94108000" />
       <workItem from="1556230428722" duration="53401000" />
       <workItem from="1557454310811" duration="50336000" />
-      <workItem from="1558069325528" duration="28594000" />
+      <workItem from="1558069325528" duration="28973000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="625532000" />
+    <option name="totallyTimeSpent" value="625911000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="1" width="1399" height="1047" extended-state="1" />
-    <editor active="true" />
+    <frame x="205" y="16" width="1399" height="1047" extended-state="0" />
     <layout>
       <window_info id="Image Layers" order="0" />
       <window_info id="Capture Tool" order="1" />
@@ -1065,7 +1061,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modeling/templates/model.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2970">
+        <state relative-caret-position="1103">
           <caret line="1653" lean-forward="true" selection-start-line="1653" selection-end-line="1653" />
           <folding>
             <element signature="e#25474#57651#0#HTML" />
@@ -1076,7 +1072,6 @@
             <element signature="e#64191#65964#0#HTML" />
             <element signature="e#66029#68276#0#HTML" />
             <element signature="e#68400#71172#0#HTML" />
-            <element signature="e#71240#77724#0#HTML" />
             <element signature="e#77261#83685#0#HTML" />
             <element signature="e#78025#78065#0#HTML" />
             <element signature="e#82470#82910#0#HTML" />
