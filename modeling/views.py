@@ -277,6 +277,7 @@ class FileUploadView(View):
 
         if form.is_valid():
             form.save('media/myJSON/')
+<<<<<<< HEAD
             documents = Document.objects.last()                     # get the last document which means uploaded one lastly.
             data = createAndInsert_json(documents.document)         # 1. json --> diagram
             # data = code2diagram(documents.document)               # 2. exeScript --> diagram
@@ -307,11 +308,17 @@ class Testview(View):
 
         if form.is_valid():
             form.save('media/myJSON/')
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             documents = Document.objects.last()
             data = code2diagram(documents.document)
 
             # data = createAndInsert_json(documents.document)     # document를 추가하는 비지니스로직 수행
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
             # Parse JSON file to JSON dump
             # return context(json dump)
             # return redirect(self.success_url)

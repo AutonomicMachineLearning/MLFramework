@@ -22,6 +22,9 @@ urlpatterns = [
     # Ajax access - training
     url('training/getTrainingResult/$', getTrainingResult),
     url('result/getResultAll/$', select_result),
+<<<<<<< HEAD
 
     url('modelTest/$', Testview.as_view())
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
 ]

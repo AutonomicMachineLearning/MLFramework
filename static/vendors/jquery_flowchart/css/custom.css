@@ -51,6 +51,7 @@ h4 {
   padding: 10px;
 }
 
+<<<<<<< HEAD
 .drawing_sheet {
   width: 20000px;
   height: 10000px;
@@ -58,6 +59,9 @@ h4 {
 }
 
 #example_8 {
+=======
+#example_9 {
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
   width: 2000px;
   height: 2000px;
   background: white;
@@ -376,6 +380,7 @@ ter;
   background: #E0E0E0;
 }
 
+<<<<<<< HEAD
 .flowchart-operator.selected {
   border: 8px solid #1ac2a2e8;
 }
@@ -396,3 +401,5 @@ ter;
   font-size: 18px;
   text-align: center
 }
+=======
+>>>>>>> 482236f8f85831ba515214b518197ad8b82f3b72
