@@ -79,7 +79,7 @@
                                                 <h4 class="panel-title">Pooling Layers</h4></a>
                                             <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
                                                 <div class="panel-body">
-                                                    <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPooling2D</div>
+                                                    <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPool2D</div>
                                                     <div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">AveragePooling2D</div>
                                                 </div>
                                             </div>
@@ -250,9 +250,9 @@
     <script src="/static/vendors/pnotify/dist/pnotify.nonblock.js?ver=1"></script>
 
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js?ver=1.3"></script>
-    <script src="/static/vendors/jquery_flowchart/jquery.flowchart.js?ver=3.5"></script>
-    <link rel="stylesheet" href="/static/vendors/jquery_flowchart/jquery.flowchart.min.css?ver=1.4">
-    <link rel="stylesheet" href="/static/vendors/jquery_flowchart/css/custom.css?ver=1.8">
+    <script src="/static/vendors/jquery_flowchart/jquery.flowchart.js?ver=4.42"></script>
+    <link rel="stylesheet" href="/static/vendors/jquery_flowchart/jquery.flowchart.min.css?ver=1.51">
+    <link rel="stylesheet" href="/static/vendors/jquery_flowchart/css/custom.css?ver=2.29">
     <script src="/static/vendors/jquery_flowchart/jquery.panzoom.min.js?ver=1.3"></script>
 
     <!-- draggable.js - Entire bundle -->
@@ -274,9 +274,15 @@
         var $container = $flowchart.parent();
         var operatorId = 0;
         var linkId = 0;
-
-
-
+        var json_data;
+        var module_index = 0;
+        let op_count = 0;
+        let isOperatorClicked = false;
+        let clickedOperatorId = -1;
+        let isLinkClicked = false;
+        let clickedLinkId = -1;
+        let aaa = "savasdafe!";
+        let currLinks = {};
 
         function getOperatorData($element) {
             //var title = $flowchart.flowchart('getOperatorTitle', operatorId);
@@ -305,11 +311,11 @@
             //   };
             // }
 
-            data.properties.inputs['input_' + operatorId] = {
+            data.properties.inputs['input_' + 0] = {
                 label: 'Input '
             };
 
-            data.properties.outputs['output_' + operatorId] = {
+            data.properties.outputs['output_' + 0] = {
                 label: 'Output '
             };
 
@@ -494,7 +500,7 @@
                         '<div>';
                     break;
 
-                case "MaxPooling2D":
+                case "MaxPool2D":
                     content += '<div id="' + parameterElementId + '" class="properties">' +
                         '<form id="' + picker + '">' +
                         '<lable for="title">title: </lable><br><input type="text" id="operator_title" disabled value="' + type + '"><br>' +
@@ -780,13 +786,16 @@
         var $draggableOperators = $('.draggable_operator');
 
         function drawOverall() {
+            let fileName = "{{ file_name }}";
             // #1. Initialize drwaing pannel.
             var sheetId = 'sheet_' + -1;
             var contents = '<div class="x_panel">' +
                 '<div class="x_title">' +
-                '<h2 id="">"Top Level" - GoogleNet/</h2>' +
+                '<div id="">Model :  ' + fileName + '/</div>' +
                 '<ul class="nav navbar-right panel_toolbox">' +
                 '<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>' +
+                '<li><a class="collapse-link"><i class="glyphicon glyphicon-info-sign"></i></a></li>' +
+                '<li><a class="save-link"><i class="glyphicon glyphicon-floppy-disk"></i></a></li>' +
                 '<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>' +
                 '<ul class="dropdown-menu" role="menu">' +
                 '<li><a href="#">Settings 1</a></li>' +
@@ -807,31 +816,46 @@
 
             $("#drawing_sheet").append(contents);
             var flowchartId = "#" + sheetId;
-            var $flowchart = $(flowchartId);
+            $flowchart = $(flowchartId);
 
             $container = $flowchart.parent();
 
             var cx = $flowchart.width() / 2;
             var cy = $flowchart.height() / 2;
-            var possibleZooms = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0];
-            var currentZoom = 9;
+            let zoomLevel = function () {
+                let temp = [];
+                let j = 0.4;
+                for (let i = 0; i < 100; i++) {
+                    k = j + 0.01 * i;
+                    temp.push(k);
+                }
+                return temp;
+            };
+            let possibleZooms = zoomLevel();
+            {#console.log("possibleZooms : ", possibleZooms[30]);#}
+            {#var possibleZooms = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8,0.81,0.82,0.83,0.84, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0];#}
+            var currentZoom = 60;
 
             // Panzoom initialization...
             $flowchart.panzoom();
 
             // Centering panzoom
-            $flowchart.panzoom('pan', -cx + $container.width() / 2, -cy + $container.height() / 2);
+            $flowchart.panzoom('pan', -548, -4802);
+            {#$flowchart.panzoom('pan', -cx + $container.width() / 2, -cy + $container.height() / 2);#}
             $container.on('mousewheel.focal', function (e) {
                 e.preventDefault();
                 var delta = (e.delta || e.originalEvent.wheelDelta) || e.originalEvent.detail;
                 var zoomOut = delta ? delta > 0 : e.originalEvent.deltaY > 0;
+                {#console.log("zoomOut : ", zoomOut);#}
+                {#console.log("delta : ", delta);#}
                 currentZoom = Math.max(0, Math.min(possibleZooms.length - 1, (currentZoom + (zoomOut * 2 - 1))));
-                console.log("currentZoom: ",currentZoom);
+                {#console.log("currentZoom11: ",currentZoom);#}
                 $flowchart.flowchart('setPositionRatio', possibleZooms[currentZoom]);
                 $flowchart.panzoom('zoom', possibleZooms[currentZoom], {
-                    animate: false,
+                    animate: true,
                     focal: e
                 });
+                {#console.log(-cx + $container.width() / 2, -cy + $container.height() / 2);#}
             });
 
             // 처음에 미리 생성할 노드들 설정
@@ -885,6 +909,12 @@
                 onLinkSelect: function (linkId) {
                     $linkProperties.show();
                     $linkColor.val($flowchart.flowchart('getLinkMainColor', linkId));
+
+                    {#console.log("onLinkSelect.linkId : ", linkId);#}
+                    // for event listener
+                    isLinkClicked = true;
+                    clickedLinkId = linkId;
+
                     return true;
                 },
                 onLinkUnselect: function () {
@@ -892,8 +922,58 @@
                     return true;
                 }
             });
+
             $flowchart.parent().siblings('.delete_selected_button').click(function () {
                 $flowchart.flowchart('deleteSelected');
+            });
+
+            $container = $flowchart.parent();
+            $draggableOperators = $('.draggable_operator');
+            $draggableOperators.draggable({
+                cursor: "move",
+                opacity: 0.7,
+
+                helper: 'clone',
+                appendTo: 'body',
+                zIndex: 1000,
+
+                helper: function (e) {
+                    console.log("this.");
+                    var $this = $(this);
+                    var data = getOperatorData($this);
+                    return $flowchart.flowchart('getOperatorElement', data);
+                },
+                stop: function (e, ui) {
+                    console.log("this2.");
+                    var $this = $(this);
+                    var elOffset = ui.offset;
+                    var containerOffset = $flowchart.offset();
+                    if (1) {
+
+                        var flowchartOffset = $flowchart.offset();
+
+                        var relativeLeft = elOffset.left - flowchartOffset.left;
+                        var relativeTop = elOffset.top - flowchartOffset.top;
+
+                        var positionRatio = $flowchart.flowchart('getPositionRatio');
+                        relativeLeft /= positionRatio;
+                        relativeTop /= positionRatio;
+
+                        var data = getOperatorData($this);
+                        data.left = relativeLeft;
+                        data.top = relativeTop;
+
+                        var newName = "layer_" + op_count;
+                        var $temp = $flowchart.flowchart('addOperator', newName, data);
+
+                        var type = $flowchart.flowchart("getOperatorTitle", newName);
+                        appendOperatorParam(newName, type);       // 우측 파라미터 설정 bar 태그 생성
+
+                        op_count++;
+                    } else {
+                        console.log("can not");
+                    }
+                }
             });
 
             $(document).on("click", flowchartId, function () {
@@ -938,13 +1018,13 @@
                             data.left = relativeLeft;
                             data.top = relativeTop;
 
-                            var newName = "0_" + operatorId;
+                            var newName = "layer_" + op_count;
                             var $temp = $flowchart.flowchart('addOperator', newName, data);
 
                             var type = $flowchart.flowchart("getOperatorTitle", newName);
                             appendOperatorParam(newName, type);       // 우측 파라미터 설정 bar 태그 생성
 
-                            operatorId++;
+                            op_count++;
                         } else {
                             console.log("can not");
                         }
@@ -957,6 +1037,10 @@
                  * onClick method for the sheet
                  *
                  */
+                // for event linstener
+                isOperatorClicked = true;
+                clickedOperatorId = this.id;
+
                 console.log("this : ", this.id);
                 if (this.id == 3) {
                     var element = document.getElementById("panel_0");
@@ -1003,13 +1087,12 @@
                             data.left = relativeLeft;
                             data.top = relativeTop;
 
-                            var newName = "0_" + operatorId;
+                            var newName = "layer_" + op_count;
                             var $temp = $flowchart.flowchart('addOperator', newName, data);
 
                             var type = $flowchart.flowchart("getOperatorTitle", newName);
                             appendOperatorParam(newName, type);       // 우측 파라미터 설정 bar 태그 생성
-
-                            operatorId++;
+                            op_count++;
                         } else {
                             console.log("can not");
                         }
@@ -1017,73 +1100,272 @@
                 });
             });
 
-            //////////////////////////////////////
-            var op_index = 0;
-            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">InputLayer</div>'));
-            var tempOperatorId = op_index++;
-            data.top = 940;
-            data.left = 140;
-            var $temp = $flowchart.flowchart('addOperator', tempOperatorId, data);  // 레이어 노드를 추가한다.
-            var type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+            $(document).on("click", '.plus_button', function () {
+                // if the 'plus button' is clicked, re-draw the graphs.
+                let count = 0;
 
-            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Convolution2D</div>'));
-            var tempOperatorId = op_index++;
-            data.top = 940;
-            data.left = 380;
-            var $temp = $flowchart.flowchart('addOperator', tempOperatorId, data);  // 레이어 노드를 추가한다.
-            var type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+                // redraw();
+                var operatorId = this.getAttribute('operatorId');
+                var $operator = $('#' + operatorId);
+                {#var operator = document.getElementById(this.getAttribute('operatorId'));#}
 
-            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Convolution2D</div>'));
-            var tempOperatorId = op_index++;
-            data.top = 940;
-            data.left = 620;
-            var $temp = $flowchart.flowchart('addOperator', tempOperatorId, data);  // 레이어 노드를 추가한다.
-            var type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+                // To get the operator's position...
+                var temp = $operator.attr('style').split('; ');
+                var position = {};
+                for (record of temp) {
+                    var key = record.split(': ')[0];
+                    var val;
+                    if (key == 'top') {
+                        val = document.getElementById(operatorId).offsetTop
+                        {#val = Number(record.split(': ')[1].substring(0, record.split(': ')[1].length - 2));#}
+                    } else {
+                        {#val = Number(record.split(': ')[1].substring(0, record.split(': ')[1].length - 3));#}
+                        val = document.getElementById(operatorId).offsetLeft;
+                    }
 
-            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1" onClick="open(Module_0);">Module_0</div>'));
-            var tempOperatorId = op_index++;
-            console.log("data : ", data);
-            data.top = 940;
-            data.left = 860;
-            var $temp = $flowchart.flowchart('addOperator', tempOperatorId, data);  // 레이어 노드를 추가한다.
-            var type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+                    position[key] = val;
 
-            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1" onClick="open(Module_1);">Module_1</div>'));
-            var tempOperatorId = op_index++;
-            data.top = 940;
-            data.left = 1100;
-            var $temp = $flowchart.flowchart('addOperator', tempOperatorId, data);  // 레이어 노드를 추가한다.
-            var type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+                    count++;    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                }
 
-            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPooling2D</div>'));
-            var tempOperatorId = op_index++;
-            data.top = 940;
-            data.left = 1340;
-            var $temp = $flowchart.flowchart('addOperator', tempOperatorId, data);  // 레이어 노드를 추가한다.
-            var type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+                var before = [];
+                var after = [];
+                for (var i of Object.keys($flowchart.flowchart('getData').links)) {
+                    if ($flowchart.flowchart('getData').links[i].toOperator == operatorId) {
+                        var temp = {};
+                        temp["index"] = i;
+                        temp["data"] = $flowchart.flowchart('getData').links[i];
+                        before.push(temp);
+                    }
+                    if ($flowchart.flowchart('getData').links[i].fromOperator == operatorId) {
+                        var temp = {};
+                        temp["index"] = i;
+                        temp["data"] = $flowchart.flowchart('getData').links[i];
+                        after.push(temp);
+                    }
 
-            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPooling2D</div>'));
-            var tempOperatorId = op_index++;
-            data.top = 940;
-            data.left = 1580;
-            var $temp = $flowchart.flowchart('addOperator', tempOperatorId, data);  // 레이어 노드를 추가한다.
-            var type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+                    count++;    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                }
 
-            for (var j = 0; j < 7 - 1; j++) {
-                var from_tempOperatorId = j
-                var to_tempOperatorId = j+1;
-                var linkData = {
-                    fromOperator: from_tempOperatorId,
-                    fromConnector: "output_" + 0,
-                    fromSubConnetor: 0,
-                    toOperator: to_tempOperatorId,
-                    toConnector: "input_" + 0,
-                    toSubConnector: 0
+                var addNewLink = function(from, to, linkId) {
+                    var linkData = {
+                        fromOperator: from,
+                        fromConnector: "output_" + 0,
+                        fromSubConnetor: 0,
+                        toOperator: to,
+                        toConnector: "input_" + 0,
+                        toSubConnector: 0
+                    };
+                    linkId = $flowchart.flowchart('myLinkDiagram', linkId, linkData);
                 };
 
-                $flowchart.flowchart('myLinkDiagram', linkId++, linkData);
-            }
+                // draw that module.
+                {#console.log("$flowchart.flowchart('getOperatorTitle', operatorId).split('_') : ", $flowchart.flowchart('getOperatorTitle', operatorId).split('_'));#}
+                var articulableSubgraph_index = $flowchart.flowchart('getOperatorTitle', operatorId).split('_')[1];
+
+                var op = drawArticulableSubgraph(json_data, articulableSubgraph_index, operatorId, $flowchart, position.left, position.top);
+
+                // delete that module.
+                $flowchart.flowchart('deleteOperator', operatorId);
+
+                // add before links
+                for (var i of before) {
+                    addNewLink(i.data.fromOperator, op.first, i.index);
+
+                    count++;    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                }
+
+                // add after links
+                for (var i of after) {
+                    addNewLink(op.last, i.data.toOperator, i.index);
+
+                    count++;    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                }
+
+                // re-locate the nodes.
+                let queue = new Queue();
+                queue.enqueue(op.last);
+                let dist = document.getElementById(op.last).offsetLeft - document.getElementById(op.first).offsetLeft;
+                let linkData = {};
+                deepCopy($flowchart.flowchart('getData').links, linkData);
+                let afterList = new Set();
+                while (!queue.empty()) {
+                    var curr = queue.dequeue();
+
+                    for (let i of Object.keys(linkData)) {
+                        count++;
+                        let data = linkData[i];
+
+                        if (data.fromOperator == curr) {
+                            afterList.add(data.toOperator);
+                            queue.enqueue(data.toOperator);
+                        }
+                    }
+                }
+
+                for (let after of afterList.values()) {
+                    let pos = {};
+                    pos['left'] = document.getElementById(after).offsetLeft;
+                    pos['top'] = document.getElementById(after).offsetTop;
+
+                    pos['left'] = pos['left'] + dist;
+                    $flowchart.flowchart('myMoveOperator', after, pos);
+                }
+
+                return;
+            });
+
+            $(document).on("click", '.minus_button', function () {
+                // if the 'plus button' is clicked, re-draw the graphs.
+
+                // redraw();
+                let operatorId = this.getAttribute('operatorId');
+
+                // Find the fan-in and the fan-out of this articulable subgraph.
+                let fan_in = null;
+                let fan_out = null;
+                let token;
+
+                token = operatorId.split('_');
+
+                function getLastIndex (operatorId) {
+                    let token = operatorId.split('_');
+                    let subString = operatorId.substr(0, operatorId.length - token[token.length - 1].length);
+                    let index = 1;
+                    while(1) {
+                        let temp = subString + index;
+                        console.log(temp);
+                        if (document.getElementById(temp) != null) {
+                            if (document.getElementById(temp).getAttribute("isend") != null) {
+                                break;
+                            } else {
+                                index++;
+                                continue;
+                            }
+                        }
+
+                    }
+
+                    return index;
+                }
+
+                let moduleType = document.getElementById(operatorId).getAttribute('type');
+                let tempIndex = getLastIndex(operatorId);
+                let starting = operatorId.substr(0, operatorId.length - token[token.length - 1].length) + '0';
+                let ending = operatorId.substr(0, operatorId.length - token[token.length - 1].length) + tempIndex;
+
+
+                let left_ending = document.getElementById(ending).getAttribute('style').split('; ')[1].split(': ')[1].split('px')[0];
+                let left_starting = document.getElementById(starting).getAttribute('style').split('; ')[1].split(': ')[1].split('px')[0];
+                let dist = left_ending - left_starting;
+
+                // To get the position of the operator which would be a module...
+                // in this case, the module's position will be the fan_in's position.
+
+                var before = [];
+                var after = [];
+
+                for (let i of Object.keys($flowchart.flowchart('getData').links)) {
+                    if ($flowchart.flowchart('getData').links[i].toOperator == starting) {
+                        var temp = {};
+                        temp["index"] = i;
+                        temp["data"] = $flowchart.flowchart('getData').links[i];
+                        before.push(temp);
+                    }
+                    if ($flowchart.flowchart('getData').links[i].fromOperator == ending) {
+                        var temp = {};
+                        temp["index"] = i;
+                        temp["data"] = $flowchart.flowchart('getData').links[i];
+                        after.push(temp);
+                    }
+                }
+
+                let position = {};
+                position["top"] = $flowchart.flowchart('getOperatorData', starting).top;
+                position["left"] = $flowchart.flowchart('getOperatorData', starting).left;
+
+                let addNewLink = function(from, to, linkId) {
+                    var linkData = {
+                        fromOperator: from,
+                        fromConnector: "output_" + 0,
+                        fromSubConnetor: 0,
+                        toOperator: to,
+                        toConnector: "input_" + 0,
+                        toSubConnector: 0
+                    };
+                    linkId = $flowchart.flowchart('myLinkDiagram', linkId, linkData);
+                };
+
+                // delete articulable subgraph.
+                for (let i of Object.keys($flowchart.flowchart('getData').operators)) {
+                    var tempToken = i.split('_');
+                    if (tempToken[0] == 'layer' && tempToken[1] == token[1] && token.length <= tempToken.length) {
+                        $flowchart.flowchart('deleteOperator', i);
+                    }
+                }
+
+                // draw that module.
+                let operatorIndex = operatorId.substr(0, operatorId.length - token[token.length - 1].length - 1);
+                let data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Module_' + moduleType + '</div>'));
+                let tempOperatorId = operatorIndex;
+                data.top = position["top"];
+                data.left = position["left"];
+                let prevType = document.getElementById(before[0].data.fromOperator).getAttribute('type');
+                let $temp = $flowchart.flowchart('addOperator', tempOperatorId, data, false, prevType);  // 레이어 노드를 추가한다.
+                let type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+
+                // add before links
+                for (let i of before) {
+                    addNewLink(i.data.fromOperator, tempOperatorId, i.index);
+                }
+
+                // add after links
+                for (let i of after) {
+                    addNewLink(tempOperatorId, i.data.toOperator, i.index);
+                }
+
+
+                // re-locate the nodes.
+                let queue = new Queue();
+                queue.enqueue(operatorIndex);
+                let linkData = {};
+                deepCopy($flowchart.flowchart('getData').links, linkData);
+                let afterList = new Set();
+                while (!queue.empty()) {
+                    let curr = queue.dequeue();
+
+                    for (let i of Object.keys(linkData)) {
+                        let data = linkData[i];
+
+                        if (data.fromOperator == curr) {
+                            afterList.add(data.toOperator);
+                            queue.enqueue(data.toOperator);
+                        }
+                    }
+                }
+
+                for (let after of afterList.values()) {
+                    let pos = {};
+                    pos['left'] = document.getElementById(after).offsetLeft;
+                    pos['top'] = document.getElementById(after).offsetTop;
+
+                    pos['left'] = pos['left'] - dist;
+
+                    $flowchart.flowchart('myMoveOperator', after, pos);
+                }
+            });
+
+
+            //////////////////////////////////////
+
+            let adjList = substitudeGraph(json_data);
+            console.log("adjList : ", adjList);
+            {#console.log("aa : ", $flowchart.flowchart('getOperatorTitle', "as_1").split('_')[1])#}
+            drawOverallGraph(json_data, $flowchart, adjList);
+
+            return;
         }
+
 
         function flow(json_dict, ag_index) {
             // #1. Initialize drwaing pannel.
@@ -1270,6 +1552,110 @@
             console.log(element);
         }
 
+        function substitudeGraph(json_data, outerGraph, currentLevel) {
+            /**
+             * substitudeGraph(outerGraph, currentLevel)
+             * At currentLevel, substitude the articulable subgraph as a module in outerGraph.
+             *
+             * @param outerGraph: a `dictionary`
+             * The outer graph.
+             *
+             * @param currentLevel: a `int`
+             * the current level.
+             */
+            let isOverallGraph = false;
+            let jsonData = Object.assign({}, json_data);
+
+            // #0. Check the current level whether the level is '-1' or not.
+            // If the current level is '-1' or the outerGraph is 'undefined', then substitude the overall graph.
+            if (outerGraph == undefined || currentLevel == -1) {
+                // overall graph
+                isOverallGraph =  true;
+                currentLevel = -1;
+            }
+
+            let adjacentList = {};      // the new adjacent list
+            let property = {};
+
+            // #1. Change the 'from' and 'to' to the module(articulable subgraph) index.
+            if (1) {
+                if (isOverallGraph == true) {
+                    // 1-1) Initialize the adjacentList.
+                    for (let sKey of Object.keys(jsonData.source_graph)) {
+                        let tIndex = sKey.substring(3, sKey.length);
+                        adjacentList[tIndex] = Object.assign([], jsonData.source_graph[sKey].toLayer);
+                        property["last"] = tIndex;
+                    }
+                    property["first"] = "0";
+                } else {
+                    for (let sKey of jsonData.articulable_subgraph[outerGraph]) {
+                        let temp = {};
+                        let tArr = [];
+                        deepCopy(jsonData.source_graph["op_" + sKey].toLayer, tArr);
+                        adjacentList[sKey] = tArr;
+                    }
+                    property["first"] = jsonData.articulable_subgraph[outerGraph][0];
+                    property["last"] = jsonData.articulable_subgraph[outerGraph][jsonData.articulable_subgraph[outerGraph].length - 1];
+                }
+                // substitude a module from overall graph.
+
+                // 1-1) Initialize the adjacentList.
+                //
+
+                // 1-2) substitude the indexes.
+                for (let aKey of Object.keys(jsonData.abstract_graph)) {
+                    if (jsonData.abstract_graph[aKey].index_outerGraph != currentLevel) {
+                        // This abstract graph is not current level, then continue this loop.
+                        continue;
+                    } else {
+                        // when this abstract graph is at current level...
+                        {#console.log("articulableSubgraph : ", articulableSubgraph);#}
+                        let articulableSubgraph = Object.assign([], jsonData.abstract_graph[aKey].subgraph);
+
+                        for (let node of articulableSubgraph) {
+                            // 3-1) check 'from'
+                            for (let key of Object.keys(adjacentList)) {
+                                let from = key;
+                                let to = adjacentList[from];
+
+                                if (from == node) {
+                                    // delete this record
+                                    let id = "ag_" + aKey;
+                                    adjacentList[id] = to;
+                                    delete(adjacentList[key]);
+                                    break;
+                                }
+                            }
+
+                            // 3-1) check 'to'
+                            for (let key of Object.keys(adjacentList)) {
+                                let from = key;
+                                let to = adjacentList[key];
+
+                                for (let each of to) {
+                                    if (node == each) {
+                                        let tempInnerIndex = to.indexOf(each);
+                                        let id = "ag_" + aKey;
+                                        to.splice(tempInnerIndex, 1, id);
+                                    }
+                                }
+                            }1
+                        }
+                    }
+                }
+            } else {
+                // substitude a module from articulable subgraph shape.
+            }
+
+            adjacentList["property"] = property;
+
+            return adjacentList;
+        }
+
+        function deepCopy(src, dst) {
+            Object.assign(dst, src);
+        }
+
         $(document).ready(function () {
             //     $(document).on("click", ".jstree-icon.jstree-ocl.draggable_operator", function() {
             //   alert("!!!");
@@ -1356,6 +1742,30 @@
                 alert("load");
             });
 
+            $(document).on("keyup", function(event) {
+                if (event.keyCode == '8' || event.keyCode == '46') {
+                    if (isOperatorClicked) {
+                        // 1) event listener for deleting the selected operator.
+                        {#console.log("flowchart: ", $flowchart);#}
+                        $flowchart.flowchart('deleteOperator', clickedOperatorId);
+                        {#console.log("clickedOperatorId : ", clickedOperatorId);#}
+                        isOperatorClicked = false;
+                    }
+
+                    if (isLinkClicked) {
+                        // 2) event listener for deleting the selected link.
+                        {#console.log("here.linkId : ", clickedLinkId);#}
+                        $flowchart.flowchart('deleteLink', clickedLinkId);
+                        isLinkClicked = false;
+                    }
+                }
+                console.log("keyup");
+            });
+
+
+
+
+
             //////////////////////// return layer sequence
             function getLayerSequence() {
                 var links = $flowchart.flowchart('getData').links;
@@ -1415,50 +1825,6 @@
                 return sequence;
             }
 
-            function getLayerSequenceFromEditor() {
-                /**
-                 * getLayerSequenceFromEditor()
-                 * Get the sequence of layer on current editor.
-                 *
-                 * @return sequence: a `dictionary`
-                 * The sequence. It means adjacent list structure.
-                 */
-                var links = $flowchart.flowchart('getData').links;  // the connections between each layers.
-                {#console.log("links : ", links);#}
-                {#console.log("opeartors : ", $flowchart.flowchart('getData').operators);#}
-
-                var sequence = {}      // the sequence of the flow.
-
-                // get connections without last layer.
-                for (var i = 0; i < Object.keys(links).length; i++) {
-                    var fromOperator = links[i]["fromOperator"]
-                    var toOperator = links[i]["toOperator"]
-
-                    // if the 'sequence' on the given key is empty, add a array '[]'.
-                    if (!sequence[fromOperator]) {
-                        sequence[fromOperator] = []
-                    }
-
-                    sequence[fromOperator].push(toOperator)
-                }
-
-                // get connection the last layer.
-                var last = -1;
-                var layers = Object.keys($flowchart.flowchart('getData').operators);
-                for (var i = 0; i < layers.length; i++) {
-                    if (sequence[i] == undefined) {
-                        last = i;
-                        break;
-                    }
-                }
-
-                sequence[last] = []     // add the last layer
-
-                {#console.log("The sequence :", sequence)#}
-
-                return sequence
-            }
-
             function graph2json(sequence) {
                 /**
                  * graph2json(sequence)
@@ -1471,16 +1837,17 @@
                  * The json file of the layer information.
                  */
 
-                var json;   // the json format of the layer information. It will be returned later.
+                let json;   // the json format of the layer information. It will be returned later.
 
-                var layers = {};
-                for (var i = 0; i < Object.keys(sequence).length; i++) {
-                    var argId = "arg_" + i;     // the id of the each argument setting tag.
-                    var layer = {};             // each layer
+                let layers = {};
+                let index = 0;
+                for (let i of Object.keys(sequence)) {
+                    let argId = "arg_" + i;     // the id of the each argument setting tag.
+                    let layer = {};             // each layer
 
                     // for during the length of the arguments in each layer.
-                    for (var j = 0; j < document.getElementById(argId).elements.length; j++) {
-                        var argKey = document.getElementById(argId).elements[j].id;
+                    for (let j = 0; j < document.getElementById(argId).elements.length; j++) {
+                        let argKey = document.getElementById(argId).elements[j].id;
                         layer[argKey] = document.getElementById(argId).elements[j].value;  // value
                     }
 
@@ -1491,12 +1858,14 @@
                     layer["left"] = document.getElementById(i).offsetLeft;
                     layer["top"] = document.getElementById(i).offsetTop;
 
-                    var layerKey = "op_" + i;
+                    let layerKey = "op_" + index++;
                     layers[layerKey] = layer;
                 }
 
+                console.log("layers : ", layers);
+
                 // integrate the source graph, articulable subgraph list, and abstract graph.
-                var graph = {}
+                let graph = {}
                 graph["source_graph"] = layers;     // source graph
                 graph["articulable_subgraph"] = {}
                 graph["abstract_graph"] = {}
@@ -1548,8 +1917,8 @@
                             data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">ZeroPadding2D</div>'));
                             break;
 
-                        case "MaxPooling2D":
-                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPooling2D</div>'));
+                        case "MaxPool2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPool2D</div>'));
                             break;
 
                         case "AveragePooling2D":
@@ -1653,8 +2022,8 @@
                             data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">ZeroPadding2D</div>'));
                             break;
 
-                        case "MaxPooling2D":
-                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPooling2D</div>'));
+                        case "MaxPool2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPool2D</div>'));
                             break;
 
                         case "AveragePooling2D":
@@ -1708,13 +2077,12 @@
                         };
 
                         {#console.log("linkData : ", linkData);#}
-                        $flowchart.flowchart('myLinkDiagram', linkId++, linkData);
+                        linkId = $flowchart.flowchart('myLinkDiagram', linkId, linkData);
                     }
                 }
             }
 
-
-            function drawOverallGraph(JSON_dict, flowchart_index) {
+            function drawSourceGraph(JSON_dict, flowchart_index) {
                 /**
                  * drawDiagrams(JSON_dict)
                  * Draw the diagrams on the editor by the layer information which consist of json dictionary.
@@ -1778,173 +2146,8 @@
                             data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">ZeroPadding2D</div>'));
                             break;
 
-                        case "MaxPooling2D":
-                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPooling2D</div>'));
-                            break;
-
-                        case "AveragePooling2D":
-                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">AveragePooling2D</div>'));
-                            break;
-
-                        case "LSTM":
-                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">LSTM</div>'));
-                            break;
-
-                        case "SimpleRNN":
-                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">SimpleRNN</div>'));
-                            break;
-
-                        case "BatchNormalization":
-                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">BatchNormalization</div>'));
-                            break;
-                        default:
-                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">default</div>'));
-                    }
-
-                    {#// if the offset is undefined, locate the layers automatically.#}
-                    {#if (data.left == undefined || data.top == undefined) {#}
-                    {#    #}
-
-                    var leftLevel = function(arr, item) {
-                        var level = -1;
-
-                        for (var i in arr) {
-                            if (arr[i].indexOf(item) != -1) {
-                                level = i;
-                                break;
-                            }
-                        }
-
-                        return level;
-                    };
-
-                    var topLevel = function(arr, item) {
-                        var index = -1;
-
-                        for (i of arr) {
-                            index = i.indexOf(item);
-
-                            if (index != -1) break;
-                        }
-
-                        return index;
-                    };
-
-                    var maxLength = function(arr) {
-                        var length = new Array();
-                        for (i of arr) {
-                            length.push(i.length);
-                        }
-                        {#console.log("length : ", length);#}
-                        return Math.max.apply(null, length);
-                    }
-
-                    // the top of the first node and last node should be same. And they should be located center of overall graph.
-                    if (dict_index == articulableSubgraph[0] || dict_index == articulableSubgraph[articulableSubgraph.length - 1]) {
-                        data.top = topStart + ( maxLength(nodeLevel) * 140) / 2;
-                        {#console.log(maxLength(nodeLevel));#}
-                    } else {
-                        data.top = topStart + topLevel(nodeLevel, dict_index) * 140;
-                    }
-                    data.left = leftStart + leftLevel(nodeLevel, dict_index) * 300;        // 레이어 노드의 좌표(left, top)
-
-
-                    //  레이어 파라미터 정보 설정하는 부분 추가해야됨
-                    var tempOperatorId = flowchart_index + "_" + abstract_index + "_" + op_index++;
-                    var $temp = $flowchart.flowchart('addOperator', tempOperatorId, data);  // 레이어 노드를 추가한다.
-                    var type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
-                    appendOperatorParam(tempOperatorId, type);
-                }   // for end
-
-                // Link 그리는 부분
-                {#var index = 0;#}
-                for (var i = 0; i < articulableSubgraph.length - 1; i++) {
-                    var layer = JSON_dict[accessKey]["op_" + articulableSubgraph[i]];
-
-                    for (var j = 0; j < Object.keys(layer["toLayer"]).length; j++) {
-                        var from_tempOperatorId = flowchart_index + "_" + abstract_index + "_" + i
-                        var to_tempOperatorId = flowchart_index + "_" + abstract_index + "_" + articulableSubgraph.indexOf(layer["toLayer"][j])
-                        var linkData = {
-                            fromOperator: from_tempOperatorId,
-                            fromConnector: "output_" + 0,
-                            fromSubConnetor: 0,
-                            toOperator: to_tempOperatorId,
-                            toConnector: "input_" + 0,
-                            toSubConnector: 0
-                        };
-
-                        $flowchart.flowchart('myLinkDiagram', linkId++, linkData);
-                    }
-                }
-            }
-
-            function drawArticulableSubgraph(JSON_dict, abstract_index, flowchart_index) {
-                /**
-                 * drawDiagrams(JSON_dict)
-                 * Draw the diagrams on the editor by the layer information which consist of json dictionary.
-                 *
-                 * @param JSON_dict: a `dictionary`
-                 * The dictionary which includes the information of the layers.
-                 *
-                 * @param articulableSubgraph: a `int`
-                 * The articulable subgraph index.
-                 */
-
-
-                var flowchartId = '#sheet_' + flowchart_index;
-                var $flowchart = $(flowchartId);
-
-                var leftStart = 470;
-                var topStart = 750;
-                var abstractData = JSON_dict["abstract_graph"][abstract_index];
-                var articulableSubgraph = abstractData.subgraph;
-                var nodeLevel = getNodeLevel_subgraph(JSON_dict, abstractData.subgraph);
-                {#getNodeLevel_subgraph(JSON_dict, articulableSubgraph);#}
-
-                // 1. Draw source graph
-                // JSON dictionary 데이터가 끝날때까지 차례로 순회한다.
-                {#var dict_index = articulableSubgraph[0];     // JSON dictionary 데이터에 접근할 인덱스 ("op_0", "op_1", ...)#}
-                var accessKey = "source_graph";
-                var op_index = 0;
-                for (var dict_index of articulableSubgraph) {
-                    var operator = JSON_dict[accessKey]["op_" + dict_index];         // operator 객체 지정
-                    {#console.log("dict_index : ", dict_index);#}
-                    var data;        // 왼쪽 탭에 있는 data(레이어 종류)
-
-                    // var default_left = 400;
-                    // var default_top = 600;
-
-                    switch (operator.operator_title) {
-                        case "InputLayer":
-                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">InputLayer</div>'));
-                            break;
-
-                        case "OutputLayer":
-                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">OutputLayer</div>'));
-                            break;
-
-                        case "Dense":
-                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Dense</div>'));
-                            break;
-
-                        case "Dropout":
-                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Dropout</div>'));
-                            break;
-
-                        case "Flatten":
-                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Flatten</div>'));
-                            break;
-
-                        case "Convolution2D":
-                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">Convolution2D</div>'));
-                            break;
-
-                        case "ZeroPadding2D":
-                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">ZeroPadding2D</div>'));
-                            break;
-
-                        case "MaxPooling2D":
-                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPooling2D</div>'));
+                        case "MaxPool2D":
+                            data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">MaxPool2D</div>'));
                             break;
 
                         case "AveragePooling2D":
@@ -2109,24 +2312,114 @@
                 return nodeLevel;
             }
 
-            function getNodeLevel_subgraph(JSON_dict, subgraph) {
+            function json2graph() {
                 /**
-                 * getNodeLevel(JSON_dict)
-                 * Get the level of each nodes in the graph for drawing on the sheet.
-                 *
-                 * @param JSON_dict: a `dictionary`
-                 * The dictionary which includes the information of the layers.
-                 *
-                 * @param subgraph: a `array`
-                 * The subgraph set.
-                 *
-                 * @return nodeLevel: a`dictionary`
-                 * The node level.
+                 * json2graph()
+                 * convert json file into graph on editor.
                  */
 
-                var nodeLevel = new Array();      // the node level needed to locate each nodes.
+                    // get the json from POST method.
+                var json_str = "{{ foo }}".replace(/&quot;/gi, "\""); // 정규식을 이용하여 &quot; 를 " 으로 모두 치환한다.
+                var json_data = JSON.parse(json_str);   // string 타입의 json정보를 갖고 있는 변수를 json 타입으로 변환한다.
+
+                return json_data;
+            }
+
+            // draw diagrams by loaded json file.
+            json_data = json2graph();
+            addCustomizingModules(json_data.articulable_subgraph);
+            drawOverall();
+
+            {#let t = getLayerSequenceFromEditor();#}
+            {#console.log("graph2json : ", graph2json(t));#}
+
+            {#console.log("a : ", a);#}
 
 
+            var overall = [];
+            for (var i = 0; i < Object.keys(json_data.source_graph).length; i++) {
+                overall.push(i);
+            }
+            console.log("overall : ", overall);
+            {#substitueOverallGraph(json_data, overall, -1);#}
+
+            {#drawDiagrams(json_data);#}
+            {#var JSON_dict =  parseJSON2Dict();#}
+            {#DrawDiagram(JSON_dict);#}
+
+        }); // on ready end
+
+        function getNodeLevel_subgraph(JSON_dict, subgraph, isAdjList) {
+            /**
+             * getNodeLevel(JSON_dict)
+             * Get the level of each nodes in the graph for drawing on the sheet.
+             *
+             * @param JSON_dict: a `dictionary`
+             * The dictionary which includes the information of the layers.
+             *
+             * @param subgraph: a `array`
+             * The subgraph set.
+             *
+             * @return nodeLevel: a`dictionary`
+             * The node level.
+             */
+
+            var nodeLevel = new Array();      // the node level needed to locate each nodes.
+
+            /////////////////////////////////////////////////////////////////////////////////////
+            var adjList = subgraph;
+            {#var adjList = JSON_dict;#}
+
+            if (isAdjList == true) {
+                let arr2dict = function(src, dst) {
+                    for (i of src) {
+                        dst[Object.keys(i)] = Object.values(i)[0];
+                    }
+                }
+
+                var adjList_dict = {};
+                arr2dict(adjList, adjList_dict);
+
+
+                nodeLevel[0] = [Number(Object.keys(subgraph)[0])];       // push the first node.
+                var currLevel = 0;
+                while (nodeLevel[currLevel] != undefined) {
+                    {#console.log("(nodeLevel[currLevel] : ", (nodeLevel[currLevel]));#}
+                    {#console.log(nodeLevel[currLevel].length, nodeLevel[currLevel][0], subgraph[subgraph.length - 1]);#}
+
+                    for (var i of nodeLevel[currLevel]) {
+                        // 1-0) if the node in current level is the last node, stop pushing.
+                        if (i == Object.keys(subgraph[subgraph.length - 1])[0]) {
+                            continue;
+                        }
+
+                        // 1-1) concatenate every next nodes.
+                        if (nodeLevel[currLevel + 1] == undefined) {
+                            nodeLevel[currLevel + 1] = adjList_dict[i];
+                        } else {
+                            nodeLevel[currLevel + 1] = nodeLevel[currLevel + 1].concat(adjList_dict[i]);
+                        }
+
+
+                        // 1-2) filter out overlapped nodes.
+                        nodeLevel[currLevel + 1] = nodeLevel[currLevel + 1].filter(function(value, index, self) {
+                            return self.indexOf(value) === index;
+                        });
+                    }
+
+                    currLevel++;
+
+                }
+
+                // 2) remove the overlapped nodes from next nodes.
+                for (let i = 0; i < nodeLevel.length - 1; i++) {
+                    for (let j = i + 1; j < nodeLevel.length; j++) {
+                        let filterNode = nodeLevel[j];
+                        nodeLevel[i] = nodeLevel[i].filter(item => !filterNode.includes(item));     // remove overlapped elements.
+                    }
+                }
+                return nodeLevel;
+            } else {
                 var adjList = JSON_dict["source_graph"];
                 {#var adjList = JSON_dict;#}
 
@@ -2138,7 +2431,6 @@
 
                     for (var i of nodeLevel[currLevel]) {
                         var dictKey = "op_" + i;        // the access key
-
                         // 1-0) if the node in current level is the last node, stop pushing.
                         if (i == subgraph[subgraph.length - 1]) {
                             break;
@@ -2162,56 +2454,525 @@
                 }
 
                 // 2) remove the overlapped nodes from next nodes.
-                for (var i = 0; i < nodeLevel.length - 1; i++) {
-                    var filterNode = nodeLevel[i + 1];
-                    nodeLevel[i] = nodeLevel[i].filter(item => !filterNode.includes(item));     // remove overlapped elements.
+                for (let i = 0; i < nodeLevel.length - 1; i++) {
+                    for (let j = i + 1; j < nodeLevel.length; j++) {
+                        let filterNode = nodeLevel[j];
+                        nodeLevel[i] = nodeLevel[i].filter(item => !filterNode.includes(item));     // remove overlapped elements.
+                    }
                 }
 
                 {#console.log("nodeLevel : ", nodeLevel);#}
+
                 return nodeLevel;
             }
+        }
 
-            function json2graph() {
-                /**
-                 * json2graph()
-                 * convert json file into graph on editor.
-                 */
+        function getNodeLevel_adjList(JSON_dict, adjList) {
+            /**
+             * getNodeLevel(JSON_dict)
+             * Get the level of each nodes in the graph for drawing on the sheet.
+             *
+             * @param JSON_dict: a `dictionary`
+             * The dictionary which includes the information of the layers.
+             *
+             * @param subgraph: a `array`
+             * The subgraph set.
+             *
+             * @return nodeLevel: a`dictionary`
+             * The node level.
+             */
 
-                    // get the json from POST method.
-                var json_str = "{{ foo }}".replace(/&quot;/gi, "\""); // 정규식을 이용하여 &quot; 를 " 으로 모두 치환한다.
-                var json_data = JSON.parse(json_str);   // string 타입의 json정보를 갖고 있는 변수를 json 타입으로 변환한다.
+            let nodeLevel = new Array();      // the node level needed to locate each nodes.
 
-                return json_data;
+            /////////////////////////////////////////////////////////////////////////////////////
+
+            nodeLevel[0] = [Number(Object.keys(adjList)[0])];       // push the first node.
+            var currLevel = 0;
+
+            while (nodeLevel[currLevel] != undefined) {
+                {#console.log("(nodeLevel[currLevel] : ", (nodeLevel[currLevel]));#}
+                {#console.log(nodeLevel[currLevel].length, nodeLevel[currLevel][0], subgraph[subgraph.length - 1]);#}
+
+                for (let i of nodeLevel[currLevel]) {
+                    if (i == adjList.property.last) {
+                        // 1-0) loop break point --> if the node in current level is the last node, stop pushing.
+                        continue;
+                    }
+
+                    // 1-1) pushing every adjacent node at current node level.
+                    if (nodeLevel[Number(currLevel) + 1] == undefined) {
+                        nodeLevel[Number(currLevel) + 1] = adjList[i];
+                    } else {
+                        nodeLevel[Number(currLevel) + 1] = nodeLevel[currLevel + 1].concat(adjList[i]);
+                    }
+
+
+                    // 1-2) filter out overlapped nodes.
+                    nodeLevel[currLevel + 1] = nodeLevel[currLevel + 1].filter(function(value, index, self) {
+                        return self.indexOf(value) === index;
+                    });
+                }
+
+                currLevel++;
+
             }
 
-            var json_data = json2graph();
-
-            // draw diagrams by loaded json file.
-            addCustomizingModules(json_data.articulable_subgraph);
-
-            drawOverall();
-
-            flow(json_data, 0);
-            drawArticulableSubgraph(json_data, 0, 0);
-
-            flow(json_data, 1);
-            drawArticulableSubgraph(json_data, 1, 1);
-
-            flow(json_data, 2);
-            drawArticulableSubgraph(json_data, 2, 2);
-
-            var overall = [];
-            for (var i = 0; i < Object.keys(json_data.source_graph).length; i++) {
-                overall.push(i);
+            for (let i = 0; i < nodeLevel.length - 1; i++) {
+                // 2) remove the overlapped nodes from next nodes.
+                for (let j = i + 1; j < nodeLevel.length; j++) {
+                    let filterNode = nodeLevel[j];
+                    nodeLevel[i] = nodeLevel[i].filter(item => !filterNode.includes(item));     // remove overlapped elements.
+                }
             }
-            console.log("overall : ", overall);
-            {#substitueOverallGraph(json_data, overall, -1);#}
 
-            {#drawDiagrams(json_data);#}
-            {#var JSON_dict =  parseJSON2Dict();#}
-            {#DrawDiagram(JSON_dict);#}
+            return nodeLevel;
+        }
 
-        }); // on ready end
+        function drawArticulableSubgraph(JSON_dict, articulableSubgraph_index, operatorId, flowchart, left, top) {
+            /**
+             * drawDiagrams(JSON_dict)
+             * Draw the diagrams on the editor by the layer information which consist of json dictionary.
+             *
+             * @param JSON_dict: a `dictionary`
+             * The dictionary which includes the information of the layers.
+             *
+             * @param articulableSubgraph: a `int`
+             * The articulable subgraph index.
+             */
+
+            let count_1 = 0;
+            let $flowchart = flowchart;
+
+            // set default position of starting node
+            if (left == undefined) {
+                left = 470;
+            }
+
+            if (top == undefined) {
+                top = 5000;
+            }
+
+            const abstract_graph = JSON_dict["abstract_graph"];
+            const source_graph = JSON_dict["source_graph"];
+            let adjacentList = substitudeGraph(json_data, articulableSubgraph_index, articulableSubgraph_index);
+            let nodeLevel = getNodeLevel_adjList(JSON_dict, adjacentList);
+
+            console.log("drawArticulableSubgraph()::adjList : ", adjacentList);
+            console.log("drawArticulableSubgraph()::nodeLevel : ", nodeLevel);
+
+
+            let leftLevel = function (arr, item) {
+                let tempItem;
+                if (typeof (item) == "string") {
+                    let tempToken = item.split('_');
+                    if (tempToken[0] != 'ag') {
+                        tempItem = Number(item);
+                    } else {
+                        tempItem = item;
+                    }
+                    {#console.log("type : ", item, typeof(tempToken[0]), typeof(arr[0][0]));#}
+                }
+
+                var level = -1;
+
+                for (var i in arr) {
+                    {#console.log("aaaa : ", arr[i], arr[i].indexOf(Number(item)));#}
+                    if (arr[i].indexOf(tempItem) != -1) {
+                        level = i;
+                        break;
+                    }
+                }
+                return level;
+            };
+            let topLevel = function (arr, item) {
+                let tempItem;
+                if (typeof (item) == "string") {
+                    let tempToken = item.split('_');
+                    if (tempToken[0] != 'ag') {
+                        tempItem = Number(item);
+                    } else {
+                        tempItem = item;
+                    }
+                    {#console.log("type : ", item, typeof(tempToken[0]), typeof(arr[0][0]));#}
+                }
+
+                var index = -1;
+
+                for (i of arr) {
+                    count_1++; //////////////////////////////////////////////////////
+                    index = i.indexOf(tempItem);
+
+                    if (index != -1) break;
+                }
+
+                return index;
+            };
+            let maxLength = function (arr) {
+                var length = new Array();
+                for (i of arr) {
+                    count_1++; //////////////////////////////////////////////////////
+                    length.push(i.length);
+                }
+                {#console.log("length : ", length);#}
+                return Math.max.apply(null, length);
+            }
+
+            let nameList_operator = [];     // it indicates names of operators
+
+            let op_index = 0;
+            for (let operator in adjacentList) {
+                // 1-1) draw operator
+                if (operator == "property") {
+                    continue;
+                }
+
+                let tempToken = String(operator).split('_');
+
+                let layerName;
+                if (tempToken[0] == "ag") {
+                    // this layer is a module.
+                    layerName = "Module_" + abstract_graph[tempToken[1]].index_articulableSubgraph;
+                } else {
+                    // this layer is a standard layer.
+                    layerName = source_graph["op_" + operator].operator_title;
+                }
+
+                let element = '<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">' + layerName + '</div>';
+                let data = getOperatorData($(element));
+                let topStart = top - maxLength(nodeLevel) / 2 * 140;
+                let leftStart;
+
+                // the top of the first node and last node should be same. And they should be located center of overall graph.
+                if (operator == adjacentList.property.first || operator == adjacentList.property.last) {
+                    data.top = top;
+                } else {
+                    data.top = topStart + topLevel(nodeLevel, operator) * 140;
+                }
+                data.left = left + leftLevel(nodeLevel, operator) * 250;        // 레이어 노드의 좌표(left, top)
+                {#let tempOperatorId = "layer_" + op_count++;#}
+                {#let operatorIndex = operatorId.split('_')[1];#}
+                let tempOperatorId = operatorId + "_" + op_index;
+
+                if (operator == adjacentList.property.first || operator == adjacentList.property.last) {
+                    // add operator --> starting or ending node
+                    let $temp = $flowchart.flowchart('addOperator', tempOperatorId, data, true, articulableSubgraph_index);
+                } else {
+                    // add operator --> normal node
+                    let $temp = $flowchart.flowchart('addOperator', tempOperatorId, data, false, articulableSubgraph_index);
+                }
+
+                let type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+                appendOperatorParam(tempOperatorId, type);
+                if (tempToken[0] == 'ag') {
+                    // draw sub operator's argument taps.
+                    drawArgumentTap_hidden(abstract_graph[tempToken[1]].index_articulableSubgraph, tempOperatorId);
+                }
+
+                nameList_operator[operator] = tempOperatorId;
+                op_index++;
+            }
+
+            console.log("nameList_operator : ", nameList_operator);
+            for (let operator in adjacentList) {
+                // 1-2) draw links
+                if (operator == "property" || operator == adjacentList.property.last) {
+                    // skip loop when the operator is the last.
+                    continue;
+                }
+
+                let from = operator;
+                let to = adjacentList[from];
+
+                for (let it of to) {
+                    // 1-2) draw link
+                    let linkData = {
+                        fromOperator: nameList_operator[from],
+                        fromConnector: "output_" + 0,
+                        fromSubConnetor: 0,
+                        toOperator: nameList_operator[it],
+                        toConnector: "input_" + 0,
+                        toSubConnector: 0
+                    };
+
+                    linkId = $flowchart.flowchart('myLinkDiagram', linkId, linkData);
+                }
+            }
+
+            let op = {};
+            op["first"] = nameList_operator[adjacentList.property.first];
+            op["last"] = nameList_operator[adjacentList.property.last];
+
+            return op;
+        }
+
+        function drawArgumentTap_hidden(articulableSubgraph_index, op_index) {
+            let sourceGraph = json_data.source_graph;
+            let articulableSubgraph = json_data.articulable_subgraph[articulableSubgraph_index];
+            let subIndex = 0;
+
+            for (let tempOperatorIndex of articulableSubgraph) {
+                let subOperatorIndex = op_index + '_' + articulableSubgraph_index + '_' + subIndex++;
+                let tempOperatorTitle = sourceGraph["op_" + tempOperatorIndex].operator_title;
+                appendOperatorParam(subOperatorIndex, tempOperatorTitle);
+                {#console.log(subOperatorIndex, tempOperatorTitle);#}
+            }
+
+        }
+
+        function drawOverallGraph(JSON_dict, flowchart, adjacentList) {
+            /**
+             * drawOverallGraph(JSON_dict, flowchart, adjacentList, left, top)
+             * Draw overall graph which indicates the highest abstract graph.
+             *
+             * @param JSON_dict: a `dictionary`
+             * The dictionary which includes the information of the layers.
+             *
+             * * @param flowchart: a `HTML element`
+             * The HTML element which indicates the drawing sheet.
+             *
+             * @param adjacentList: a `array`
+             * A graph which has adjacent list structure.
+             *
+             * @param left: a `int`
+             * The offset which indicates left(x) position.
+             *
+             * @param top: a `int`
+             * The offset which indicates top(y) position.
+             *
+             */
+
+            {#substitudeGraph();#}
+            let $flowchart = flowchart;
+
+            let left, top;
+            console.log("adjacentList : ", adjacentList);
+
+            // set the default starting offsets.
+            if (left == undefined) {
+                left = 470;
+            }
+
+            if (top == undefined) {
+                top = 5000;
+            }
+
+            const abstract_graph = JSON_dict["abstract_graph"];
+            const source_graph = JSON_dict["source_graph"];
+            const articulable_subgraph = JSON_dict["articulable_subgraph"];
+
+
+            // 1. Draw the layers by rounding the adjacent list.
+            // the overall abstract architecture of the network will be linear shape.
+            let count = 0;
+
+            let queue = new Queue();
+            queue.enqueue(adjacentList.property.first);
+
+            let before = op_count;
+
+            while (!queue.empty()) {
+                let currentLayer = queue.dequeue();
+
+                if (currentLayer == 'undefined') {
+                    // break point --> last node (ending node)
+                    break;
+                }
+
+                let tempToken = currentLayer.split('_');
+
+                let layerName;
+                if (tempToken[0] == "ag") {
+                    // this layer is a module.
+                    layerName = "Module_" + abstract_graph[tempToken[1]].index_articulableSubgraph;
+                } else {
+                    // this layer is a standard layer.
+                    layerName = source_graph["op_" + currentLayer].operator_title;
+                }
+
+                // 1-1) draw operator
+                let element = '<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">' + layerName + '</div>';
+                let data = getOperatorData($(element));
+                data.top = top;                         // set its offsets
+                data.left = left + (count++ * 240);
+                let tempOperatorId = "layer_" + op_count;
+                let ag_index = tempToken[1];
+
+                if (tempToken[0] == 'ag') {
+                    // draw sub operator's argument taps.
+                    let ag_index = tempToken[1];
+                    let $temp = $flowchart.flowchart('addOperator', tempOperatorId, data, false, ag_index);  // add operator
+                    {#let type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);#}
+                    drawArgumentTap_hidden(abstract_graph[tempToken[1]].index_articulableSubgraph, tempOperatorId);
+                } else {
+                    let $temp = $flowchart.flowchart('addOperator', tempOperatorId, data, false);  // add operator}
+                    {#let type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);#}
+                }
+                let type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+
+                appendOperatorParam(tempOperatorId, type);
+
+                if (currentLayer == adjacentList.property.first) {
+                    before = op_count;
+                } else {
+                    // 1-2) draw link
+                    let linkData = {
+                        fromOperator: "layer_" + before,
+                        fromConnector: "output_" + 0,
+                        fromSubConnetor: 0,
+                        toOperator: "layer_" + op_count,
+                        toConnector: "input_" + 0,
+                        toSubConnector: 0
+                    };
+
+                    linkId = $flowchart.flowchart('myLinkDiagram', linkId, linkData);
+                }
+
+                before = op_count;
+                op_count++;
+                queue.enqueue(String(adjacentList[currentLayer][0]));
+            }
+
+            // 3) extend the drawing sheet
+            {#let transform = $('.drawing_sheet').css('transform');#}
+            {#let transition = $('.drawing_sheet').css('transition');#}
+            {#let width = Number($('.drawing_sheet').css('width').substring(0, $('.drawing_sheet').css('width').length - 2)) + ((count - 4) * 240);#}
+            {#let style = 'width: ' + width + 'px; transform: ' + transform + '; transition: ' + transition + '; transform-origin: 50% 50%; cursor: move';#}
+            {#$('.drawing_sheet').attr('style', style);#}
+        }
+
+        function preDrawAll(JSON_dict, flowchart) {
+            let left, top;
+
+            // set the default starting offsets.
+            if (left == undefined) {
+                left = 470;
+            }
+
+            if (top == undefined) {
+                top = 5000;
+            }
+
+            const abstract_graph = JSON_dict["abstract_graph"];
+            const source_graph = JSON_dict["source_graph"];
+            const articulable_subgraph = JSON_dict["articulable_subgraph"];
+
+
+        }
+
+
+        function drawOverallGraph2(JSON_dict, flowchart, adjacentList, left, top, id) {
+            /**
+             * drawOverallGraph(JSON_dict, flowchart, adjacentList, left, top)
+             * Draw overall graph which indicates the highest abstract graph.
+             *
+             * @param JSON_dict: a `dictionary`
+             * The dictionary which includes the information of the layers.
+             *
+             * * @param flowchart: a `HTML element`
+             * The HTML element which indicates the drawing sheet.
+             *
+             * @param adjacentList: a `array`
+             * A graph which has adjacent list structure.
+             *
+             * @param left: a `int`
+             * The offset which indicates left(x) position.
+             *
+             * @param top: a `int`
+             * The offset which indicates top(y) position.
+             *
+             */
+
+                {#substitudeGraph();#}
+            let $flowchart = flowchart;
+
+            // set the default starting offsets.
+            if (left == undefined) {
+                left = 470;
+            }
+
+            if (top == undefined) {
+                top = 5000;
+            }
+
+            const abstract_graph = JSON_dict["abstract_graph"];
+            const source_graph = JSON_dict["source_graph"];
+            const articulable_subgraph = JSON_dict["articulable_subgraph"];
+
+            articulableSubgraph_index = 0;
+            var op_index = 0;
+
+
+            // 1. Draw the layers by rounding the adjacent list.
+            // the overall abstract architecture of the network will be linear shape.
+            let count = 0;
+            for (let record of adjacentList) {
+                let fromLayer = Object.keys(record)[0];
+                let toLayer = record[fromLayer];
+
+                let tempToken = fromLayer.split('_');
+
+                let layerName;
+                if (tempToken[0] == "ag") {
+                    // this layer is a module.
+                    layerName = "Module_" + abstract_graph[tempToken[1]].index_articulableSubgraph;
+                } else {
+                    // this layer is a standard layer.
+                    layerName = source_graph["op_" + fromLayer].operator_title;
+                }
+
+                // 1-1) draw operator
+                let element = '<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">' + layerName + '</div>';
+                let data = getOperatorData($(element));
+                data.top = top;                         // set its offsets
+                data.left = left + (count++ * 240);
+                var tempOperatorId = operatorId + "_" + articulableSubgraph_index + "_" + op_index++;
+                let $temp = $flowchart.flowchart('addOperator', tempOperatorId, data);  // add operator
+                let type = $flowchart.flowchart('getOperatorTitle', tempOperatorId);
+                appendOperatorParam(tempOperatorId, type);
+                if (tempToken[0] == 'ag') {
+                    // draw sub operator's argument taps.
+                    drawArgumentTap_hidden(abstract_graph[tempToken[1]].index_articulableSubgraph, tempOperatorId);
+                }
+            }
+
+
+            // 2) Draw the links
+            var op = {'first':null, 'last':null};
+            for (var i = 0; i < articulableSubgraph.length - 1; i++) {
+                var layer = JSON_dict[accessKey]["op_" + articulableSubgraph[i]];
+
+                for (var j = 0; j < Object.keys(layer["toLayer"]).length; j++) {
+                    var from_tempOperatorId = operatorId + "_" + articulableSubgraph_index + "_" + i;
+                    var to_tempOperatorId = operatorId + "_" + articulableSubgraph_index + "_" + articulableSubgraph.indexOf(layer["toLayer"][j])
+                    if (i == 0) {
+                        op['first'] = from_tempOperatorId;
+                    }
+                    var linkData = {
+                        fromOperator: from_tempOperatorId,
+                        fromConnector: "output_" + 0,
+                        fromSubConnetor: 0,
+                        toOperator: to_tempOperatorId,
+                        toConnector: "input_" + 0,
+                        toSubConnector: 0
+                    };
+
+                    linkId = $flowchart.flowchart('myLinkDiagram', linkId, linkData);
+
+                    count_1++; //////////////////////////////////////////////////////
+                }
+            }
+            op['last'] = operatorId + "_" + articulableSubgraph_index + "_" + (articulableSubgraph.length - 1);
+
+            return op;
+
+
+            // 3) extend the drawing sheet
+            {#let transform = $('.drawing_sheet').css('transform');#}
+            {#let transition = $('.drawing_sheet').css('transition');#}
+            {#let width = Number($('.drawing_sheet').css('width').substring(0, $('.drawing_sheet').css('width').length - 2)) + ((count - 4) * 240);#}
+            {#let style = 'width: ' + width + 'px; transform: ' + transform + '; transition: ' + transition + '; transform-origin: 50% 50%; cursor: move';#}
+            {#$('.drawing_sheet').attr('style', style);#}
+        }
 
         function Queue() {
             /**
@@ -2238,7 +2999,7 @@
                 } else {
                     return false;
                 }
-            }
+            };
             this.toString = function toString() {
                 var str = "";
                 for (var i = 0; i < this.dataStore.length; i++) {
@@ -2246,7 +3007,14 @@
                 }
 
                 return str;
-            }
+            };
+            this.hasValue = function hasValue(value) {
+                if (this.dataStore.indexOf(value) == -1) {
+                    return false;
+                } else {
+                    return true;
+                }
+            };
         }
 
         // var data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">InputLayer</div>'));
@@ -2279,81 +3047,72 @@
             }
         }
 
-        function substitueOverallGraph(json_dict, subgraph, currLevel) {
-            var abstractGraph = new Array();
-            var queue = new Queue();
+        function getLayerSequenceFromEditor() {
+            /**
+             * getLayerSequenceFromEditor()
+             * Get the sequence of layer on current editor.
+             *
+             * @return sequence: a `dictionary`
+             * The sequence. It means adjacent list structure.
+             */
+            let links = $flowchart.flowchart('getData').links;  // the connections between each layers.
 
-            queue.enqueue(subgraph[0]);     // push the fisrt node.
-            abstractGraph[subgraph[0]] = {"toLayer" : [], "type" : -1};
+            console.log("links : ", links);
+            {#console.log("opeartors : ", $flowchart.flowchart('getData').operators);#}
 
-            var as_index = 0;
-            while (!queue.empty()) {
-                var curr = queue.dequeue();
-                console.log("curr : ", curr);
-                console.log("queue : ", queue.toString());
-                console.log("abstractGraph[curr] : ", abstractGraph[curr]);
-                console.log("abstractGraph : ", abstractGraph);
+            let sequence = {}      // the sequence of the flow.
 
+            // get connections without last layer.
+            let last = -1;
+            for (let i of Object.keys(links))  {
+                let fromOperator = links[i]["fromOperator"]
+                let toOperator = links[i]["toOperator"]
 
-                if (abstractGraph[curr].type == -1) {
-                    console.log("here!!!!!");
-                    // 1-1) The 'curr' node is not a module.
-                    if (curr >= subgraph[subgraph.length - 1]) {
-                        continue;
-                    }
+                {#if (fromOperator == undefined || toOperator == undefined){#}
+                {#    continue;#}
 
-                    for (var next of json_dict.source_graph["op_" + curr].toLayer) {
-                        var flag = -1;
-                        for (ag of json_dict.abstract_graph) {
-                            if (next == ag.subgraph[0]) {
-                                var module = "as_" + as_index++;
-                                abstractGraph[curr].toLayer.push(module);
-                                abstractGraph[module] = {"toLayer" : [], "type" : ag.index_articulableSubgraph};
-                                queue.enqueue(module);
-                                flag++;
-                            }
-                        }
-                        if (flag == -1) {
-                            abstractGraph[curr].toLayer.push(next);
-                            abstractGraph[next] = {"toLayer" : [], "type" : -1};
-                            queue.enqueue(next);
-                        }
-                    }
-                } else {
-                    console.log("here!!");
-                    // 1-2) The 'curr' node is a module.
-                    var articulableSubgraph = json_dict.articulable_subgraph[abstractGraph[curr].type];
-                    console.log("articulableSubgraph : ", articulableSubgraph);
-                    var startingNode = articulableSubgraph[articulableSubgraph.length - 1];
-
-                    if (startingNode >= subgraph[subgraph.length - 1]) {
-                        continue;
-                    }
-
-                    for (next of json_dict.source_graph["op_" + startingNode].toLayer) {
-                        var flag = -1;
-                        for (ag of json_dict.abstract_graph) {
-                            if(next == ag.subgraph[0]) {
-                                var module = "as_" + as_index++;
-                                abstractGraph[curr].toLayer.push(module);
-                                abstractGraph[module] = {"toLayer" : [], "type" : ag.index_articulableSubgraph};
-                                queue.enqueue(module);
-                                flag++;
-                            }
-                        }
-                        if (flag == -1) {
-                            abstractGraph[curr].toLayer.push(next);
-                            abstractGraph[next] = {"toLayer" : [], "type" : -1};
-                            queue.enqueue(next);
-                        }
-                    }
+                // if the 'sequence' on the given key is empty, add a array '[]'.
+                if (!sequence[fromOperator]) {
+                    sequence[fromOperator] = []
                 }
+
+                sequence[fromOperator].push(toOperator);
+                last = toOperator;
             }
+            {#for (let i of Object.keys(links)) {#}
+            {#    let fromOperator = links[i]["fromOperator"]#}
+            {#    let toOperator = links[i]["toOperator"]#}
+            {##}
+            {#    // if the 'sequence' on the given key is empty, add a array '[]'.#}
+            {#    if (!sequence[fromOperator]) {#}
+            {#        sequence[fromOperator] = []#}
+            {#    }#}
+            {##}
+            {#    sequence[fromOperator].push(toOperator);#}
+            {#    last = toOperator;#}
 
-            console.log("abstractGraph : ", abstractGraph);
+            // get connection the last layer.
+            {#var last = -1;#}
+            {#var layers = Object.keys($flowchart.flowchart('getData').operators);#}
+            {#for (var i = 0; i < layers.length; i++) {#}
+            {#    if (sequence[i] == undefined) {#}
+            {#        last = i;#}
+            {#        break;#}
+            {#    }#}
 
-            return abstractGraph;
+
+            sequence[last] = [];     // add the last layer
+
+            console.log("The sequence :", sequence);
+
+            return sequence
         }
+
+        function getLayerSequenceFromEditor2() {
+
+        }
+
+
 
     </script>
 {% endblock javascripts %}
