@@ -118,7 +118,7 @@
 }
 
 .flowchart-operator.selected {
-    border-color: #555;
+    border: 3px solid #555;
 }
 
 
@@ -135,6 +135,8 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     cursor: move;
+    font-size: 18px;
+    text-align: center
 }
 
 .flowchart-operator .flowchart-operator-inputs-outputs {

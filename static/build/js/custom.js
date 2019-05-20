@@ -180,6 +180,12 @@ $(document).ready(function() {
         var $BOX_PANEL = $(this).closest('.x_panel');
         $BOX_PANEL.remove();
     });
+
+    $('.save-link').click(function() {
+        alert("save!");
+        //
+
+    });
 });
 // /Panel toolbox
 

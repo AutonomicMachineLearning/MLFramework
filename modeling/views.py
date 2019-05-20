@@ -280,6 +280,7 @@ class FileUploadView(View):
             documents = Document.objects.last()                     # get the last document which means uploaded one lastly.
             data = createAndInsert_json(documents.document)         # 1. json --> diagram
             # data = code2diagram(documents.document)               # 2. exeScript --> diagram
+            file_name = str(documents.document)[0:-5]
 
             # data = createAndInsert_json(documents.document)     # document를 추가하는 비지니스로직 수행
             
@@ -288,7 +289,7 @@ class FileUploadView(View):
             # return redirect(self.success_url)
             # print(json.dumps(data))
             # test = str(data)
-            return render(request, self.template_name, {'foo': json.dumps(data)})
+            return render(request, self.template_name, {'foo': json.dumps(data), "file_name": file_name})
         else:
             return render(request, self.template_name, {'form': form})
 
