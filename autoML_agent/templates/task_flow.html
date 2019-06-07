@@ -1,0 +1,1204 @@
+{% extends "base_site.html" %}
+
+{% block title %} Data 입력 {% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+<!-- Dropzone.js -->
+<link rel="stylesheet" type="text/css" href="/static/vendors/Directed-Graph-jQuery-SVG-Arg-Graph/arg-graph-1.1/arg-graph.css?ver=1.05">
+<link href="/static/vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
+<link href="/static/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+<link href="/static/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+<link href="/static/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+<link href="/static/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+<link href="/static/vendors/ion.rangeSlider/css/ion.rangeSlider.css" rel="stylesheet">
+<link href="/static/vendors/ion.rangeSlider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+<script src="/static/vendors/jQuery-Knob-master/dist/jquery.knob.min.js?ver=1"></script>
+
+
+<style>
+    .panel-body:hover {
+        background-color: #ffffff;
+    }
+
+    .subtitle > h2 {
+        font-size: 25px;
+    }
+
+    #section_1 {
+        height: 748px;
+    }
+
+    .x_panel.tasks {
+        height: 741px;
+    }
+
+    #diagrams {
+        border: 1px dashed #aaa;
+        -ms-border-radius: 10px;
+        border-radius: 10px;
+        background-color: rgba(250, 250, 250, 0.93);
+        overflow: auto;
+        width: 100%;
+        overflow-y: auto;
+        float: left;
+        margin: 10px;
+        height: 630px;
+    }
+
+    textarea {
+        margin: 5%;
+        width: 90%;
+        height: 75%;
+    }
+
+    h3, button, #newItem, #output {
+        margin: 20px 20px 5px 20px;
+    }
+
+    .arg-Graph_item {
+        text-align: center;
+        text-transform: uppercase;
+        background-image: none;
+        padding: 4px 10px;
+        border-radius: 3px;
+        border: 2px solid transparent;
+        color: #484e5a;
+        border-color: #7a7a7a;
+        background: #b3e0ee;
+        font-size: 20px;
+        font-weight: bold;
+        width: 200px;
+    }
+
+    .checkout-step-number {
+        border-radius: 50%;
+        border: 1px solid #666;
+        display: inline-block;
+        font-size: 12px;
+        height: 32px;
+        margin-right: 26px;
+        padding: 6px;
+        text-align: center;
+        width: 32px;
+    }
+
+    .checkout-step-title{
+        font-size: 18px;
+        font-weight: 500;
+        vertical-align: middle;
+        display: inline-block;
+        margin: 0px;
+    }
+
+    .panel.collapse-panel {
+        margin-top: 5px;
+        border: 1px dashed #aaa;
+        -ms-border-radius: 10px;
+    }
+
+    .input-group {
+        display: table;
+        border-collapse: separate;
+    }
+    .input-group.form-control, .input-group-addon, .input-group-btn {
+        display: table-cell;
+    }
+
+     .form_label {
+         padding-left: 60px;
+         padding-left: 60px;
+         text-align: center;
+         font-size: 16px;
+    }
+
+    .input-group-addon > img, .d-inline-block > img {
+        height: 30px;
+    }
+
+    .x_panel tasks {
+        overflow: auto;
+    }
+
+    .panel-body {
+        padding: 15px;
+        max-height: 480px;
+        overflow: auto;
+    }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="col-md-6 col-sm-12 col-xs-12" id="section_1">
+            <div class="x_panel tasks" id="task_0" style="display: block">
+                <div class="x_title subtitle">
+                    <h2><i class="fa fa-bars"></i> 데이터 업로드 <small>데이터를 서버에 저장합니다.</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="accordion" id="accordion_task0" role="tablist" aria-multiselectable="true">
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading" role="tab" id="task0_heding0" data-toggle="collapse" data-parent="#accordion_task0" href="#task0_collapse0" aria-expanded="true">
+                                <span class="checkout-step-number">1</span>
+                                <h4 class="checkout-step-title">데이터 파일 유형은?</h4>
+                            </a>
+                            <div id="task0_collapse0" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="task0_heding0">
+                                <div class="panel-body">
+                                    <p style="text-align: center">
+                                        <input type="radio" class="flat" name="file_type" id="image" value="image" checked="" required />&nbsp;
+                                        <label for="image" data-toggle="tooltip" data-placement="bottom" title="JPEG, PNG">Image</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="flat" name="file_type" id="audio" value="audio" />&nbsp;
+                                        <label for="audio" data-toggle="tooltip" data-placement="bottom" title="MP3, wav">Audio</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="flat" name="file_type" id="CSV" value="CSV"/>&nbsp;
+                                        <label for="CSV" data-toggle="tooltip" data-placement="bottom" title="Excel">CSV</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="flat" name="file_type" id="text" value="text"/>&nbsp;
+                                        <label for="text" data-toggle="tooltip" data-placement="bottom" title="doc">Text</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading collapsed" role="tab" id="task0_heding1" data-toggle="collapse" data-parent="#accordion_task0" href="#task0_collapse1" aria-expanded="false">
+                                <span class="checkout-step-number">2</span>
+                                <h4 class="checkout-step-title">데이터 종류</h4>
+                            </a>
+                            <div id="task0_collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task0_heding1">
+                                <div class="panel-body">
+                                    <p style="text-align: center">
+                                        <input type="radio" class="flat" name="data_type" id="isRawData" value="rawData" checked="" required />&nbsp;
+                                        <label for="image" data-toggle="tooltip" data-placement="bottom" title="원시 데이터">Row Data</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="flat" name="data_type" id="isMetaData" value="metaData" checked="" required />&nbsp;
+                                        <label for="image" data-toggle="tooltip" data-placement="bottom" title="원시 데이터의 설명 데이터">Meta Data</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading collapsed" role="tab" id="task0_heding2" data-toggle="collapse" data-parent="#accordion_task0" href="#task0_collapse2" aria-expanded="false">
+                                <span class="checkout-step-number">3</span>
+                                <h4 class="checkout-step-title">파일 업로드</h4>
+                            </a>
+                            <div id="task0_collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task0_heding2">
+                                <div class="panel-body" style="text-align: center;">
+                                    <div class="col-md-3 col-sm-3 col-xs-12"></div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <input type="file" id="file_upload_form_dataUpload" class="filestyle">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel tasks" id="task_1" style="display: none">
+                <div class="x_title subtitle">
+                    <h2><i class="fa fa-bars"></i> 데이터 탐색 <small>사용할 데이터를 설정합니다.</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="accordion" id="accordion_task1" role="tablist" aria-multiselectable="true">
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading" role="tab" id="task1_heding0" data-toggle="collapse" data-parent="#accordion_task1" href="#task1_collapse0" aria-expanded="true">
+                                <span class="checkout-step-number">1</span>
+                                <h4 class="checkout-step-title">데이터 불러오기</h4>
+                            </a>
+                            <div id="task1_collapse0" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="task1_heding0">
+                                <div class="panel-body">
+                                    <div class="col-md-3 col-sm-3 col-xs-12"></div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select class="form-control" id="data_load_select_box">
+                                            <option value="" selected>데이터 선택</option>
+                                            <optgroup label="Standard Dataset">
+                                                <option value="MNIST">MNIST</option>
+                                                <option value="COCO">COCO</option>
+                                                <option value="ImageNet">ImageNet</option>
+                                                <option value="Iris">Iris</option>
+                                            </optgroup>
+                                            <optgroup label="Custom Dataset">
+                                                <option value="myData">myData</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading collapsed" role="tab" id="task1_heding1" data-toggle="collapse" data-parent="#accordion_task1" href="#task1_collapse1" aria-expanded="false">
+                                <span class="checkout-step-number">2</span>
+                                <h4 class="checkout-step-title">데이터 분석</h4>
+                            </a>
+                            <div id="task1_collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task1_heding1">
+                                <div class="panel-body">
+                                    <p style="text-align: center">
+                                        <input type="radio" class="flat" name="data_analysis" id="data_structure" value="data_structure" checked="" required />&nbsp;
+                                        <label for="image" data-toggle="tooltip" data-placement="bottom" title="데이터 구조에 대해 분석합니다.">데이터 구조</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="flat" name="data_analysis" id="data_distribution" value="data_distribution" />&nbsp;
+                                        <label for="audio" data-toggle="tooltip" data-placement="bottom" title="데이터 분포에 대해 분석합니다.">데이터 분포</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="flat" name="data_analysis" id="data_property" value="data_property"/>&nbsp;
+                                        <label for="CSV" data-toggle="tooltip" data-placement="bottom" title="데이터 속성에 대해 분석합니다.">데이터 속성</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="flat" name="data_analysis" id="data_relationship" value="data_relationship"/>&nbsp;
+                                        <label for="text" data-toggle="tooltip" data-placement="bottom" title="데이터 속성들 간의 관계에 대해 분석합니다.">데이터 속성들의 관계</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading collapsed" role="tab" id="task1_heding2" data-toggle="collapse" data-parent="#accordion_task1" href="#task1_collapse2" aria-expanded="false">
+                                <span class="checkout-step-number">3</span>
+                                <h4 class="checkout-step-title">데이터 전처리</h4>
+                            </a>
+                            <div id="task1_collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task1_heding2">
+                                <div class="panel-body">
+                                    <p style="text-align: center">
+                                        <input type="radio" class="flat" name="data_preprocessing" id="data_selection" value="data_selection" checked="" required />&nbsp;
+                                        <label for="image" data-toggle="tooltip" data-placement="bottom" title="데이터를 선택합니다.">데이터 선택</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="flat" name="data_preprocessing" id="data_distillation" value="data_distillation" />&nbsp;
+                                        <label for="audio" data-toggle="tooltip" data-placement="bottom" title="데이터를 정제합니다.">데이터 정제</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="flat" name="data_preprocessing" id="data_conversion" value="data_conversion"/>&nbsp;
+                                        <label for="CSV" data-toggle="tooltip" data-placement="bottom" title="기존 데이터를 특정 데이터로 변환합니다.">데이터 변환</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </p>
+                                    <br>
+                                    <div class="col-md-2 col-sm-1"></div>
+                                    <div class="col-md-8 col-sm-10 col-xs-12">
+                                        <ul class="list-unstyled text-left">
+                                            <h2 class="StepTitle">데이터 전처리 가이드</h2>
+                                            <li><i class="fa fa-asterisk text-success"></i>&nbsp; 누락된 값, 노이즈, 이상치에 대한 작업</li>
+                                            <li><i class="fa fa-asterisk text-success"></i>&nbsp; 데이터 정규화 : 최대/최솟값 정규화 (0~1 사이의 데이터)</li>
+                                            <li><i class="fa fa-asterisk text-success"></i>&nbsp; 데이터 변환 (숫자값 매핑, 문자값 매핑, 범주형값 매핑)</li>
+                                            <li><i class="fa fa-asterisk text-success"></i>&nbsp; 데이터 감소</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-2 col-sm-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel tasks" id="task_2" style="display: none">
+                <div class="x_title subtitle">
+                    <h2><i class="fa fa-bars"></i> 데이터 컬럼 선택 <small>데이터의 입력속성과 출력 속성을 선택합니다.</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="accordion" id="accordion_task2" role="tablist" aria-multiselectable="true">
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading" role="tab" id="task2_heding0" data-toggle="collapse" data-parent="#accordion_task2" href="#task2_collapse0" aria-expanded="true">
+                                <span class="checkout-step-number">1</span>
+                                <h4 class="checkout-step-title">학습데이터의 입력/출력 선택</h4>
+                            </a>
+                            <div id="task2_collapse0" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="task2_heding0">
+                                <div class="panel-body">
+                                    <table id="datatable-buttons" class="table table-striped table-bordered">
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<br>-->
+                        <!--<div class="panel collapse-panel">-->
+                        <!--<a class="panel-heading collapsed" role="tab" id="task2_heding1" data-toggle="collapse" data-parent="#accordion_task2" href="#task2_collapse1" aria-expanded="false">-->
+                        <!--<span class="checkout-step-number">2</span>-->
+                        <!--<h4 class="checkout-step-title">Collapsible Group Items #2</h4>-->
+                        <!--</a>-->
+                        <!--<div id="task2_collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task2_heding1">-->
+                        <!--<div class="panel-body">-->
+                        <!--contents-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<br>-->
+                        <!--<div class="panel collapse-panel">-->
+                        <!--<a class="panel-heading collapsed" role="tab" id="task2_heding2" data-toggle="collapse" data-parent="#accordion_task2" href="#task2_collapse2" aria-expanded="false">-->
+                        <!--<span class="checkout-step-number">3</span>-->
+                        <!--<h4 class="checkout-step-title">Collapsible Group Items #3</h4>-->
+                        <!--</a>-->
+                        <!--<div id="task2_collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task2_heding2">-->
+                        <!--<div class="panel-body">-->
+                        <!--contents-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel tasks" id="task_4" style="display: none">
+                <div class="x_title subtitle">
+                    <h2><i class="fa fa-bars"></i> 학습 데이터 분할 <small>훈련에 사용할 학습데이터를 분할합니다.</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="accordion" id="accordion_task4" role="tablist" aria-multiselectable="true">
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading" role="tab" id="task4_heding0" data-toggle="collapse" data-parent="#accordion_task4" href="#task4_collapse0" aria-expanded="true">
+                                <span class="checkout-step-number">1</span>
+                                <h4 class="checkout-step-title">학습 데이터 분할</h4>
+                            </a>
+                            <div id="task4_collapse0" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="task5_heding0">
+                                <div class="panel-body" style="text-align: center">
+                                    <label for="TVT_select" data-toggle="tooltip" data-placement="top" title="학습에 이용할 데이터를 분할합니다." style="font-size:18px">훈련/검증/시험 데이터 분할</label>
+                                    <select class="form-control" id="TVT_select">
+                                        <option>Custom</option>
+                                        <option value="60_20_20">60%-20%-20%</option>
+                                        <option value="70_15_15">70%-15%-15%</option>
+                                        <option value="80_10_10">80%-10%-10%</option>
+                                        <option value="90_5_5">90%-5%-5%</option>
+                                        <option value="95_5_0">95%-5%-0%</option>
+                                        <option value="k_fold_cross_validation">K-Fold Cross Validation</option>
+                                    </select>
+                                    <br>
+                                    <div class="form-group">
+                                        <div class="x_content" id="TVT_split">
+                                            <div class="col-md-3"></div>
+                                            <div class="col-md-2"><input type="text" value="60" class="dial" id="train_ratio" data-fgColor="#26B99A"></div>
+                                            <div class="col-md-2"><input type="text" value="20" class="dial" id="validation_ratio" data-fgColor='#e01ab5'></div>
+                                            <div class="col-md-2"><input type="text" value="20" class="dial" id="test_ratio" data-fgColor="#3159a6"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <!--<div class="panel collapse-panel">-->
+                            <!--<a class="panel-heading collapsed" role="tab" id="task4_heding1" data-toggle="collapse" data-parent="#accordion_task5" href="#task4_collapse1" aria-expanded="false">-->
+                                <!--<span class="checkout-step-number">2</span>-->
+                                <!--<h4 class="checkout-step-title">하이퍼 파라미터 설정</h4>-->
+                            <!--</a>-->
+                            <!--<div id="task4_collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task4_heding1">-->
+                                <!--<div class="panel-body">-->
+
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<br>-->
+                        <!--<div class="panel collapse-panel">-->
+                        <!--<a class="panel-heading collapsed" role="tab" id="task5_heding2" data-toggle="collapse" data-parent="#accordion_task5" href="#task5_collapse2" aria-expanded="false">-->
+                        <!--<span class="checkout-step-number">3</span>-->
+                        <!--<h4 class="checkout-step-title">Collapsible Group Items #3</h4>-->
+                        <!--</a>-->
+                        <!--<div id="task5_collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task5_heding2">-->
+                        <!--<div class="panel-body">-->
+                        <!--contents-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel tasks" id="task_5" style="display: none">
+                <div class="x_title subtitle">
+                    <h2><i class="fa fa-bars"></i> 학습(훈련) 모델 <small>훈련에 사용할 학습모델을 설정합니다.</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="accordion" id="accordion_task5" role="tablist" aria-multiselectable="true">
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading" role="tab" id="task5_heding0" data-toggle="collapse" data-parent="#accordion_task5" href="#task5_collapse0" aria-expanded="true">
+                                <span class="checkout-step-number">1</span>
+                                <h4 class="checkout-step-title">기계학습 모델 구성</h4>
+                            </a>
+                            <div id="task5_collapse0" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="task5_heding0">
+                                <div class="panel-body" style="text-align: center">
+                                    <div class="col-md-4 col-sm-3 col-xs-12">
+                                        <label class="form_label" for="file_upload_form_modelUpload" data-toggle="tooltip" data-placement="top" title="미리 작성되어 있는 스크립트를 불러옵니다.">미리 작성된 ML 모델 사용</label>
+                                    </div>
+                                    <div class="col-md-8 col-sm-9 col-xs-12">
+                                        <div class="form-group">
+                                            <input type="file" id="file_upload_form_modelUpload" class="filestyle">
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                    <a href="/modeling/model/">
+                                        <button type="button" class="btn btn-default" href="/home/">딥러닝 모델 편집기로 이동(직접 생성) </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading collapsed" role="tab" id="task5_heding1" data-toggle="collapse" data-parent="#accordion_task5" href="#task5_collapse1" aria-expanded="false">
+                                <span class="checkout-step-number">2</span>
+                                <h4 class="checkout-step-title">하이퍼 파라미터 설정</h4>
+                                {% load staticfiles %}
+                                <span class="d-inline-block" tabindex="0">
+                                    <img class="right-icon" data-toggle="tooltip" title="Default는 AutoML이 제공하는 최적 값입니다." data-html="true" src="{% static 'images/icon/iconfinder_warning_1930253.png' %}" style= "height : 35px; float : right" >
+                                </span>
+                            </a>
+                            <div id="task5_collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task5_heding1">
+                                <div class="panel-body">
+                                    <form class="form-horizontal form-label-left">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Number of Epoch</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <div class="input-group" style="width : 100%; margin-bottom : 3px">
+                                                    <div class="input-group input-group-lg" style="width : 100%">
+                                                        <input type="text" class="form-control" id="use_icon" placeholder="1000 :: Default">
+                                                        <span class="input-group-addon" style="padding : 3px">
+                                                            {% load staticfiles %}
+                                                            <span class="d-inline-block" tabindex="0">
+                                                                <img class="right-icon" data-toggle="tooltip" title="전체 트레이닝 데이터 셋에 대해 학습을 완료한 단위" data-html="true" src="{% static 'images/icon/iconfinder_info_1930258.png'%}">
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Batch Size</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <div class="input-group" style="width : 100%">
+                                                    <div class="input-group input-group-lg" style="width : 100%; margin-bottom : 3px">
+                                                        <input type="text" class="form-control" placeholder="2000 :: Default">
+                                                        <span class="input-group-addon" style="padding : 3px">
+                                                            {% load staticfiles %}
+                                                            <span class="d-inline-block" tabindex="0">
+                                                               <img class="right-icon" data-toggle="tooltip" title="학습시킬 데이터셋을 나누는 크기" data-html="true" src="{% static 'images/icon/iconfinder_info_1930258.png' %}">
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Loss Function</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <div class="input-group" style="width : 100%; margin-bottom : 3px">
+                                                    <div class="input-group input-group-lg" style="width : 100%">
+                                                        <input type="text" class="form-control" placeholder="2000 :: Default">
+                                                        <span class="input-group-addon" style="padding : 3px">
+                                                            {% load staticfiles %}
+                                                            <span class="d-inline-block" tabindex="0">
+                                                                <img class="right-icon" data-toggle="tooltip" title="실제 관측값과 예측값을 비교하여 나타내는 함수" data-html="true" src="{% static 'images/icon/iconfinder_info_1930258.png' %}">
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Optimizer</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <div class="input-group" style="width : 100%; margin-bottom : 3px">
+                                                    <div class="input-group input-group-lg" style="width : 100%">
+                                                        <select class="form-control">
+                                                            <option>Adadelta</option>
+                                                            <option>Adagrad</option>
+                                                            <option>Adam</option>
+                                                            <option>Adamax</option>
+                                                            <option>Nadam</option>
+                                                            <option>RMSprop</option>
+                                                            <option>SGD</option>
+                                                        </select>
+                                                        <span class="input-group-addon" style="padding : 3px">
+                                                            <span class="d-inline-block" tabindex="0">
+                                                                <img class="right-icon" data-toggle="tooltip" title="오류를 최소화 하는 방향으로 학습하는 함수" data-html="true" src="{% static 'images/icon/iconfinder_info_1930258.png' %}" >
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Learning Rate</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <div class="input-group input-group-lg" style="width : 100%">
+                                                    <input type="text" class="form-control" placeholder="0.7 :: Default">
+                                                    <span class="input-group-addon" style="padding : 3px">
+                                                        {% load staticfiles %}
+                                                        <span class="d-inline-block" tabindex="0">
+                                                            <img class="right-icon" data-toggle="tooltip" title="학습 방향에 따라 얼마나 이동할지 정하는 단위" data-html="true" src="{% static 'images/icon/iconfinder_info_1930258.png' %}">
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">epsilon</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <div class="input-group input-group-lg" style="width : 100%">
+                                                    <input type="text" class="form-control" placeholder="1e-08 :: Default">
+                                                    <span class="input-group-addon" style="padding : 3px">
+                                                        {% load staticfiles %}
+                                                        <img class='right-icon' src="{% static 'images/icon/iconfinder_info_1930258.png' %}">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Decay</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <div class="input-group input-group-lg" style="width : 100%">
+                                                    <input type="text" class="form-control" placeholder="0 :: Default">
+                                                    <span class="input-group-addon" style="padding : 3px">
+                                                        {% load staticfiles %}
+                                                        <img class='right-icon' src="{% static 'images/icon/iconfinder_info_1930258.png' %}">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">rho</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <div class="input-group input-group-lg" style="width : 100%">
+                                                    <input type="text" class="form-control" placeholder="0.95 :: Default">
+                                                    <span class="input-group-addon" style="padding : 3px">
+                                                        {% load staticfiles %}
+                                                        <img class='right-icon' src="{% static 'images/icon/iconfinder_info_1930258.png' %}">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <!--<div class="panel collapse-panel">-->
+                            <!--<a class="panel-heading collapsed" role="tab" id="task5_heding2" data-toggle="collapse" data-parent="#accordion_task5" href="#task5_collapse2" aria-expanded="false">-->
+                                <!--<span class="checkout-step-number">3</span>-->
+                                <!--<h4 class="checkout-step-title">Collapsible Group Items #3</h4>-->
+                            <!--</a>-->
+                            <!--<div id="task5_collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task5_heding2">-->
+                                <!--<div class="panel-body">-->
+                                    <!--contents-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel tasks" id="task_9" style="display: none">
+                <div class="x_title subtitle">
+                    <h2><i class="fa fa-bars"></i> 학습 알고리즘 <small>학습에 적용할 알고리즘을 선택합니다.</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="accordion" id="accordion_task9" role="tablist" aria-multiselectable="true">
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading" role="tab" id="task9_heding0" data-toggle="collapse" data-parent="#accordion_task9" href="#task9_collapse0" aria-expanded="true">
+                                <span class="checkout-step-number">1</span>
+                                <h4 class="checkout-step-title">기계학습 태스크 선택</h4>
+                            </a>
+                            <div id="task9_collapse0" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="task9_heding0">
+                                <div class="panel-body">
+                                    <p style="text-align: center">
+                                        <input type="radio" class="flat" name="task_type" id="machine_learning" value="machine_learning" checked="" required />&nbsp;
+                                        <label for="machine_learning" data-toggle="tooltip" data-placement="bottom" title="기계학습을 수행합니다.">Machine Learning</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="flat" name="task_type" id="deep_learning" value="deep_learning" />&nbsp;
+                                        <label for="deep_learning" data-toggle="tooltip" data-placement="bottom" title="심층학습을 수행합니다.">Deep Learning</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading collapsed" role="tab" id="task9_heding1" data-toggle="collapse" data-parent="#accordion_task9" href="#task9_collapse1" aria-expanded="false">
+                                <span class="checkout-step-number">2</span>
+                                <h4 class="checkout-step-title">알고리즘 선택</h4>
+                            </a>
+                            <div id="task9_collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task9_heding1">
+                                <div class="panel-body">
+                                    <div class="col-md-3 col-sm-3 col-xs-12"></div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select class="form-control" id="data_load_select_box">
+                                            <option value="" selected>알고리즘 선택</option>
+                                            <optgroup label="Standard Algorithm">
+                                                <option value="CNN">CNN (Image Classification)</option>
+                                                <option value="Yolo">Yolo (Image Detection)</option>
+                                                <option value="mask_RCNN">Mask-RCNN (Image Recognition)</option>
+                                                <option value="RNN">RNN</option>
+                                            </optgroup>
+                                            <optgroup label="Custom Algorithm">
+                                                <option value="myData">my algorithm 01</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <!--<div class="panel collapse-panel">-->
+                        <!--<a class="panel-heading collapsed" role="tab" id="task9_heding2" data-toggle="collapse" data-parent="#accordion_task9" href="#task9_collapse2" aria-expanded="false">-->
+                        <!--<span class="checkout-step-number">3</span>-->
+                        <!--<h4 class="checkout-step-title">Collapsible Group Items #3</h4>-->
+                        <!--</a>-->
+                        <!--<div id="task9_collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task9_heding2">-->
+                        <!--<div class="panel-body">-->
+                        <!--contents-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12" id="section_2">
+            <div class="x_panel">
+                <div class="x_title subtitle">
+                    <h2><i class="fa fa-bars"></i> 태스크 종류 : 분류 <small>semi description</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <!--<button id="import">import</button>-->
+                    <div class="arg-Graph panel" id="diagrams"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-12 col-sm-12 col-xs-12" id="section_3" style="display:none;">
+            <div class="x_panel">
+                <div class="x_title subtitle">
+                    <h2><i class="fa fa-bars"></i> 선택된 데이터 <small>semi description</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Username</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+{{ block.super }}
+
+<script src="/static/vendors/Directed-Graph-jQuery-SVG-Arg-Graph/arg-graph-1.1/arg-graph.js?ver=1.06"></script>
+<script src="/static/vendors/dropzone/dist/min/dropzone.min.js"></script>
+<script src="/static/vendors/pnotify/dist/pnotify.js"></script>
+<script src="/static/vendors/pnotify/dist/pnotify.buttons.js"></script>
+<script src="/static/vendors/pnotify/dist/pnotify.nonblock.js"></script>
+
+<!--<script src="/static/vendors/bootstrap-filestyle-2.1.0/src/bootstrap-filestyle.min.js?ver=1.01"></script>-->
+<script src="/static/vendors/bootstrap-filestyle-2.1.0/src/bootstrap-filestyle.js?ver=1.01"></script>
+<script src="/static/vendors/jQuery-Knob-master/dist/jquery.knob.min.js?ver=1"></script>
+
+
+<script>
+    argGraph = $('.arg-Graph').ArgGraph({
+            'onGraphChange': function () {
+                // var json = argGraph.exportJson();
+                // $("#output").html(document.createTextNode(json));
+            }
+    });
+
+    $('.dial').knob({
+            // set the size of dials -- item4. set dataSet
+            "min" : 0,
+            "max" : 100,
+            "height" : 120,
+            "width" : 120,
+    });
+
+    $(document).on("change", "#TVT_select", function () {
+        var select = $("#TVT_select").val();
+
+        //if (select.value == "custom") {
+        //
+        //}else if (select.value == "k_fold_cross_validation") {
+        //
+        //} else {
+        //}
+        var strArr = select.split('_');
+        var train_ratio = strArr[0];
+        var validation_ratio = strArr[1];
+        var test_ratio = strArr[2];
+
+        $('#train_ratio').val(train_ratio).trigger('change');
+        $('#validation_ratio').val(validation_ratio).trigger('change');
+        $('#test_ratio').val(test_ratio).trigger('change');
+    });
+
+    $('#file_upload_form_dataUpload').filestyle({
+        btnClass : 'btn-danger',
+        text : ' File selection',
+
+    });
+
+    $('#file_upload_form_modelUpload').filestyle({
+        btnClass : 'btn-danger',
+        text : ' File selection',
+
+    });
+
+    $('#file_upload_form_dataUpload').change(function() {
+        new PNotify({
+            title: 'Success',
+            text: '파일 선택 완료',
+            type: 'success',
+            styling: 'bootstrap3'
+        });
+    });
+
+    $('#file_upload_form_modelUpload').change(function() {
+        new PNotify({
+            title: 'Success',
+            text: '파일 선택 완료',
+            type: 'success',
+            styling: 'bootstrap3'
+        });
+    });
+
+    $('#data_load_select_box').change(function() {
+        // event listener of data load select box
+        let temp = '<table class="table table-hover">' +
+                        '<thead>' +
+                            '<tr>' +
+                                '<th>#</th>' +
+                                '<th>First Name</th>' +
+                                '<th>Last Name</th>' +
+                                '<th>Username</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody>' +
+                            '<tr>' +
+                                '<th scope="row">1</th>' +
+                                    '<td>Mark</td>' +
+                                    '<td>Otto</td>' +
+                                    '<td>@mdo</td>' +
+                             '</tr>' +
+                        '</tbody>' +
+                    '</table>';
+
+        document.getElementById('section_3').style.display = 'block';
+
+        new PNotify({
+            title: 'Success',
+            text: '데이터를 성공적으로 불러왔습니다.',
+            type: 'success',
+            styling: 'bootstrap3'
+        });
+    });
+
+    $(document).ready(function() {
+        // var json = $("#input").html();
+        let test = [
+            {
+                "id": "item_0",
+                "text": "데이터 업로드",
+                "position": {
+                    "left": "540px",
+                    "top": "30px"
+                },
+                "neighbors": [
+                    "item_1"
+                ]
+            },
+            {
+                "id": "item_1",
+                "text": "데이터 탐색",
+                "position": {
+                    "left": "540px",
+                    "top": "100px"
+                },
+                "neighbors": [
+                    "item_2"
+                ]
+            },
+            {
+                "id": "item_2",
+                "text": "데이터 컬럼 선택",
+                "position": {
+                    "left": "540px",
+                    "top": "170px"
+                },
+                "neighbors": ["item_3"]
+            },
+            {
+                "id": "item_3",
+                "text": "데이터 특징 추출",
+                "position": {
+                    "left": "540px",
+                    "top": "240px"
+                },
+                "neighbors": [
+                    "item_4"
+                ]
+            },
+            {
+                "id": "item_4",
+                "text": "학습 데이터 분할",
+                "position": {
+                    "left": "540px",
+                    "top": "310px"
+                },
+                "neighbors": [
+                    "item_5", "item_7"
+                ]
+            },
+            {
+                "id": "item_5",
+                "text": "학습(훈련) 모델",
+                "position": {
+                    "left": "300px",
+                    "top": "380px"
+                },
+                "neighbors": [
+                    "item_7"
+                ]
+            },
+            {
+                "id": "item_7",
+                "text": "성능측정(모델함수)",
+                "position": {
+                    "left": "350px",
+                    "top": "450px"
+                },
+                "neighbors": [
+                    "item_8"
+                ]
+            },
+            {
+                "id": "item_8",
+                "text": "모델평가",
+                "position": {
+                    "left": "350px",
+                    "top": "520px"
+                },
+                "neighbors": [
+                    ""
+                ]
+            },
+            {
+                "id": "item_9",
+                "text": "학습 알고리즘",
+                "position": {
+                    "left": "100px",
+                    "top": "310px"
+                },
+                "neighbors": [
+                    "item_5"
+                ]
+            },
+        ];
+
+        argGraph.importJson(test);
+
+        document.getElementById('item_0').style.border = '8px solid #1a65da';
+
+        let itemClickEvents = $('.arg-Graph_item').on('click', function(e) {
+            // when the operator selected, set the css of the operators and display the left section which related to the selected operator.
+            let clicked_id = this.id;
+
+            let index = String(clicked_id).split('_')[1];
+            {#let index = String(clicked_id).substring(4, 5);#}
+
+            for (let i = 0; i < 3; i++) {
+                // off
+                if (index == i) {
+                    continue;
+                }
+
+                let sectionId = "task_" + i;
+                let tempElement = document.getElementById(sectionId).setAttribute('style', 'display:none;');
+
+                let itemId = "item_" + i;
+                document.getElementById(itemId).style.border = '2px solid black';
+            }
+
+            let sectionId = "task_" + index;
+            let element = document.getElementById(sectionId).setAttribute('style', 'display:block;');
+
+            document.getElementById(clicked_id).style.border = '8px solid #1a65da';
+            document.getElementById('section_3').style.display = 'none';
+        });
+
+
+    });
+
+
+    // $(function () {
+    //     $('#import').on('click',
+    //         function() {
+    //             // var json = $("#input").html();
+    //             let test = [
+    //                 {
+    //                     "id": "item_0",
+    //                     "text": "데이터 불러오기",
+    //                     "position": {
+    //                         "left": "540px",
+    //                         "top": "100px"
+    //                     },
+    //                     "neighbors": [
+    //                         "item_1"
+    //                     ]
+    //                 },
+    //                 {
+    //                     "id": "item_1",
+    //                     "text": "데이터 탐색",
+    //                     "position": {
+    //                         "left": "540px",
+    //                         "top": "200px"
+    //                     },
+    //                     "neighbors": [
+    //                         "item_2"
+    //                     ]
+    //                 },
+    //                 {
+    //                     "id": "item_2",
+    //                     "text": "데이터 컬럼 선택",
+    //                     "position": {
+    //                         "left": "540px",
+    //                         "top": "300px"
+    //                     },
+    //                     "neighbors": ["item_3"]
+    //                 },
+    //                 {
+    //                     "id": "item_3",
+    //                     "text": "데이터 특징 추출",
+    //                     "position": {
+    //                         "left": "540px",
+    //                         "top": "400px"
+    //                     },
+    //                     "neighbors": [
+    //                         "item_4"
+    //                     ]
+    //                 },
+    //                 {
+    //                     "id": "item_4",
+    //                     "text": "학습 데이터 분할",
+    //                     "position": {
+    //                         "left": "540px",
+    //                         "top": "500px"
+    //                     },
+    //                     "neighbors": [
+    //                         "item_5", "item_7"
+    //                     ]
+    //                 },
+    //                 {
+    //                     "id": "item_5",
+    //                     "text": "학습(훈련) 모델",
+    //                     "position": {
+    //                         "left": "300px",
+    //                         "top": "600px"
+    //                     },
+    //                     "neighbors": [
+    //                         "item_7"
+    //                     ]
+    //                 },
+    //                 {
+    //                     "id": "item_7",
+    //                     "text": "성능측정(모델함수)",
+    //                     "position": {
+    //                         "left": "300px",
+    //                         "top": "700px"
+    //                     },
+    //                     "neighbors": [
+    //                         "item_8"
+    //                     ]
+    //                 },
+    //                 {
+    //                     "id": "item_8",
+    //                     "text": "모델평가",
+    //                     "position": {
+    //                         "left": "300px",
+    //                         "top": "800px"
+    //                     },
+    //                     "neighbors": [
+    //                         ""
+    //                     ]
+    //                 },
+    //                 {
+    //                     "id": "item_9",
+    //                     "text": "학습 알고리즘",
+    //                     "position": {
+    //                         "left": "100px",
+    //                         "top": "600px"
+    //                     },
+    //                     "neighbors": [
+    //                         "item_5"
+    //                     ]
+    //                 },
+    //             ];
+    //
+    //             argGraph.importJson(test);
+    //
+    //             let itemClickEvents = $('.arg-Graph_item').on('click', function(e) {
+    //                 // when the operator selected, set the css of the operators and display the left section which related to the selected operator.
+    //                 let clicked_id = this.id;
+    //
+    //                 let index = String(clicked_id).split('_')[1];
+    //                 {#let index = String(clicked_id).substring(4, 5);#}
+    //
+    //                 for (let i = 0; i < 3; i++) {
+    //                     // off
+    //                     if (index == i) {
+    //                         continue;
+    //                     }
+    //
+    //                     let sectionId = "section_" + i;
+    //                     let tempElement = document.getElementById(sectionId).setAttribute('style', 'display:none;');
+    //
+    //                     let itemId = "item_" + i;
+    //                     document.getElementById(itemId).style.border = '2px solid black';
+    //                 }
+    //
+    //                 let sectionId = "section_" + index;
+    //                 let element = document.getElementById(sectionId).setAttribute('style', 'display:block;');
+    //
+    //                 document.getElementById(clicked_id).style.border = '8px solid #1a65da';
+    //
+    //             });
+    //         });
+    //
+    // });
+
+    function renderSection_left(taskList) {
+        /**
+         * renderSection_left(taskList)
+         * Render the let section refering to taskList.
+         *
+         * @param taskList: a 'list'
+         * the list of tasks.
+         *
+         * @return nothing:
+         */
+    }
+
+    function getTable(datasetName) {
+        let dataSet = $('#' + datasetName).val();   // DataSet 셀렉터로부터 선택된 값을 가져온다
+        console.log(dataSet);
+        dataSet = 'mnist';
+
+        $.ajax({
+                type : "POST",
+                url : "table/",
+                dataType : "json",
+                data : {
+                    'csrfmiddlewaretoken': '{{csrf_token }}',
+                    // 'dataSet':JSON.stringify(dataSet),
+                    'dataSet':dataSet,
+                },
+                success: function(responseData) {
+                    //alert(success);
+                    if (responseData == null) {
+                        alert("Error : responseData is null");
+                        return;
+                    }    // 받아올 값이 없거나 오류가 발생하면 바로 함수 종료
+
+                    console.log(responseData.tuples);
+                    // 해당 데이터셋과 일치하는 테이블이 없는 경우 바로 함수 종료
+                    if (responseData.tuples == null) {
+                        alert("Error : no such table");
+                        document.getElementById("table_name").innerHTML = "No Table";    // table 이름 설정
+                        document.getElementById("datatable-buttons").innerHTML = null;   // table 컨텐츠 설정
+                        return;
+                    }
+
+                    var content = "<thead>" +
+                        "<tr>";
+
+                    for (var i = 0; i < responseData.column.length; i++) {
+                        var selectId = "select_" + i;
+                        var inputId = "inputPort_" + i;
+                        var outputId = "outputPort_" + i;
+                        content +=      "<th>" +
+                            "<select class='form-control btn btn-default dropdown-toggle' id=" + selectId + ">" +
+                            "<option value=" + inputId + ">" + inputId + "</option>" +
+                            "<option value=" + outputId + ">" + outputId + "</option>" +
+                            "<option value='ignore'>ignore</option>" +
+                            "</select>" +
+                            "</th>";
+                    }
+
+                    content += "</tr>" + "<tr>";
+
+                    for (var i = 0; i < responseData.column.length; i++) {
+
+                        content += "<th>" + responseData.column[i] + "</th>";
+                    }
+
+                    content += "</tr>" +
+                        "</thead>" +
+                        "<tbody>";
+
+                    for (var i = 0; i < responseData.tuples.length; i++) {
+                        content += "<tr>";
+
+                        for (var j = 0; j < responseData.column.length; j++) {
+                            content += "<td>" + responseData.tuples[i][j] + "</td>";
+                        }
+
+                        content += "</tr>";
+                    }
+
+                    content += "</tbody>";
+
+                    //console.log(innerHTML(elements))
+                    // document.getElementById("table_name").innerHTML = dataSet;          // table 이름 설정
+                    document.getElementById("datatable-buttons").innerHTML = content;  // table 컨텐츠 설정
+                },
+                error: function() {
+                    //alert(error);
+                    //autoclosingAlert("#danerMessage", 2000);
+                }
+            });
+    }
+        getTable();
+
+
+</script>
+{% endblock javascripts %}

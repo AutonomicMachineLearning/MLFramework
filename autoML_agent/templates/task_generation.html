@@ -1,0 +1,271 @@
+{% extends "base_site.html" %}
+
+{% block title %} Data 입력 {% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+<!-- Dropzone.js -->
+<link rel="stylesheet" href="/static/vendors/alloy-3.0.1/build\aui-diagram-builder\assets\aui-diagram-builder-core.css?ver=1.01">
+<link rel="stylesheet" type="text/css" href="/static/vendors/Directed-Graph-jQuery-SVG-Arg-Graph/arg-graph-1.1/arg-graph.css?ver=1.05">
+
+
+<style>
+    .checkout-step-panel {
+        border: 1px dashed #aaa;
+        border-radius: 10px;
+        background-color: rgba(250, 250, 250, 0.93);
+        width: 100%;
+        overflow-y: auto;
+        float: left;
+        margin: 10px;
+        height: auto;
+        padding: 20px;
+        color: #666;
+        font-size: 16px;
+    }
+
+
+    .list-unstyled > li {
+        font-size: 15px;
+        margin-bottom: 3px;
+        padding-left: 20px;
+    }
+</style>
+
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="x_title">
+                    <h3><i class="fa fa-bars"></i> 태스크 생성
+                        <small></small>
+                    </h3>
+                    <br>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10 col-sm-6 col-xs-12">
+                        <div id="wizard" class="form_wizard wizard_horizontal">
+                            <ul class="wizard_steps anchor">
+                                <li>
+                                    <a href="#step-1" class="selected" isdone="1" rel="1">
+                                        <span class="step_no">1</span>
+                                        <span class="step_descr">
+                                    ML 태스크 유형 선택 가이드
+                                    <br>
+                                    <small></small>
+                                </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#step-2" class="done" isdone="1" rel="2">
+                                        <span class="step_no">2</span>
+                                        <span class="step_descr">
+                                    데이터 선택
+                                    <br>
+                                    <small></small>
+                                </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#step-3" class="done" isdone="1" rel="3">
+                                        <span class="step_no">3</span>
+                                        <span class="step_descr">
+                                    모델 학습 및 예측
+                                    <br>
+                                    <small></small>
+                                </span>
+                                    </a>
+                                </li>
+                                <!--<li>-->
+                                <!--<a href="#step-4" class="done" isdone="1" rel="4">-->
+                                <!--<span class="step_no">4</span>-->
+                                <!--<span class="step_descr">-->
+                                <!--Step 4-->
+                                <!--<br>-->
+                                <!--<small>Step 4 description</small>-->
+                                <!--</span>-->
+                                <!--</a>-->
+                                <!--</li>-->
+                            </ul>
+                            <div class="stepContainer" style="height: 300px;">
+                                <div id="step-1" class="content" style="display: block;">
+                                    <div class="row">
+                                        <div class="ln_solid"></div>
+                                        <div class="col-md-3 col-sm-1"></div>
+                                        <div class="col-md-6 col-sm-10 col-xs-12">
+                                            <ul class="list-unstyled text-left">
+                                                <h3 class="StepTitle">ML 태스크 선택</h3>
+                                                <li><i class="fa fa-check text-success"></i> <strong> 특정 데이터가 A이거나 B인가요?</strong> 에서는 분류 알고리즘을 사용합니다.</li>
+                                                <li><i class="fa fa-check text-success"></i> <strong>데이터의 양 또는 수치를 예측하나요?</strong> 에서는 회귀 알고리즘을 사용합니다.</li>
+                                                <li><i class="fa fa-check text-success"></i> <strong>데이터가 어떻게 구성되어 있나요?</strong> 에서는 클러스트링(군집화) 알고리즘을 사용합니다.</li>
+                                                <li><i class="fa fa-check text-success"></i> <strong>데이터가 이상한가요?</strong> 에서는 이상치 탐지 알고리즘을 사용합니다.</li>
+                                                <li><i class="fa fa-check text-success"></i> <strong>어떻게 해야 하나요?</strong> 에서는 강화학습 알고리즘을 사용합니다.</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-3 col-sm-1"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ln_solid"></div>
+                                        <form class="form-horizontal form-label-left">
+                                            <div class="form-group">
+                                                <div class="col-md-2 col-sm-2"></div>
+                                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">태스크 :</label>
+                                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                                <select class="form-control">
+                                                                    <option>태스크 선택</option>
+                                                                    <option value="classification">분류 태스크</option>
+                                                                    <option value="regression">회귀 태스크</option>
+                                                                    <option value="clustering">군집화 태스크</option>
+                                                                    <option value="novelty_detection">이상치 탐지 태스크</option>
+                                                                    <option value="reinforcement_learning">강화학습 태스크</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2"></div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div id="step-2" class="content" style="display: none;">
+                                    <div class="row">
+                                        <div class="ln_solid"></div>
+                                        <div class="col-md-3 col-sm-1"></div>
+                                        <div class="col-md-6 col-sm-10 col-xs-12">
+                                            <ul class="list-unstyled text-left">
+                                                <h3 class="StepTitle">데이터가 준비되어 있나요?</h3>
+                                                <li><i class="fa fa-check text-success"></i> <strong> 데이터가 준비되어 있다면 </strong>기존의 준비되어 있는 데이터를 사용합니다.</li>
+                                                <li><i class="fa fa-check text-success"></i> <strong> 만약, 데이터가 준비되어 있지 않다면 </strong>새로운 데이터를 불러옵니다.</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-3 col-sm-1"></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ln_solid"></div>
+                                        <form class="form-horizontal form-label-left">
+                                            <div class="form-group">
+                                                <div class="col-md-2 col-sm-2"></div>
+                                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-5 col-sm-5 col-xs-5"></div>
+                                                            <div id="" class="btn-group col-md-2 col-sm-2 col-xs-2" data-toggle="buttons">
+                                                                <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                                                    <input type="radio" name="gender" value="male"> &nbsp; Yes &nbsp;
+                                                                </label>
+                                                                <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                                                    <input type="radio" name="gender" value="female"> &nbsp; No &nbsp;
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-md-5 col-sm-5 col-xs-5"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div id="step-3" class="content" style="display: none;">
+                                    <div class="row">
+                                        <div class="ln_solid"></div>
+                                        <div class="col-md-3 col-sm-1"></div>
+                                        <div class="col-md-6 col-sm-10 col-xs-12">
+                                            <ul class="list-unstyled text-left">
+                                                <h3 class="StepTitle">모델 학습 및 예측</h3>
+                                                <li><i class="fa fa-check text-success"></i> <strong> 1단계 </strong> 데이터 가져오기</li>
+                                                <li><i class="fa fa-check text-success"></i> <strong> 2단계 </strong> 데이터 준비</li>
+                                                <li><i class="fa fa-check text-success"></i> <strong> 3단계 </strong> 데이터 탐색 >> 데이터셋에서 열 선택</li>
+                                                <li><i class="fa fa-check text-success"></i> <strong> 4단계 </strong> 데이터 분할</li>
+                                                <li><i class="fa fa-check text-success"></i> <strong> 5단계 </strong> 학습 모델 선택</li>
+                                                <li><i class="fa fa-check text-success"></i> <strong> 6단계 </strong> 새로운 데이터 예측</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-3 col-sm-1"></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <!--<div class="row">-->
+                                        <!--<div class="ln_solid"></div>-->
+                                        <!--<form class="form-horizontal form-label-left">-->
+                                            <!--<div class="form-group">-->
+                                                <!--<div class="col-md-2 col-sm-2"></div>-->
+                                                <!--<div class="col-md-8 col-sm-8 col-xs-12">-->
+                                                    <!--<div class="form-group">-->
+                                                        <!--<div class="row">-->
+                                                            <!--<div class="col-md-5 col-sm-5 col-xs-5"></div>-->
+                                                            <!--<div id="gender" class="btn-group col-md-2 col-sm-2 col-xs-2" data-toggle="buttons">-->
+                                                                <!--<label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">-->
+                                                                    <!--<input type="radio" name="gender" value="male"> &nbsp; Yes &nbsp;-->
+                                                                <!--</label>-->
+                                                                <!--<label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">-->
+                                                                    <!--<input type="radio" name="gender" value="female"> &nbsp; No &nbsp;-->
+                                                                <!--</label>-->
+                                                            <!--</div>-->
+                                                            <!--<div class="col-md-5 col-sm-5 col-xs-5"></div>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</form>-->
+                                    <!--</div>-->
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+{{ block.super }}
+<script src="/static/vendors/alloy-3.0.1/build/aui/aui-min.js"></script>
+<script src="/static/vendors/alloy-3.0.1/build/aui-diagram-builder/aui-diagram-builder.js"></script>
+<script src="/static/vendors/alloy-3.0.1/build/aui-diagram-builder-connector/aui-diagram-builder-connector.js"></script>
+<script src="/static/vendors/alloy-3.0.1/build/aui-diagram-node/aui-diagram-node.js"></script>
+<script src="/static/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js?ver=1.02"></script>
+<script src="/static/vendors/Directed-Graph-jQuery-SVG-Arg-Graph/arg-graph-1.1/arg-graph.js?ver=1.06"></script>
+
+
+
+<script>
+
+    $(document).ready(function() {
+        $('.buttonFinish').on('click', function() {
+            alert("click");
+        });
+    });
+
+</script>
+{% endblock javascripts %}

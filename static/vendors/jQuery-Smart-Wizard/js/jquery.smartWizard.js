@@ -66,6 +66,23 @@ function SmartWizard(target, options) {
             $this.goBackward();
             return false;
         });
+        // $($this.buttons.finish).click(function() {
+        //      // source
+        //     if(!$(this).hasClass('buttonDisabled')){
+        //         if($.isFunction($this.options.onFinish)) {
+        //             var context = { fromStep: $this.curStepIdx + 1 };
+        //             if(!$this.options.onFinish.call(this,$($this.steps), context)){
+        //                 return false;
+        //             }
+        //         }else{
+        //             var frm = $this.target.parents('form');
+        //             if(frm && frm.length){
+        //                 frm.submit();
+        //             }
+        //         }
+        //     }
+        //     return false;
+        // });
         $($this.buttons.finish).click(function() {
             if(!$(this).hasClass('buttonDisabled')){
                 if($.isFunction($this.options.onFinish)) {
@@ -74,7 +91,10 @@ function SmartWizard(target, options) {
                         return false;
                     }
                 }else{
+                    location.replace('/autoML_agent/task_flow/');   // go to the url
+                    // those code would be ignored.
                     var frm = $this.target.parents('form');
+                    console.log("frm : ", frm);
                     if(frm && frm.length){
                         frm.submit();
                     }

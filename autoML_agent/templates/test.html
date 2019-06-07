@@ -1,0 +1,168 @@
+{% block content %}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="row">
+                <div class="title">
+                    <h3>태스크 생성 </h3>
+                </div>
+                <div style="float : left; width : 50%" class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <div class="container">
+                                <form method = "post" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="accordion" class="checkout">
+                                            <div class="panel checkout-step">
+                                                <div><span class="checkout-step-number">1</span>
+                                                    <h4 class="checkout-step-title"><a role="button"
+                                                                                       data-toggle="collapse"
+                                                                                       data-parent="#accordion"
+                                                                                       href="#collapseOne"> ML태스크 유형
+                                                        선택</a></h4>
+                                                </div>
+                                                <div id="collapseOne" class="collapse in">
+                                                    <div class="checkout-step-body">
+                                                        <p>알고리즘을 선택 해주세요.</p>
+                                                        <div class="row">
+                                                            <div class="col-lg-8">
+                                                                <div class="checkout-login">
+                                                                        {% csrf_token %}
+                                                                        {{ form.algorithm }}
+                                                                        <a class="btn btn-default " role="button"
+                                                                           data-toggle="collapse"
+                                                                           data-parent="#accordion" href="#collapseTwo">Next</a>
+                                                                        <!-- add class disabled to inactive button -->
+                                                                </div>
+                                                                <!-- /input-group -->
+                                                            </div>
+                                                            <!-- /.col-lg-6 -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel checkout-step">
+                                                <div role="tab" id="headingTwo"><span
+                                                        class="checkout-step-number">2</span>
+                                                    <h4 class="checkout-step-title"><a class="collapsed" role="button"
+                                                                                       data-toggle="collapse"
+                                                                                       data-parent="#accordion"
+                                                                                       href="#collapseTwo"> 데이터가 준비
+                                                        되어있나요? </a></h4>
+                                                </div>
+                                                <div id="collapseTwo" class="panel-collapse collapse">
+                                                    <div class="checkout-step-body">
+                                                        <div class="checout-address-step">
+                                                            <div class="row">
+
+                                                                    <!-- Multiple Radios (inline) -->
+                                                                    {% csrf_token %}
+                                                                        {{ form.readyData }}
+                                                            </div>
+                                                        </div>
+                                                        <a class="collapsed btn btn-default" role="button"
+                                                           data-toggle="collapse" data-parent="#accordion"
+                                                           href="#collapseThree"> Next </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="panel checkout-step">
+                                                <div role="tab" id="headingThree"><span
+                                                        class="checkout-step-number">3</span>
+                                                    <h4 class="checkout-step-title"><a class="collapsed" role="button"
+                                                                                       data-toggle="collapse"
+                                                                                       data-parent="#accordion"
+                                                                                       href="#collapseThree"> 모델
+                                                        만들기 </a></h4>
+                                                </div>
+                                                <div id="collapseThree" class="panel-collapse collapse">
+                                                    <div class="checkout-step-body">
+                                                        <div class="row">
+                                                            <div class="form-group">
+                                                                ·1단계 : 데이터 가져오기 <br/>
+                                                                ·2단계 : 데이터 준비 <br/>
+                                                                ·3단계 : 데이터 탐색 -> 데이터셋에서 열선택 <br/>
+                                                            </div>
+                                                        </div>
+
+                                                    <a class="collapsed btn btn-default" role="button"
+                                                       data-toggle="collapse" data-parent="#accordion"
+                                                       href="#collapseFour"> Next </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="panel checkout-step">
+                                                <div role="tab" id="headingFour"><span
+                                                        class="checkout-step-number">4</span>
+                                                    <h4 class="checkout-step-title"><a class="collapsed" role="button"
+                                                                                       data-toggle="collapse"
+                                                                                       data-parent="#accordion"
+                                                                                       href="#collapseFour"> 모델 학습 </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseFour" class="panel-collapse collapse">
+                                                    <div class="checkout-step-body">
+                                                            <div class="row">
+                                                                <div class="form-group">
+                                                                    ·4단계 : 데이터 분할 <br/>
+                                                                    ·5단계 : 학습 모델 선택 <br/>
+                                                                </div>
+                                                            </div>
+                                                    <a class="collapsed btn btn-default" role="button"
+                                                       data-toggle="collapse" data-parent="#accordion"
+                                                       href="#collapseFive"> Next </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="panel checkout-step">
+                                                <div role="tab" id="headingFive"><span
+                                                        class="checkout-step-number">5</span>
+                                                    <h4 class="checkout-step-title"><a class="collapsed" role="button"
+                                                                                       data-toggle="collapse"
+                                                                                       data-parent="#accordion"
+                                                                                       href="#collapseFive"> 모델 예측 </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseFive" class="panel-collapse collapse">
+                                                    <div class="checkout-step-body">
+                                                        ·6단계 : 새로운 데이터 예측 <br/>
+                                                        <button type="submt">submit</button>
+{#                                                        <a href="#" class="btn btn-default">Proccess to payment</a>#}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="float : right; width : 50%" class="col-md-6 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <!--<div class="x_title"> <h2> ML 테스크 생성</h2> <br/></div>-->
+                <div class="x_content">
+                    <!--<div class="clearfix">ML태스크 유형 선택가이드</div> <br/>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+
+</div>
+
+{% endblock content %}
