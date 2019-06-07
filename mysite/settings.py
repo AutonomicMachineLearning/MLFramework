@@ -26,7 +26,7 @@ SECRET_KEY = 'jd0fer!vx@-xji%v0@yeq(oi5p0$+k571q6*l5gw04&*cod7k('
 DEBUG = True
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['203.255.93.50', 'localhost']
+ALLOWED_HOSTS = ['203.255.93.50', 'localhost', '113.198.137.148']
 
 
 # Application definition
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'modeling',
     'environments',
     'projects',
+    'autoML_agent',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,566 @@
+{% extends "base_site.html" %}
+
+{% block title %} Data 입력 {% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+<!-- Dropzone.js -->
+       <link href="/static/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="/static/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="/static/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="/static/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="/static/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <!-- Ion.RangeSlider -->
+    <link href="/static/vendors/normalize-css/normalize.css" rel="stylesheet">
+    <link href="/static/vendors/ion.rangeSlider/css/ion.rangeSlider.css" rel="stylesheet">
+    <link href="/static/vendors/ion.rangeSlider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+    <link href="/static/vendors/icheck-1.x/skins/square/blue.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/static/vendors/Directed-Graph-jQuery-SVG-Arg-Graph/arg-graph-1.1/arg-graph.min.css">
+
+    <style>
+        .container {
+            min-height: 500px;
+            margin: 20px;
+        }
+
+        .panel, .half-panel {
+            border: 1px dashed #aaa;
+            -ms-border-radius: 10px;
+            border-radius: 10px;
+            background-color: rgba(250, 250, 250, 0.93);
+            overflow: hidden;
+            width: 100%;
+            overflow-y: scroll;
+            float: left;
+            margin: 10px;
+            height: 900px
+        }
+        textarea {
+            margin: 5%;
+            width: 90%;
+            height: 75%;
+        }
+
+        h3, button, #newItem, #output {
+            margin: 20px 20px 5px 20px;
+        }
+
+        .arg-Graph_item {
+            text-align: center;
+            text-transform: uppercase;
+            background-image: none;
+            padding: 4px 10px;
+            border-radius: 3px;
+            border: 2px solid transparent;
+            color: white;
+            border-color: black;
+            background: #4e3fda;
+            {#font-family: "Monospace";#}
+            font-size: 20px;
+            font-weight: bold;
+            width: 200px;
+        }
+    </style>
+{% endblock stylesheets %}
+{% block ajaxCode %}
+    <script type="text/javascript">
+        // 페이지가 로드 되었을 떄 자동으로 chatListFunction() 함수 실행
+        //   $(document).ready(function () {
+        //      //getInfiniteChat();
+        //      //getDatasetList();
+        //     $(document).on("click", "#save_btn", function () {
+        //        alert("저장되었습니다.")
+        //      });
+        //  });
+
+        //////////////////////// dataSet 셀렉터 선택에 따라 하단부 table 불러오기
+        function getTable() {
+            var dataSet = $('#dataSet').val();   // DataSet 셀렉터로부터 선택된 값을 가져온다
+            console.log(dataSet);
+
+            $.ajax({
+                type: "POST",
+                url: "table/",
+                dataType: "json",
+                data: {
+                    'csrfmiddlewaretoken': '{{csrf_token }}',
+                    // 'dataSet':JSON.stringify(dataSet),
+                    'dataSet': dataSet,
+                },
+                success: function (responseData) {
+                    //alert(success);
+                    if (responseData == null) {
+                        alert("Error : responseData is null");
+                        return;
+                    }    // 받아올 값이 없거나 오류가 발생하면 바로 함수 종료
+
+                    console.log(responseData.tuples);
+                    // 해당 데이터셋과 일치하는 테이블이 없는 경우 바로 함수 종료
+                    if (responseData.tuples == null) {
+                        alert("Error : no such table");
+                        document.getElementById("table_name").innerHTML = "No Table";    // table 이름 설정
+                        document.getElementById("datatable-buttons").innerHTML = null;   // table 컨텐츠 설정
+                        return;
+                    }
+
+                    var content = "<thead>" +
+                        "<tr>";
+
+                    for (var i = 0; i < responseData.column.length; i++) {
+                        var selectId = "select_" + i;
+                        var inputId = "inputPort_" + i;
+                        var outputId = "outputPort_" + i;
+                        content += "<th>" +
+                            "<select class='form-control btn btn-default dropdown-toggle' id=" + selectId + ">" +
+                            "<option value=" + inputId + ">" + inputId + "</option>" +
+                            "<option value=" + outputId + ">" + outputId + "</option>" +
+                            "<option value='ignore'>ignore</option>" +
+                            "</select>" +
+                            "</th>";
+                    }
+
+                    content += "</tr>" + "<tr>";
+
+                    for (var i = 0; i < responseData.column.length; i++) {
+
+                        content += "<th>" + responseData.column[i] + "</th>";
+                    }
+
+                    content += "</tr>" +
+                        "</thead>" +
+                        "<tbody>";
+
+                    for (var i = 0; i < responseData.tuples.length; i++) {
+                        content += "<tr>";
+
+                        for (var j = 0; j < responseData.column.length; j++) {
+                            content += "<td>" + responseData.tuples[i][j] + "</td>";
+                        }
+
+                        content += "</tr>";
+                    }
+
+                    content += "</tbody>";
+
+                    //console.log(innerHTML(elements))
+                    document.getElementById("table_name").innerHTML = dataSet;          // table 이름 설정
+                    document.getElementById("datatable-buttons").innerHTML = content;  // table 컨텐츠 설정
+                },
+                error: function () {
+                    //alert(error);
+                    //autoclosingAlert("#danerMessage", 2000);
+                }
+            });
+        }
+
+
+        function getDatasetList() {
+            $.ajax({
+                type: "POST",
+                url: "dataset_list/",
+                dataType: "json",
+                data: {
+                    'csrfmiddlewaretoken': '{{csrf_token }}',
+                    'data1': 'hello'
+                },
+                success: function (responseData) {
+                    //alert(111);
+                    if (responseData == null) {
+                        alert("Error : responseData is null")
+                        return;
+                    }    // 받아올 값이 없거나 오류가 발생하면 바로 함수 종료
+                    console.log(responseData);
+                    alert(responseData.column[0]);
+                },
+                error: function () {
+                    alert(222);
+                    //autoclosingAlert("#danerMessage", 2000);
+                }
+            });
+        }
+
+        function autoclosingAlert(selector, delay) {
+            var alert = $(selector).alert();
+            alert.show();
+            window.setTimeout(function () {
+                alert.hide()
+            }, delay);
+        }
+
+        function submitFunction() {
+            var chatName = $('#chatName').val();
+            var chatContent = $('#chatContent').val();
+
+            $.ajax({
+                type: "POST",
+                url: "./ChatSubmitServlet",
+                data: {
+                    chatName: encodeURIComponent(chatName),
+                    chatContent: encodeURIComponent(chatContent)
+                },
+                success: function (result) {
+                    if (result == 1) {
+                        autoclosingAlert('#successMessage', 2000);
+                    } else if (result == 0) {
+                        autoclosingAlert('#dangerMessage', 2000);
+                    } else {
+                        autoclosingAlert('#warningMessage', 2000);
+                    }
+                }
+            });
+
+            $('#chatContent').val('');
+        }
+    </script>
+{% endblock ajaxCode %}
+{% block content %}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="row">
+                <div class="title">
+                    <h3>데이터 불러오기 </h3>
+                </div>
+                <div style="float : left; width : 50%" class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <div class="container">
+                                  <div class="x_title">
+                    <h2 id="table_name">
+                        <small>Sample table of datasets</small>
+                    </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                                 <div class="x_content">
+                            <br/>
+                            <form class="form-horizontal form-label-left">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Dataset</label>
+                                    <div class="col-md-3">
+                                        <select class="form-control" id="dataSet" onchange="getTable();">
+                                            <option>Dataset 선택(필수)</option>
+                                            <!-- <option value="iris">iris</option>
+                                            <option value="mnist">mnist</option>
+                                            <option value=" toilets">toilets</option>
+                                            <option value="imdb">imdb</option>
+                                            <option value="reuters">reuters</option>
+                                            <option value="titanic">titanic</option>
+                                            <option value="mytable">mytable(custom)</option> -->
+                                            {% for dataset_name in datasetList %}
+                                                <option value="{{ dataset_name }}">{{ dataset_name }} (custom)</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <label class="control-label col-md-3">Load Dataset in Memory</label>
+                                    <div class="col-md-3">
+                                        <select class="form-control">
+                                            <option>Full dataset</option>
+                                            <option>One Batch at a time</option>
+                                        </select>
+                                    </div>
+                                    <br><br><br>
+                                </div>
+                                <div class="">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-6">
+                                        <!-- <button type="button" class="btn btn-danger" onclick="getDatasetList();">Cancel</button> -->
+                                        <button type="reset" class="btn btn-primary">Reset</button>
+                                        <button type="button" class="btn btn-success" id="save_btn">Save</button>
+                                        <div class="col-md-3"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="float : right; width : 50%" class="col-md-6 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <!--<div class="x_title"> <h2> ML 테스크 생성</h2> <br/></div>-->
+                <div class="x_content">
+                    {% load staticfiles %}
+                    <style>
+                        .test {width : 40%; display : block; margin-left : auto; margin-right : auto;}
+                    </style>
+{#                    <img class='test' src="{%static "image/DataLoad.png" %}">#}
+                    <!--<div class="clearfix">ML태스크 유형 선택가이드</div> <br/>-->
+
+
+                    <button id="import">import</button>
+                    <div class="arg-Graph panel"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-14">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2 id="table_name">
+                        <small>Sample table of datasets</small>
+                    </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                        <!--<thead>-->
+                        <!--<tr>-->
+                        <!--{% for col in column %}-->
+                            <!--<th>{{ col }}</th>-->
+                            <!--{% endfor %}-->
+                        <!--</tr>-->
+                        <!--</thead>-->
+                        <!--<tbody>-->
+                        <!--{% for tuple in csvTable %}-->
+                            <!--<tr>-->
+                            <!--{% for temp in tuple %}-->
+                                <!--<td>{{ temp }}</td>-->
+                                <!--{% endfor %}-->
+                            <!--</tr>-->
+                            <!--{% endfor %}-->
+                        <!--</tbody>-->
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block javascripts %}
+{{ block.super }}
+    <script src="/static/vendors/datatables.net/js/jquery.dataTables.min.js?ver=1"></script>
+    <script src="/static/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js?ver=1"></script>
+    <script src="/static/vendors/datatables.net-buttons/js/dataTables.buttons.min.js?ver=1"></script>
+    <script src="/static/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js?ver=1"></script>
+    <script src="/static/vendors/datatables.net-buttons/js/buttons.flash.min.js?ver=1"></script>
+    <script src="/static/vendors/datatables.net-buttons/js/buttons.html5.min.js?ver=1"></script>
+    <script src="/static/vendors/datatables.net-buttons/js/buttons.print.min.js?ver=1"></script>
+    <script src="/static/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js?ver=1"></script>
+    <script src="/static/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js?ver=1"></script>
+    <script src="/static/vendors/datatables.net-responsive/js/dataTables.responsive.min.js?ver=1"></script>
+    <script src="/static/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js?ver=1"></script>
+    <script src="/static/vendors/datatables.net-scroller/js/dataTables.scroller.min.js?ver=1"></script>
+    <script src="/static/vendors/jszip/dist/jszip.min.js?ver=1"></script>
+    <script src="/static/vendors/pdfmake/build/pdfmake.min.js?ver=1"></script>
+    <script src="/static/vendors/pdfmake/build/vfs_fonts.js?ver=1"></script>
+
+    <!-- jQuery Knob -->
+    <!-- <script src="/static/vendors/jquery-knob/dist/jquery.knob.min.js?ver=1"></script> -->
+    <script src="/static/vendors/icheck-1.x/icheck.js"></script>
+
+    <script src="/static/vendors/jQuery-Knob-master/dist/jquery.knob.min.js?ver=1"></script>+
+
+    <script src="/static/vendors/Directed-Graph-jQuery-SVG-Arg-Graph/arg-graph-1.1/arg-graph.js?ver=1.02"></script>
+
+
+    <script>
+        $('.dial').knob(
+            {
+                "min": 0,
+                "max": 100,
+                "height": 120,
+                "width": 120,
+            }
+        );
+
+        $(document).ready(function () {
+
+            // selector로 부터 Train set, validation set, test set을 설정하여 pie bar에 출력하는 함수
+            $(document).on("change", "#TVT_select", function () {
+                var select = $("#TVT_select").val();
+
+                //if (select.value == "custom") {
+                //
+                //}else if (select.value == "k_fold_cross_validation") {
+                //
+                //} else {
+                //}
+                var strArr = select.split('_');
+                var train_ratio = strArr[0];
+                var validation_ratio = strArr[1];
+                var test_ratio = strArr[2];
+
+                $('#train_ratio').val(train_ratio).trigger('change');
+                $('#validation_ratio').val(validation_ratio).trigger('change');
+                $('#test_ratio').val(test_ratio).trigger('change');
+            });
+
+            // [save] 버튼을 클릭했을 때 이벤트 발생
+            $(document).on("click", "#save_btn", function () {
+                alert("저장되었습니다.");
+            });
+
+            // check 박스 디자인
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+        });
+
+        var argGraph;
+        $(function () {
+            argGraph = $('.arg-Graph').ArgGraph({
+                'onGraphChange': function () {
+                    // var json = argGraph.exportJson();
+                    // $("#output").html(document.createTextNode(json));
+                }
+            });
+
+            $('#import').on('click',
+                function() {
+                    // var json = $("#input").html();
+                    let test = [
+                        {
+                            "id": "item0",
+                            "text": "데이터 불러오기",
+                            "position": {
+                                "left": "540px",
+                                "top": "100px"
+                            },
+                            "neighbors": [
+                                "item1"
+                            ]
+                        },
+                        {
+                            "id": "item1",
+                            "text": "데이터 탐색",
+                            "position": {
+                                "left": "540px",
+                                "top": "200px"
+                            },
+                            "neighbors": [
+                                "item2"
+                            ]
+                        },
+                        {
+                            "id": "item2",
+                            "text": "데이터 컬럼 선택",
+                            "position": {
+                                "left": "540px",
+                                "top": "300px"
+                            },
+                            "neighbors": ["item3"]
+                        },
+                        {
+                            "id": "item3",
+                            "text": "데이터 특징 추출",
+                            "position": {
+                                "left": "540px",
+                                "top": "400px"
+                            },
+                            "neighbors": [
+                                "item4"
+                            ]
+                        },
+                        {
+                            "id": "item4",
+                            "text": "학습 데이터 분할",
+                            "position": {
+                                "left": "540px",
+                                "top": "500px"
+                            },
+                            "neighbors": [
+                                "item5"
+                            ]
+                        },
+                        {
+                            "id": "item5",
+                            "text": "학습(훈련) 모델",
+                            "position": {
+                                "left": "540px",
+                                "top": "600px"
+                            },
+                            "neighbors": [
+                                "item7"
+                            ]
+                        },
+                        {
+                            "id": "item7",
+                            "text": "성능측정(모델함수)",
+                            "position": {
+                                "left": "300px",
+                                "top": "700px"
+                            },
+                            "neighbors": [
+                                "item8"
+                            ]
+                        },
+                        {
+                            "id": "item8",
+                            "text": "모델평가",
+                            "position": {
+                                "left": "300px",
+                                "top": "800px"
+                            },
+                            "neighbors": [
+                                ""
+                            ]
+                        },
+                        {
+                            "id": "item9",
+                            "text": "학습 알고리즘",
+                            "position": {
+                                "left": "100px",
+                                "top": "600px"
+                            },
+                            "neighbors": [
+                                "item7"
+                            ]
+                        },
+                    ];
+                    console.log("test : ", test);
+
+                    argGraph.importJson(test);
+                });
+
+            // var json = argGraph.exportJson();
+            // $("#output").html(document.createTextNode(json));
+        });
+
+
+    </script>
+
+
+{% endblock javascripts %}
+

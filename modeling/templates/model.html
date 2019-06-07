@@ -1764,8 +1764,6 @@
 
 
 
-
-
             //////////////////////// return layer sequence
             function getLayerSequence() {
                 var links = $flowchart.flowchart('getData').links;
@@ -2045,10 +2043,6 @@
                             data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">default</div>'));
                     }
 
-                    {#// if the offset is undefined, locate the layers automatically.#}
-                    {#if (data.left == undefined || data.top == undefined) {#}
-                    {#    #}
-
                     data.left = operatorObject.left;        // 레이어 노드의 좌표(left, top)
                     data.top = operatorObject.top;
 
@@ -2076,7 +2070,6 @@
                             toSubConnector: 0
                         };
 
-                        {#console.log("linkData : ", linkData);#}
                         linkId = $flowchart.flowchart('myLinkDiagram', linkId, linkData);
                     }
                 }
@@ -2102,11 +2095,9 @@
                 var topStart = 750;
                 var articulableSubgraph = abstractData.subgraph;
                 var nodeLevel = getNodeLevel_subgraph(JSON_dict, abstractData.subgraph);
-                {#getNodeLevel_subgraph(JSON_dict, articulableSubgraph);#}
 
                 // 1. Draw source graph
                 // JSON dictionary 데이터가 끝날때까지 차례로 순회한다.
-                {#var dict_index = articulableSubgraph[0];     // JSON dictionary 데이터에 접근할 인덱스 ("op_0", "op_1", ...)#}
                 var accessKey = "source_graph";
                 var op_index = 0;
                 for (var dict_index of articulableSubgraph) {
@@ -2169,9 +2160,6 @@
                             data = getOperatorData($('<div class="draggable_operator ui-draggable ui-draggable-handle" data-nb-inputs="1" data-nb-outputs="1">default</div>'));
                     }
 
-                    {#// if the offset is undefined, locate the layers automatically.#}
-                    {#if (data.left == undefined || data.top == undefined) {#}
-                    {#    #}
 
                     var leftLevel = function(arr, item) {
                         var level = -1;

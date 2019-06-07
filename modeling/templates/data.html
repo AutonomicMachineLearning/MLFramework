@@ -242,7 +242,7 @@
                     <option value="titanic">titanic</option>
                     <option value="mytable">mytable(custom)</option> -->
                         {% for dataset_name in datasetList %}
-                            <option value="{{ dataset_name }}">{{ dataset_name }} (custom)</option>
+                            <option value="{{ dataset_name }}">{{ dataset_name }} </option>
                         {% endfor %}
                   </select>
                 </div>
@@ -266,7 +266,7 @@
                     <option value="k_fold_cross_validation">K-Fold Cross Validation</option>
                   </select>
                 </div>
-                <label class="control-label col-md-3">Total Records : 150</label>
+                <label class="control-label col-md-3">Total Records : 60000</label>
                 <div class="checkbox col-md-3" style="font-size:15px">
                   <input type="checkbox" class="flat" checked="checked"> Shuffle Data
                 </div>
@@ -421,7 +421,7 @@
 
     // [save] 버튼을 클릭했을 때 이벤트 발생
     $(document).on("click", "#save_btn", function() {
-      alert("저장되었습니다.");
+      // alert("저장되었습니다.");
     });
 
     // check 박스 디자인

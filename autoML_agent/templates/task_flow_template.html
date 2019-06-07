@@ -1,0 +1,681 @@
+{% extends "base_site.html" %}
+
+{% block title %} Data 입력 {% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+<!-- Dropzone.js -->
+<link rel="stylesheet" type="text/css" href="/static/vendors/Directed-Graph-jQuery-SVG-Arg-Graph/arg-graph-1.1/arg-graph.css?ver=1.05">
+<link href="/static/vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
+<link href="/static/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+
+<style>
+    .container {
+        min-height: 500px;
+        margin: 20px;
+    }
+
+    .panel-body:hover {
+        background-color: #ffffff;
+    }
+
+    .subtitle > h2 {
+        font-size: 25px;
+    }
+
+    #section_1 {
+        height: 748px;
+    }
+
+    .x_panel.tasks {
+        height: 741px;
+    }
+
+    #diagrams {
+        border: 1px dashed #aaa;
+        -ms-border-radius: 10px;
+        border-radius: 10px;
+        background-color: rgba(250, 250, 250, 0.93);
+        overflow: auto;
+        width: 100%;
+        overflow-y: auto;
+        float: left;
+        margin: 10px;
+        height: 630px;
+    }
+
+    textarea {
+        margin: 5%;
+        width: 90%;
+        height: 75%;
+    }
+
+    h3, button, #newItem, #output {
+        margin: 20px 20px 5px 20px;
+    }
+
+    .arg-Graph_item {
+        text-align: center;
+        text-transform: uppercase;
+        background-image: none;
+        padding: 4px 10px;
+        border-radius: 3px;
+        border: 2px solid transparent;
+        color: #3a3737;
+        border-color: black;
+        background: #c3e4f5;
+        font-size: 20px;
+        font-weight: bold;
+        width: 200px;
+    }
+
+    .checkout-step-number {
+        border-radius: 50%;
+        border: 1px solid #666;
+        display: inline-block;
+        font-size: 12px;
+        height: 32px;
+        margin-right: 26px;
+        padding: 6px;
+        text-align: center;
+        width: 32px;
+    }
+
+    .checkout-step-title{
+        font-size: 18px;
+        font-weight: 500;
+        vertical-align: middle;
+        display: inline-block;
+        margin: 0px;
+    }
+
+    .panel.collapse-panel {
+        margin-top: 5px;
+        border: 1px dashed #aaa;
+        -ms-border-radius: 10px;
+    }
+
+    .input-group {
+        display: table;
+        border-collapse: separate;
+    }
+    .input-group.form-control, .input-group-addon, .input-group-btn {
+        display: table-cell;
+    }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="col-md-6 col-sm-12 col-xs-12" id="section_1">
+            <div class="x_panel tasks" id="task_0" style="display: block">
+                <div class="x_title subtitle">
+                    <h2><i class="fa fa-bars"></i> 데이터 불러오기 <small>데이터 불러오기</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="accordion" id="accordion_task0" role="tablist" aria-multiselectable="true">
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading" role="tab" id="task0_heding0" data-toggle="collapse" data-parent="#accordion_task0" href="#task0_collapse0" aria-expanded="true">
+                                <span class="checkout-step-number">1</span>
+                                <h4 class="checkout-step-title">데이터 파일 유형은?</h4>
+                            </a>
+                            <div id="task0_collapse0" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="task0_heding0">
+                                <div class="panel-body">
+                                    <p style="text-align: center">
+                                        <input type="radio" class="flat" name="file_type" id="image" value="image" checked="" required />&nbsp;
+                                        <label for="image" data-toggle="tooltip" data-placement="bottom" title="JPEG, PNG">Image</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="flat" name="file_type" id="audio" value="audio" />&nbsp;
+                                        <label for="audio" data-toggle="tooltip" data-placement="bottom" title="MP3, wav">Audio</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="flat" name="file_type" id="CSV" value="CSV"/>&nbsp;
+                                        <label for="CSV" data-toggle="tooltip" data-placement="bottom" title="Excel">CSV</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="flat" name="file_type" id="text" value="text"/>&nbsp;
+                                        <label for="text" data-toggle="tooltip" data-placement="bottom" title="doc">Text</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading collapsed" role="tab" id="task0_heding1" data-toggle="collapse" data-parent="#accordion_task0" href="#task0_collapse1" aria-expanded="false">
+                                <span class="checkout-step-number">2</span>
+                                <h4 class="checkout-step-title">데이터 종류</h4>
+                            </a>
+                            <div id="task0_collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task0_heding1">
+                                <div class="panel-body">
+                                    <p style="text-align: center">
+                                        <input type="radio" class="flat" name="data_type" id="isRawData" value="rawData" checked="" required />&nbsp;
+                                        <label for="image" data-toggle="tooltip" data-placement="bottom" title="원시 데이터">Row Data</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="flat" name="data_type" id="isMetaData" value="metaData" checked="" required />&nbsp;
+                                        <label for="image" data-toggle="tooltip" data-placement="bottom" title="원시 데이터의 설명 데이터">Meta Data</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading collapsed" role="tab" id="task0_heding2" data-toggle="collapse" data-parent="#accordion_task0" href="#task0_collapse2" aria-expanded="false">
+                                <span class="checkout-step-number">3</span>
+                                <h4 class="checkout-step-title">데이터 불러오기</h4>
+                            </a>
+                            <div id="task0_collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task0_heding2">
+                                <div class="panel-body" style="text-align: center;">
+                                    <div class="col-md-3 col-sm-3 col-xs-12"></div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select class="form-control" id="data_load_select_box">
+                                            <option value="" selected="true">데이터 선택</option>
+                                            <optgroup label="Standard Dataset">
+                                                <option value="classification">MNIST</option>
+                                                <option value="regression">COCO</option>
+                                                <option value="clustering">ImageNet</option>
+                                                <option value="novelty_detection">Iris</option>
+                                            </optgroup>
+                                            <optgroup label="Custom Dataset">
+                                                <option value="load">myData</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel tasks" id="task_1" style="display: none">
+                <div class="x_title subtitle">
+                    <h2><i class="fa fa-bars"></i> 데이터 탐색 <small>데이터 불러오기</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="accordion" id="accordion_task1" role="tablist" aria-multiselectable="true">
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading" role="tab" id="task1_heding0" data-toggle="collapse" data-parent="#accordion_task1" href="#task1_collapse0" aria-expanded="true">
+                                <span class="checkout-step-number">1</span>
+                                <h4 class="checkout-step-title">Collapsible Group Items #1</h4>
+                            </a>
+                            <div id="task1_collapse0" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="task1_heding0">
+                                <div class="panel-body">
+                                    contents
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading collapsed" role="tab" id="task1_heding1" data-toggle="collapse" data-parent="#accordion_task1" href="#task1_collapse1" aria-expanded="false">
+                                <span class="checkout-step-number">2</span>
+                                <h4 class="checkout-step-title">Collapsible Group Items #2</h4>
+                            </a>
+                            <div id="task1_collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task1_heding1">
+                                <div class="panel-body">
+                                    contents
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading collapsed" role="tab" id="task1_heding2" data-toggle="collapse" data-parent="#accordion_task1" href="#task1_collapse2" aria-expanded="false">
+                                <span class="checkout-step-number">3</span>
+                                <h4 class="checkout-step-title">Collapsible Group Items #3</h4>
+                            </a>
+                            <div id="task1_collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task1_heding2">
+                                <div class="panel-body">
+                                    contents
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel tasks" id="task_2" style="display: none">
+                <div class="x_title subtitle">
+                    <h2><i class="fa fa-bars"></i> 데이터 컬럼 선택 <small>데이터 불러오기</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="accordion" id="accordion_task2" role="tablist" aria-multiselectable="true">
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading" role="tab" id="task2_heding0" data-toggle="collapse" data-parent="#accordion_task2" href="#task2_collapse0" aria-expanded="true">
+                                <span class="checkout-step-number">1</span>
+                                <h4 class="checkout-step-title">Collapsible Group Items #1</h4>
+                            </a>
+                            <div id="task2_collapse0" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="task2_heding0">
+                                <div class="panel-body">
+                                    contents
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading collapsed" role="tab" id="task2_heding1" data-toggle="collapse" data-parent="#accordion_task2" href="#task2_collapse1" aria-expanded="false">
+                                <span class="checkout-step-number">2</span>
+                                <h4 class="checkout-step-title">Collapsible Group Items #2</h4>
+                            </a>
+                            <div id="task2_collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task2_heding1">
+                                <div class="panel-body">
+                                    contents
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading collapsed" role="tab" id="task2_heding2" data-toggle="collapse" data-parent="#accordion_task2" href="#task2_collapse2" aria-expanded="false">
+                                <span class="checkout-step-number">3</span>
+                                <h4 class="checkout-step-title">Collapsible Group Items #3</h4>
+                            </a>
+                            <div id="task2_collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task2_heding2">
+                                <div class="panel-body">
+                                    contents
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12" id="section_2">
+            <div class="x_panel">
+                <div class="x_title subtitle">
+                    <h2><i class="fa fa-bars"></i> 태스크 종류 : 분류 <small>semi description</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <!--<button id="import">import</button>-->
+                    <div class="arg-Graph panel" id="diagrams"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-12 col-sm-12 col-xs-12" id="section_3" style="display:none;">
+            <div class="x_panel">
+                <div class="x_title subtitle">
+                    <h2><i class="fa fa-bars"></i> 선택된 데이터 <small>semi description</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Username</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+{{ block.super }}
+
+<script src="/static/vendors/Directed-Graph-jQuery-SVG-Arg-Graph/arg-graph-1.1/arg-graph.js?ver=1.06"></script>
+<script src="/static/vendors/dropzone/dist/min/dropzone.min.js"></script>
+
+        <script>
+        argGraph = $('.arg-Graph').ArgGraph({
+            'onGraphChange': function () {
+                // var json = argGraph.exportJson();
+                // $("#output").html(document.createTextNode(json));
+            }
+    });
+
+    $('#data_load_select_box').change(function() {
+        // event listener of data load select box
+        let temp = '<table class="table table-hover">' +
+                        '<thead>' +
+                            '<tr>' +
+                                '<th>#</th>' +
+                                '<th>First Name</th>' +
+                                '<th>Last Name</th>' +
+                                '<th>Username</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody>' +
+                            '<tr>' +
+                                '<th scope="row">1</th>' +
+                                    '<td>Mark</td>' +
+                                    '<td>Otto</td>' +
+                                    '<td>@mdo</td>' +
+                             '</tr>' +
+                        '</tbody>' +
+                    '</table>';
+
+        document.getElementById('section_3').style.display = 'block';
+    });
+
+    $(document).ready(function() {
+        // var json = $("#input").html();
+        let test = [
+            {
+                "id": "item_0",
+                "text": "데이터 불러오기",
+                "position": {
+                    "left": "540px",
+                    "top": "30px"
+                },
+                "neighbors": [
+                    "item_1"
+                ]
+            },
+            {
+                "id": "item_1",
+                "text": "데이터 탐색",
+                "position": {
+                    "left": "540px",
+                    "top": "100px"
+                },
+                "neighbors": [
+                    "item_2"
+                ]
+            },
+            {
+                "id": "item_2",
+                "text": "데이터 컬럼 선택",
+                "position": {
+                    "left": "540px",
+                    "top": "170px"
+                },
+                "neighbors": ["item_3"]
+            },
+            {
+                "id": "item_3",
+                "text": "데이터 특징 추출",
+                "position": {
+                    "left": "540px",
+                    "top": "240px"
+                },
+                "neighbors": [
+                    "item_4"
+                ]
+            },
+            {
+                "id": "item_4",
+                "text": "학습 데이터 분할",
+                "position": {
+                    "left": "540px",
+                    "top": "310px"
+                },
+                "neighbors": [
+                    "item_5"
+                ]
+            },
+            {
+                "id": "item_5",
+                "text": "학습(훈련) 모델",
+                "position": {
+                    "left": "540px",
+                    "top": "380px"
+                },
+                "neighbors": [
+                    "item_7"
+                ]
+            },
+            {
+                "id": "item_7",
+                "text": "성능측정(모델함수)",
+                "position": {
+                    "left": "300px",
+                    "top": "450px"
+                },
+                "neighbors": [
+                    "item_8"
+                ]
+            },
+            {
+                "id": "item_8",
+                "text": "모델평가",
+                "position": {
+                    "left": "300px",
+                    "top": "520px"
+                },
+                "neighbors": [
+                    ""
+                ]
+            },
+            {
+                "id": "item_9",
+                "text": "학습 알고리즘",
+                "position": {
+                    "left": "100px",
+                    "top": "380px"
+                },
+                "neighbors": [
+                    "item_7"
+                ]
+            },
+        ];
+
+        argGraph.importJson(test);
+
+        document.getElementById('item_0').style.border = '8px solid #1a65da';
+
+        let itemClickEvents = $('.arg-Graph_item').on('click', function(e) {
+            // when the operator selected, set the css of the operators and display the left section which related to the selected operator.
+            let clicked_id = this.id;
+
+            let index = String(clicked_id).split('_')[1];
+            {#let index = String(clicked_id).substring(4, 5);#}
+
+            for (let i = 0; i < 3; i++) {
+                // off
+                if (index == i) {
+                    continue;
+                }
+
+                let sectionId = "task_" + i;
+                let tempElement = document.getElementById(sectionId).setAttribute('style', 'display:none;');
+
+                let itemId = "item_" + i;
+                document.getElementById(itemId).style.border = '2px solid black';
+            }
+
+            let sectionId = "task_" + index;
+            let element = document.getElementById(sectionId).setAttribute('style', 'display:block;');
+
+            document.getElementById(clicked_id).style.border = '8px solid #1a65da';
+            document.getElementById('section_3').style.display = 'none';
+        });
+    });
+
+
+    // $(function () {
+    //     $('#import').on('click',
+    //         function() {
+    //             // var json = $("#input").html();
+    //             let test = [
+    //                 {
+    //                     "id": "item_0",
+    //                     "text": "데이터 불러오기",
+    //                     "position": {
+    //                         "left": "540px",
+    //                         "top": "100px"
+    //                     },
+    //                     "neighbors": [
+    //                         "item_1"
+    //                     ]
+    //                 },
+    //                 {
+    //                     "id": "item_1",
+    //                     "text": "데이터 탐색",
+    //                     "position": {
+    //                         "left": "540px",
+    //                         "top": "200px"
+    //                     },
+    //                     "neighbors": [
+    //                         "item_2"
+    //                     ]
+    //                 },
+    //                 {
+    //                     "id": "item_2",
+    //                     "text": "데이터 컬럼 선택",
+    //                     "position": {
+    //                         "left": "540px",
+    //                         "top": "300px"
+    //                     },
+    //                     "neighbors": ["item_3"]
+    //                 },
+    //                 {
+    //                     "id": "item_3",
+    //                     "text": "데이터 특징 추출",
+    //                     "position": {
+    //                         "left": "540px",
+    //                         "top": "400px"
+    //                     },
+    //                     "neighbors": [
+    //                         "item_4"
+    //                     ]
+    //                 },
+    //                 {
+    //                     "id": "item_4",
+    //                     "text": "학습 데이터 분할",
+    //                     "position": {
+    //                         "left": "540px",
+    //                         "top": "500px"
+    //                     },
+    //                     "neighbors": [
+    //                         "item_5"
+    //                     ]
+    //                 },
+    //                 {
+    //                     "id": "item_5",
+    //                     "text": "학습(훈련) 모델",
+    //                     "position": {
+    //                         "left": "540px",
+    //                         "top": "600px"
+    //                     },
+    //                     "neighbors": [
+    //                         "item_7"
+    //                     ]
+    //                 },
+    //                 {
+    //                     "id": "item_7",
+    //                     "text": "성능측정(모델함수)",
+    //                     "position": {
+    //                         "left": "300px",
+    //                         "top": "700px"
+    //                     },
+    //                     "neighbors": [
+    //                         "item_8"
+    //                     ]
+    //                 },
+    //                 {
+    //                     "id": "item_8",
+    //                     "text": "모델평가",
+    //                     "position": {
+    //                         "left": "300px",
+    //                         "top": "800px"
+    //                     },
+    //                     "neighbors": [
+    //                         ""
+    //                     ]
+    //                 },
+    //                 {
+    //                     "id": "item_9",
+    //                     "text": "학습 알고리즘",
+    //                     "position": {
+    //                         "left": "100px",
+    //                         "top": "600px"
+    //                     },
+    //                     "neighbors": [
+    //                         "item_7"
+    //                     ]
+    //                 },
+    //             ];
+    //
+    //             argGraph.importJson(test);
+    //
+    //             let itemClickEvents = $('.arg-Graph_item').on('click', function(e) {
+    //                 // when the operator selected, set the css of the operators and display the left section which related to the selected operator.
+    //                 let clicked_id = this.id;
+    //
+    //                 let index = String(clicked_id).split('_')[1];
+    //                 {#let index = String(clicked_id).substring(4, 5);#}
+    //
+    //                 for (let i = 0; i < 3; i++) {
+    //                     // off
+    //                     if (index == i) {
+    //                         continue;
+    //                     }
+    //
+    //                     let sectionId = "section_" + i;
+    //                     let tempElement = document.getElementById(sectionId).setAttribute('style', 'display:none;');
+    //
+    //                     let itemId = "item_" + i;
+    //                     document.getElementById(itemId).style.border = '2px solid black';
+    //                 }
+    //
+    //                 let sectionId = "section_" + index;
+    //                 let element = document.getElementById(sectionId).setAttribute('style', 'display:block;');
+    //
+    //                 document.getElementById(clicked_id).style.border = '8px solid #1a65da';
+    //
+    //             });
+    //         });
+    //
+    // });
+
+    function renderSection_left(taskList) {
+        /**
+         * renderSection_left(taskList)
+         * Render the let section refering to taskList.
+         *
+         * @param taskList: a 'list'
+         * the list of tasks.
+         *
+         * @return nothing:
+         */
+    }
+
+
+</script>
+{% endblock javascripts %}

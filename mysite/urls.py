@@ -22,6 +22,7 @@ from mysite.views import *
 from modeling.views import *
 from django.conf.urls import url
 from projects.views import *
+from autoML_agent.views import *
 
 urlpatterns = [
     #### admin page ####
@@ -59,6 +60,12 @@ urlpatterns = [
     url('accounts/', include('django.contrib.auth.urls')),
     url('accounts/register/$', UserCreateView.as_view(), name='register'),
     url('accounts/register/done/$', UserCreateDoneTV.as_view(), name='register_done'),
+
+    #### jobplan page ####
+    # path('jobPlan/', include('jobPlan.urls')),
+
+    ### automl page ###
+    path('autoML_agent/', include('autoML_agent.urls')),
 
     
 ]

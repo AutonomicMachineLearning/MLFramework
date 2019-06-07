@@ -1,0 +1,181 @@
+{% extends "base_site.html" %}
+
+{% block title %} Data 입력 {% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+<!-- Dropzone.js -->
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="row">
+                <div class="title">
+                    <h3>데이터 업로드 </h3>
+                </div>
+                <div style="float : left; width : 50%" class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <div class="container">
+                                <form method="post" enctype="multipart/form-data" novalidate>
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <div class="panel checkout-step">
+                                                    <div><span class="checkout-step-number">1</span>
+                                                        <h4 class="checkout-step-title"><a role="button"
+                                                                                           data-toggle="collapse"
+                                                                                           data-parent="#accordion"
+                                                                                           href="#collapseOne"> 데이터
+                                                            파일 유형은?
+                                                        </a></h4>
+                                                    </div>
+                                                    <div id="collapseOne" class="collapse in">
+                                                        <div class="checkout-step-body">
+                                                            <!--<label class="col-md-12 control-label">Time</label>-->
+                                                            <div class="col-md-16">
+                                                                <div class="funkyradio">
+                                                                    {% for radio in form.Type %}
+                                                                    <div class="funkyradio-primary">
+                                                                    {{radio.tag}}
+                                                                        <label for="{{ radio.id_for_label }}">
+                                                                            {{radio.choice_label}}
+                                                                        </label>
+                                                                    </div>
+                                                                    {% endfor %}
+                                                                </div>
+                                                                <a class="btn btn-default " role="button"
+                                                                   data-toggle="collapse"
+                                                                   data-parent="#accordion"
+                                                                   href="#collapseTwo">Next</a>
+                                                            </div>
+                                                            <!-- /.col-lg-6 -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="panel checkout-step">
+                                                    <div role="tab" id="headingTwo"><span
+                                                            class="checkout-step-number">2</span>
+                                                        <h4 class="checkout-step-title"><a class="collapsed"
+                                                                                           role="button"
+                                                                                           data-toggle="collapse"
+                                                                                           data-parent="#accordion"
+                                                                                           href="#collapseTwo">데이터
+                                                            종류 </a></h4>
+                                                    </div>
+                                                    <div id="collapseTwo" class="panel-collapse collapse">
+                                                        <div class="checkout-step-body">
+                                                            <!--<label class="col-md-12 control-label">Time</label>-->
+                                                            <div class="col-md-16">
+                                                                <div class="funkyradio">
+                                                                    {% for radio in form.Kind %}
+                                                                    <div class="funkyradio-primary">
+                                                                        {{radio.tag}}
+                                                                        <label for="{{ radio.id_for_label }}">
+                                                                            {{radio.choice_label}}
+                                                                        </label>
+                                                                    </div>
+                                                                    {% endfor %}
+                                                                </div>
+                                                                <a class="btn btn-default " role="button"
+                                                                   data-toggle="collapse"
+                                                                   data-parent="#accordion" href="#collapseThree">Next</a>
+                                                            </div>
+                                                            <!-- /.col-lg-6 -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="panel checkout-step">
+                                                    <div role="tab" id="headingThree"><span
+                                                            class="checkout-step-number">3</span>
+                                                        <h4 class="checkout-step-title"><a class="collapsed"
+                                                                                           role="button"
+                                                                                           data-toggle="collapse"
+                                                                                           data-parent="#accordion"
+                                                                                           href="#collapseThree">
+                                                            데이터 불러오기</a></h4>
+                                                    </div>
+                                                    <div id="collapseThree" class="panel-collapse collapse">
+                                                        <div class="checkout-step-body">
+                                                            <div class="row">
+                                                                <div class="form-group">
+                                                                    <label for="id_doc">Document : </label>
+                                                                    {{form.document}}
+                                                                </div>
+                                                            </div>
+
+                                                            <button type="submt">submit</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="float : right; width : 50%" class="col-md-6 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <!--<div class="x_title"> <h2> ML 테스크 생성</h2> <br/></div>-->
+                <div class="x_content">
+                      {% load staticfiles %}
+                    <style>
+                        .test {margin-top : 8%; margin-bottom : 8%; width : 80%; text-align : center;}
+                    </style>
+                    <img class='test' src="{%static "image/Dataflow.png" %}">
+                    <!--<div class="clearfix">ML태스크 유형 선택가이드</div> <br/>-->
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="row">
+        <div class="col-md-14">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2 id="table_name">
+                        <small>Sample table of datasets</small>
+                    </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block javascripts %}
+{{ block.super }}
+{% endblock javascripts %}
