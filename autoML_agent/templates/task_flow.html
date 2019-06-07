@@ -68,7 +68,7 @@
         background: #b3e0ee;
         font-size: 20px;
         font-weight: bold;
-        width: 200px;
+        min-width: 200px;
     }
 
     .checkout-step-number {
@@ -124,6 +124,10 @@
         padding: 15px;
         max-height: 480px;
         overflow: auto;
+    }
+
+    .checkbox {
+        font-size: 18px;
     }
 </style>
 {% endblock stylesheets %}
@@ -333,6 +337,51 @@
                     </div>
                 </div>
             </div>
+            <div class="x_panel tasks" id="task_3" style="display: none">
+                <div class="x_title subtitle">
+                    <h2><i class="fa fa-bars"></i> 데이터 특징 추출 <small>데이터 특징을 추출합니다.</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="accordion" id="accordion_task3" role="tablist" aria-multiselectable="true">
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading" role="tab" id="task3_heding0" data-toggle="collapse" data-parent="#accordion_task4" href="#task4_collapse0" aria-expanded="true">
+                                <span class="checkout-step-number">1</span>
+                                <h4 class="checkout-step-title">데이터 특징 추출</h4>
+                            </a>
+                            <div id="task3_collapse0" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="task3_heding0">
+                                <div class="panel-body" style="text-align: center">
+
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <!--<div class="panel collapse-panel">-->
+                        <!--<a class="panel-heading collapsed" role="tab" id="task4_heding1" data-toggle="collapse" data-parent="#accordion_task5" href="#task4_collapse1" aria-expanded="false">-->
+                        <!--<span class="checkout-step-number">2</span>-->
+                        <!--<h4 class="checkout-step-title">하이퍼 파라미터 설정</h4>-->
+                        <!--</a>-->
+                        <!--<div id="task4_collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task4_heding1">-->
+                        <!--<div class="panel-body">-->
+
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<br>-->
+                        <!--<div class="panel collapse-panel">-->
+                        <!--<a class="panel-heading collapsed" role="tab" id="task5_heding2" data-toggle="collapse" data-parent="#accordion_task5" href="#task5_collapse2" aria-expanded="false">-->
+                        <!--<span class="checkout-step-number">3</span>-->
+                        <!--<h4 class="checkout-step-title">Collapsible Group Items #3</h4>-->
+                        <!--</a>-->
+                        <!--<div id="task5_collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task5_heding2">-->
+                        <!--<div class="panel-body">-->
+                        <!--contents-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
             <div class="x_panel tasks" id="task_4" style="display: none">
                 <div class="x_title subtitle">
                     <h2><i class="fa fa-bars"></i> 학습 데이터 분할 <small>훈련에 사용할 학습데이터를 분할합니다.</small></h2>
@@ -398,7 +447,7 @@
             </div>
             <div class="x_panel tasks" id="task_5" style="display: none">
                 <div class="x_title subtitle">
-                    <h2><i class="fa fa-bars"></i> 학습(훈련) 모델 <small>훈련에 사용할 학습모델을 설정합니다.</small></h2>
+                    <h2><i class="fa fa-bars"></i> 학습 모델 구성 <small>훈련에 사용할 학습모델을 구성합니다.</small></h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -579,7 +628,155 @@
                     </div>
                 </div>
             </div>
-            <div class="x_panel tasks" id="task_9" style="display: none">
+            <div class="x_panel tasks" id="task_6" style="display: none">
+                <div class="x_title subtitle">
+                    <h2><i class="fa fa-bars"></i> 모델 성능 측정 및 평가 <small>학습이 제대로 이루어 졌는지 모델의 성능을 측정하고 평가합니다.</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="accordion" id="accordion_task6" role="tablist" aria-multiselectable="true">
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading" role="tab" id="task6_heding0" data-toggle="collapse" data-parent="#accordion_task6" href="#task6_collapse0" aria-expanded="true">
+                                <span class="checkout-step-number">1</span>
+                                <h4 class="checkout-step-title">데이터 검증 (데이터가 적은 경우)</h4>
+                            </a>
+                            <div id="task6_collapse0" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="task6_heding0">
+                                <div class="panel-body" style="text-align: center">
+                                    <div class="col-md-2 col-xs-12"></div>
+                                    <div class="checkbox col-md-4 col-xs-12">
+                                        <label>
+                                            <input type="checkbox" class="flat" checked="checked"> K-fold cross validation
+                                        </label>
+                                    </div>
+                                    <div class="col-md-4 col-xs-12">
+                                        <input type="number" id="fold_number" name="fold_number" required="required" data-validate-minmax="10,100" class="form-control">
+                                    </div>
+                                    <div class="col-md-2 col-xs-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading collapsed" role="tab" id="task6_heding1" data-toggle="collapse" data-parent="#accordion_task6" href="#task6_collapse1" aria-expanded="false">
+                                <span class="checkout-step-number">2</span>
+                                <h4 class="checkout-step-title">Matrix Functions</h4>
+                            </a>
+                            <div id="task6_collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task6_heding1">
+                                <div class="panel-body">
+                                    <div class="col-md-2 col-sm-3 col-xs-12"></div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <select class="form-control" id="matrix_select_box">
+                                            <option value="" selected>Matrices</option>
+                                            <option value="binary_accuracy">binary_accuracy</option>
+                                            <option value="categorical_accuracy">categorical_accuracy</option>
+                                            <option value="top_k_categorical_accuracy">top_k_categorical_accuracy</option>
+                                            <option value="sparse_top_k_categorical_accuracy">sparse_top_k_categorical_accuracy</option>
+                                        </select>
+                                    </div>
+                                    <div class="checkbox col-md-4 col-xs-12">
+                                        <label>
+                                            <input type="checkbox" class="flat" checked="checked"> 조기 종료 조건
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2 col-sm-3 col-xs-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <!--<div class="panel collapse-panel">-->
+                        <!--<a class="panel-heading collapsed" role="tab" id="task5_heding2" data-toggle="collapse" data-parent="#accordion_task5" href="#task5_collapse2" aria-expanded="false">-->
+                        <!--<span class="checkout-step-number">3</span>-->
+                        <!--<h4 class="checkout-step-title">Collapsible Group Items #3</h4>-->
+                        <!--</a>-->
+                        <!--<div id="task5_collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task5_heding2">-->
+                        <!--<div class="panel-body">-->
+                        <!--contents-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel tasks" id="task_7" style="display: none">
+                <div class="x_title subtitle">
+                    <h2><i class="fa fa-bars"></i> 모델 배포 <small>모델을 배포합니다.</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="accordion" id="accordion_task7" role="tablist" aria-multiselectable="true">
+                        <div class="panel collapse-panel">
+                            <a class="panel-heading" role="tab" id="task7_heding0" data-toggle="collapse" data-parent="#accordion_task7" href="#task7_collapse0" aria-expanded="true">
+                                <span class="checkout-step-number">1</span>
+                                <h4 class="checkout-step-title">학습 결과 설정</h4>
+                            </a>
+                            <div id="task7_collapse0" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="task7_heding0">
+                                <div class="panel-body" style="text-align: center">
+                                    <form class="form-horizontal form-label-left" novalidate>
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="model_file_name">학습 모델 파일명 <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input id="model_file_name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="weights-improvement-01-0.96.hdf5" required="required" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="result_file_name">학습 결과 파일명 <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input id="result_file_name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="PerformanceMatrix.csv" required="required" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="ln_solid"></div>
+                                        <div class="col-md-6 col-md-offset-6">
+                                            <button id="deploy_finish" class="btn btn-default">Finish</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <!--<div class="panel collapse-panel">-->
+                            <!--<a class="panel-heading collapsed" role="tab" id="task7_heding1" data-toggle="collapse" data-parent="#accordion_task7" href="#task7_collapse1" aria-expanded="false">-->
+                                <!--<span class="checkout-step-number">2</span>-->
+                                <!--<h4 class="checkout-step-title">Matrix Functions</h4>-->
+                            <!--</a>-->
+                            <!--<div id="task7_collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task7_heding1">-->
+                                <!--<div class="panel-body">-->
+                                    <!--<div class="col-md-2 col-sm-3 col-xs-12"></div>-->
+                                    <!--<div class="col-md-4 col-sm-6 col-xs-12">-->
+                                        <!--<select class="form-control" id="matrix_select_box">-->
+                                            <!--<option value="" selected>Matrices</option>-->
+                                            <!--<option value="binary_accuracy">binary_accuracy</option>-->
+                                            <!--<option value="categorical_accuracy">categorical_accuracy</option>-->
+                                            <!--<option value="top_k_categorical_accuracy">top_k_categorical_accuracy</option>-->
+                                            <!--<option value="sparse_top_k_categorical_accuracy">sparse_top_k_categorical_accuracy</option>-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                    <!--<div class="checkbox col-md-4 col-xs-12">-->
+                                        <!--<label>-->
+                                            <!--<input type="checkbox" class="flat" checked="checked"> 조기 종료 조건-->
+                                        <!--</label>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-md-2 col-sm-3 col-xs-12"></div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<br>-->
+                        <!--<div class="panel collapse-panel">-->
+                        <!--<a class="panel-heading collapsed" role="tab" id="task5_heding2" data-toggle="collapse" data-parent="#accordion_task5" href="#task5_collapse2" aria-expanded="false">-->
+                        <!--<span class="checkout-step-number">3</span>-->
+                        <!--<h4 class="checkout-step-title">Collapsible Group Items #3</h4>-->
+                        <!--</a>-->
+                        <!--<div id="task5_collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task5_heding2">-->
+                        <!--<div class="panel-body">-->
+                        <!--contents-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel tasks" id="task_8" style="display: none">
                 <div class="x_title subtitle">
                     <h2><i class="fa fa-bars"></i> 학습 알고리즘 <small>학습에 적용할 알고리즘을 선택합니다.</small></h2>
                     <div class="clearfix"></div>
@@ -614,14 +811,21 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <select class="form-control" id="data_load_select_box">
                                             <option value="" selected>알고리즘 선택</option>
-                                            <optgroup label="Standard Algorithm">
-                                                <option value="CNN">CNN (Image Classification)</option>
-                                                <option value="Yolo">Yolo (Image Detection)</option>
-                                                <option value="mask_RCNN">Mask-RCNN (Image Recognition)</option>
-                                                <option value="RNN">RNN</option>
+                                            <optgroup label="Convolutional Neural Networks (CNN)">
+                                                <option value="AlexNet">AlexNet</option>
+                                                <option value="GoogleNet">GoogleNet</option>
+                                                <option value="VGGNet">VGGNet</option>
+                                                <option value="Fast-RCNN">Fast-RCNN</option>
+                                                <option value="Mask-RCNN">Mask-RCNN</option>
                                             </optgroup>
-                                            <optgroup label="Custom Algorithm">
-                                                <option value="myData">my algorithm 01</option>
+                                            <optgroup label="Recurrent Neural Networks (RNN)">
+                                                <option value="LSTM">LSTM : Long Short-Term Memory models</option>
+                                                <option value="GRU">GRU : Gated Recurrent Unit</option>
+                                            </optgroup>
+                                            <optgroup label="Auto Encoders">
+                                                <option value="Seq2seq">Seq2seq</option>
+                                                <option value="stacked">Stacked auto-encoders</option>
+                                                <option value="generative">Generative Adversarial Networks</option>
                                             </optgroup>
                                         </select>
                                     </div>
@@ -886,15 +1090,26 @@
                     "top": "310px"
                 },
                 "neighbors": [
-                    "item_5", "item_7"
+                    "item_5", "item_6"
                 ]
             },
             {
                 "id": "item_5",
-                "text": "학습(훈련) 모델",
+                "text": "학습 모델 구성",
                 "position": {
                     "left": "300px",
                     "top": "380px"
+                },
+                "neighbors": [
+                    "item_6"
+                ]
+            },
+            {
+                "id": "item_6",
+                "text": "모델 성능 측정 및 평가",
+                "position": {
+                    "left": "350px",
+                    "top": "450px"
                 },
                 "neighbors": [
                     "item_7"
@@ -902,20 +1117,9 @@
             },
             {
                 "id": "item_7",
-                "text": "성능측정(모델함수)",
+                "text": "모델 배포",
                 "position": {
-                    "left": "350px",
-                    "top": "450px"
-                },
-                "neighbors": [
-                    "item_8"
-                ]
-            },
-            {
-                "id": "item_8",
-                "text": "모델평가",
-                "position": {
-                    "left": "350px",
+                    "left": "365px",
                     "top": "520px"
                 },
                 "neighbors": [
@@ -923,7 +1127,7 @@
                 ]
             },
             {
-                "id": "item_9",
+                "id": "item_8",
                 "text": "학습 알고리즘",
                 "position": {
                     "left": "100px",
@@ -939,14 +1143,17 @@
 
         document.getElementById('item_0').style.border = '8px solid #1a65da';
 
+        $('#deploy_finish').on('click', function() {
+            alert("배포가 완료되었습니다!");
+        });
+
         let itemClickEvents = $('.arg-Graph_item').on('click', function(e) {
             // when the operator selected, set the css of the operators and display the left section which related to the selected operator.
             let clicked_id = this.id;
 
             let index = String(clicked_id).split('_')[1];
-            {#let index = String(clicked_id).substring(4, 5);#}
 
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < 9; i++) {
                 // off
                 if (index == i) {
                     continue;
@@ -966,6 +1173,8 @@
             document.getElementById('section_3').style.display = 'none';
         });
 
+        // select data columns
+        getTable();
 
     });
 
@@ -1197,8 +1406,6 @@
                 }
             });
     }
-        getTable();
-
 
 </script>
 {% endblock javascripts %}
